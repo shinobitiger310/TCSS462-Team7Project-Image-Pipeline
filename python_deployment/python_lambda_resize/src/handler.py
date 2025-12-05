@@ -12,53 +12,71 @@ def lambda_handler(event, context):
     Lambda function to resize an image.
     Reads from S3 stage1/{filename}, resizes it, and writes to S3 as stage2/{filename}
 
-    Event parameters:
+    Event parameters (Manual invocation):
     - bucket_name: S3 bucket name (required)
     - scale_percent: Scale image by percentage (default: 150). If width/height not specified, uses this.
     - width: Target width in pixels (optional, overrides scale_percent)
     - height: Target height in pixels (optional, overrides scale_percent)
     - maintain_aspect_ratio: If True, maintains aspect ratio when using width/height (default: False)
     - input_key: Input file to resize (default: auto-detects stage1/*)
+
+    Event parameters (S3 trigger):
+    - Records[0].s3.bucket.name: S3 bucket name (automatically provided)
+    - Records[0].s3.object.key: S3 object key (automatically provided)
+    - Environment variables: SCALE_PERCENT (default: 150), WIDTH, HEIGHT
     """
     # Initialize Inspector for performance monitoring
     inspector = Inspector()
     inspector.inspectAll()
 
     try:
-        # Get parameters from event
-        bucket_name = event.get('bucket_name')
-        scale_percent = event.get('scale_percent', 150)  # Default 150%
-        target_width = event.get('width')  # None if not specified
-        target_height = event.get('height')  # None if not specified
-        maintain_aspect_ratio = event.get('maintain_aspect_ratio', False)
+        # Check if this is an S3 trigger event or manual invocation
+        if 'Records' in event and len(event['Records']) > 0:
+            # S3 trigger event format
+            s3_record = event['Records'][0]['s3']
+            bucket_name = s3_record['bucket']['name']
+            input_key = s3_record['object']['key']
+            scale_percent = int(os.environ.get('SCALE_PERCENT', 150))
+            target_width = int(os.environ.get('WIDTH')) if os.environ.get('WIDTH') else None
+            target_height = int(os.environ.get('HEIGHT')) if os.environ.get('HEIGHT') else None
+            maintain_aspect_ratio = os.environ.get('MAINTAIN_ASPECT_RATIO', 'false').lower() == 'true'
+            inspector.addAttribute("trigger_type", "s3_event")
+        else:
+            # Manual invocation format
+            bucket_name = event.get('bucket_name')
+            scale_percent = event.get('scale_percent', 150)
+            target_width = event.get('width')
+            target_height = event.get('height')
+            maintain_aspect_ratio = event.get('maintain_aspect_ratio', False)
+            inspector.addAttribute("trigger_type", "manual_invoke")
 
-        if not bucket_name:
-            raise ValueError("bucket_name is required in the event")
+            if not bucket_name:
+                raise ValueError("bucket_name is required in the event")
 
-        # Auto-detect input file in stage1/ folder
-        input_key = event.get('input_key')
-        if not input_key:
-            # List files in stage1/ folder
-            response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix='stage1/')
-            if 'Contents' in response and len(response['Contents']) > 0:
-                # Get the first non-empty image file in stage1/
-                for obj in response['Contents']:
-                    key = obj['Key']
-                    size = obj['Size']
+            # Auto-detect input file in stage1/ folder if not provided
+            input_key = event.get('input_key')
+            if not input_key:
+                # List files in stage1/ folder
+                response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix='stage1/')
+                if 'Contents' in response and len(response['Contents']) > 0:
+                    # Get the first non-empty image file in stage1/
+                    for obj in response['Contents']:
+                        key = obj['Key']
+                        size = obj['Size']
 
-                    # Skip if it's just the folder itself or empty
-                    if key == 'stage1/' or size == 0:
-                        continue
+                        # Skip if it's just the folder itself or empty
+                        if key == 'stage1/' or size == 0:
+                            continue
 
-                    # Check if it's an image file
-                    if key.lower().endswith(('.jpg', '.jpeg', '.png')):
-                        input_key = key
-                        break
+                        # Check if it's an image file
+                        if key.lower().endswith(('.jpg', '.jpeg', '.png')):
+                            input_key = key
+                            break
 
-                if not input_key:
-                    raise ValueError("Could not find image file (.jpg, .jpeg, .png) in stage1/ folder")
-            else:
-                raise ValueError("Could not find input file in stage1/ folder")
+                    if not input_key:
+                        raise ValueError("Could not find image file (.jpg, .jpeg, .png) in stage1/ folder")
+                else:
+                    raise ValueError("Could not find input file in stage1/ folder")
 
         # Extract filename from input_key
         filename = os.path.basename(input_key)
