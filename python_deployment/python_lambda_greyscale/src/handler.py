@@ -12,33 +12,48 @@ def lambda_handler(event, context):
     Lambda function to convert an image to greyscale.
     Reads from S3 stage2/{filename}, converts to greyscale, and writes to S3 as output/{filename}
 
-    Event parameters:
+    Event parameters (Manual invocation):
     - bucket_name: S3 bucket name (required)
     - input_key: Input file to convert (default: auto-detects stage2/*)
     - greyscale_mode: Greyscale conversion mode - 'L' for standard or '1' for binary (default: 'L')
+
+    Event parameters (S3 trigger):
+    - Records[0].s3.bucket.name: S3 bucket name (automatically provided)
+    - Records[0].s3.object.key: S3 object key (automatically provided)
+    - Environment variable GREYSCALE_MODE: 'L' for standard or '1' for binary (default: 'L')
     """
     # Initialize Inspector for performance monitoring
     inspector = Inspector()
     inspector.inspectAll()
 
     try:
-        # Get parameters from event
-        bucket_name = event.get('bucket_name')
-        greyscale_mode = event.get('greyscale_mode', 'L')  # 'L' for greyscale, '1' for binary
+        # Check if this is an S3 trigger event or manual invocation
+        if 'Records' in event and len(event['Records']) > 0:
+            # S3 trigger event format
+            s3_record = event['Records'][0]['s3']
+            bucket_name = s3_record['bucket']['name']
+            input_key = s3_record['object']['key']
+            greyscale_mode = os.environ.get('GREYSCALE_MODE', 'L')
+            inspector.addAttribute("trigger_type", "s3_event")
+        else:
+            # Manual invocation format
+            bucket_name = event.get('bucket_name')
+            greyscale_mode = event.get('greyscale_mode', 'L')
+            inspector.addAttribute("trigger_type", "manual_invoke")
 
-        if not bucket_name:
-            raise ValueError("bucket_name is required in the event")
+            if not bucket_name:
+                raise ValueError("bucket_name is required in the event")
 
-        # Auto-detect input file in stage2/ folder
-        input_key = event.get('input_key')
-        if not input_key:
-            # List files in stage2/ folder
-            response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix='stage2/')
-            if 'Contents' in response and len(response['Contents']) > 0:
-                # Get the first file in stage2/
-                input_key = response['Contents'][0]['Key']
-            else:
-                raise ValueError("Could not find input file in stage2/ folder")
+            # Auto-detect input file in stage2/ folder if not provided
+            input_key = event.get('input_key')
+            if not input_key:
+                # List files in stage2/ folder
+                response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix='stage2/')
+                if 'Contents' in response and len(response['Contents']) > 0:
+                    # Get the first file in stage2/
+                    input_key = response['Contents'][0]['Key']
+                else:
+                    raise ValueError("Could not find input file in stage2/ folder")
 
         # Extract filename from input_key
         filename = os.path.basename(input_key)

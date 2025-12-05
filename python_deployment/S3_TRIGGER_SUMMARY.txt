@@ -1,0 +1,40 @@
+# Quick S3 Trigger Setup Summary
+
+All three Lambda handlers now support S3 triggers!
+
+## What Changed:
+
+✅ python_lambda_rotate/src/handler.py - Detects S3 trigger events
+✅ python_lambda_resize/src/handler.py - Detects S3 trigger events  
+✅ python_lambda_greyscale/src/handler.py - Detects S3 trigger events
+
+## Setup Steps (AWS Console):
+
+1. python_lambda_rotate
+   - Add S3 trigger: PUT events, prefix: input/
+   
+2. python_lambda_resize
+   - Add S3 trigger: PUT events, prefix: stage1/
+   
+3. python_lambda_greyscale
+   - Add S3 trigger: PUT events, prefix: stage2/
+
+## How It Works:
+
+Upload image to input/ → Auto-rotates → Auto-resizes → Auto-greyscales → Final output/
+
+## IAM Role:
+
+All functions share: lambda_image_pipeline_role (or LambdaS3)
+- Has full S3 permissions for the bucket
+- Already configured and working
+
+## Test:
+
+aws s3 cp myimage.jpg s3://tcss462-term-project-group-7/input/
+# Wait ~10-30 seconds
+aws s3 ls s3://tcss462-term-project-group-7/output/
+
+## Full Guide:
+
+See S3_TRIGGER_SETUP.md for detailed instructions.

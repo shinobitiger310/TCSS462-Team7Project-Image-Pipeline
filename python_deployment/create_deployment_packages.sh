@@ -30,6 +30,9 @@ create_package() {
     # Copy source files to package directory
     cp ../src/*.py ./package/
 
+    # Copy Lambda handler from platforms/aws
+    cp ../platforms/aws/*.py ./package/
+
     # Create ZIP file
     cd package
     zip -r "../../../${lambda_name}.zip" . > /dev/null 2>&1
@@ -64,5 +67,5 @@ echo "  - Runtime: Python 3.12"
 echo "  - Handler: lambda_function.lambda_handler"
 echo "  - Memory: 512 MB"
 echo "  - Timeout: 900 seconds (15 minutes)"
-echo "  - IAM Role: arn:aws:iam::940336903991:role/LambdaS3"
+echo "  - IAM Role: arn:aws:iam::458329144069:role/lambda_image_pipeline_role"
 echo ""

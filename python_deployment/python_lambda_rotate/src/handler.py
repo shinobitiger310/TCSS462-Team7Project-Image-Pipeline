@@ -12,23 +12,38 @@ def lambda_handler(event, context):
     Lambda function to rotate an image.
     Reads from S3, rotates by specified degrees, and writes to S3 as stage1/{filename}
 
-    Event parameters:
+    Event parameters (Manual invocation):
     - bucket_name: S3 bucket name (required)
     - input_key: Input file name (e.g., 'input_image.jpeg', 'input_image.jpg', 'input_image.png')
     - rotation_degrees: Degrees to rotate (default: 180). Positive = counter-clockwise, Negative = clockwise
+
+    Event parameters (S3 trigger):
+    - Records[0].s3.bucket.name: S3 bucket name (automatically provided)
+    - Records[0].s3.object.key: S3 object key (automatically provided)
+    - Environment variable ROTATION_DEGREES: Degrees to rotate (default: 180)
     """
     # Initialize Inspector for performance monitoring
     inspector = Inspector()
     inspector.inspectAll()
 
     try:
-        # Get parameters from event
-        bucket_name = event.get('bucket_name')
-        input_key = event.get('input_key', 'input_image.jpeg')
-        rotation_degrees = event.get('rotation_degrees', 180)  # Default 180 degrees
+        # Check if this is an S3 trigger event or manual invocation
+        if 'Records' in event and len(event['Records']) > 0:
+            # S3 trigger event format
+            s3_record = event['Records'][0]['s3']
+            bucket_name = s3_record['bucket']['name']
+            input_key = s3_record['object']['key']
+            rotation_degrees = int(os.environ.get('ROTATION_DEGREES', 180))
+            inspector.addAttribute("trigger_type", "s3_event")
+        else:
+            # Manual invocation format
+            bucket_name = event.get('bucket_name')
+            input_key = event.get('input_key', 'input_image.jpeg')
+            rotation_degrees = event.get('rotation_degrees', 180)
+            inspector.addAttribute("trigger_type", "manual_invoke")
 
-        if not bucket_name:
-            raise ValueError("bucket_name is required in the event")
+            if not bucket_name:
+                raise ValueError("bucket_name is required in the event")
 
         # Extract filename from input_key (remove any path prefix)
         filename = os.path.basename(input_key)
