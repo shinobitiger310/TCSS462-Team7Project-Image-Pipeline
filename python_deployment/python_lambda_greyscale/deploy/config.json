@@ -6,7 +6,7 @@
 
 	"lambdaHandler": "lambda_function.lambda_handler",
 	"lambdaRoleARN": "arn:aws:iam::940336903991:role/LambdaS3",
-	"lambdaSubnets": "",
+  "lambdaSubnets": "",
 	"lambdaSecurityGroups": "",
 	"lambdaEnvironment": "Variables={}",
 	"lambdaRuntime": "python3.12",

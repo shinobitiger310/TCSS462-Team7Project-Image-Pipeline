@@ -10,11 +10,11 @@ s3_client = boto3.client('s3')
 def lambda_handler(event, context):
     """
     Lambda function to rotate an image.
-    Reads from S3, rotates by specified degrees, and writes to S3 as stage1/{filename}
+    Reads from S3 input/{filename}, rotates by specified degrees, and writes to S3 as stage1/{filename}
 
     Event parameters:
     - bucket_name: S3 bucket name (required)
-    - input_key: Input file name (e.g., 'input_image.jpeg', 'input_image.jpg', 'input_image.png')
+    - input_key: Input file name (default: auto-detects input/*)
     - rotation_degrees: Degrees to rotate (default: 180). Positive = counter-clockwise, Negative = clockwise
     """
     # Initialize Inspector for performance monitoring
@@ -24,11 +24,35 @@ def lambda_handler(event, context):
     try:
         # Get parameters from event
         bucket_name = event.get('bucket_name')
-        input_key = event.get('input_key', 'input_image.jpeg')
         rotation_degrees = event.get('rotation_degrees', 180)  # Default 180 degrees
 
         if not bucket_name:
             raise ValueError("bucket_name is required in the event")
+
+        # Auto-detect input file in input/ folder
+        input_key = event.get('input_key')
+        if not input_key:
+            # List files in input/ folder
+            response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix='input/')
+            if 'Contents' in response and len(response['Contents']) > 0:
+                # Get the first image file in input/
+                for obj in response['Contents']:
+                    key = obj['Key']
+                    size = obj['Size']
+
+                    # Skip if it's just the folder itself or empty
+                    if key == 'input/' or size == 0:
+                        continue
+
+                    # Check if it's an image file
+                    if key.lower().endswith(('.jpg', '.jpeg', '.png')):
+                        input_key = key
+                        break
+
+                if not input_key:
+                    raise ValueError("Could not find image file (.jpg, .jpeg, .png) in input/ folder")
+            else:
+                raise ValueError("Could not find input file in input/ folder")
 
         # Extract filename from input_key (remove any path prefix)
         filename = os.path.basename(input_key)

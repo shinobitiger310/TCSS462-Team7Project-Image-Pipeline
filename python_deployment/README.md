@@ -15,31 +15,43 @@ Each Lambda function reads from and writes to an S3 bucket, creating a sequentia
 ## Architecture
 
 ```
-S3 Bucket (input_image.jpeg)
+S3 Bucket (input/*.jpg, *.jpeg, *.png)
     ↓
-Lambda: python_lambda_rotate → stage1/input_image.jpeg
+Lambda: python_lambda_rotate → stage1/*.jpg/jpeg/png
     ↓
-Lambda: python_lambda_resize → stage2/input_image.jpeg
+Lambda: python_lambda_resize → stage2/*.jpg/jpeg/png
     ↓
-Lambda: python_lambda_greyscale → output/input_image.jpeg (final)
+Lambda: python_lambda_greyscale → output/*.jpg/jpeg/png (final)
 ```
+
+**Supported image formats:** `.jpg`, `.jpeg`, `.png`
 
 ## Directory Contents
 
 ### Deployment Scripts
 - **`deploy_all_python.sh`** - Master deployment script
+  - **Uploads images from local `input/` folder to S3** (Step 0)
   - Installs Pillow dependencies for each function
   - Packages and uploads to AWS Lambda
-  - Configures function settings
+  - Configures function settings (timeout, memory, runtime)
+
+- **`create_deployment_packages.sh`** - Manual package builder
+  - Creates ZIP files for manual Lambda upload
+  - Does NOT deploy to AWS or upload images
+  - Use when you want to manually create Lambda functions via AWS Console
 
 ### Testing Scripts
 - **`test_python_all.sh`** - Tests complete image processing pipeline
-  - Uploads test image to S3
+  - Uploads **ALL images** from local `input/` folder to S3
   - Runs all three Lambda functions in sequence
-  - Downloads and displays final output
+  - Downloads **ALL processed images** to `./final_output/` folder
 - **`test_python_rotate.sh`** - Tests only the rotate Lambda function
+  - Uploads images from `input/` folder to S3
+  - Processes first image found in S3 `input/` folder
 - **`test_python_resize.sh`** - Tests only the resize Lambda function
+  - Requires images in S3 `stage1/` folder (from rotate output)
 - **`test_python_greyscale.sh`** - Tests only the greyscale Lambda function
+  - Requires images in S3 `stage2/` folder (from resize output)
 
 ### Setup Scripts
 - **`install_python312.sh`** - Installs Python 3.12 from source
@@ -119,7 +131,21 @@ Required configuration:
 }
 ```
 
-### 3. Deploy Lambda Functions
+### 3. Prepare Input Images
+
+Create a local `input/` folder and add your test images:
+
+```bash
+mkdir input
+cp your_image.jpg input/
+cp another_image.png input/
+```
+
+The deployment script will automatically upload these images to S3.
+
+**Supported formats:** `.jpg`, `.jpeg`, `.png`
+
+### 4. Deploy Lambda Functions
 
 ```bash
 chmod +x deploy_all_python.sh
@@ -127,12 +153,18 @@ chmod +x deploy_all_python.sh
 ```
 
 This script will:
-1. Install Python dependencies (Pillow) for each function
-2. Create deployment packages (~35MB each)
-3. Upload to AWS Lambda
-4. Configure memory (512MB), timeout (900s), and runtime settings
+1. **Upload ALL images from local `input/` folder to S3** (syncs only new/modified files)
+2. Install Python dependencies (Pillow) for each function
+3. Create deployment packages (~35MB each)
+4. Upload to AWS Lambda
+5. Configure memory (512MB), timeout (900s), and runtime settings
 
-### 4. Test the Pipeline
+**Important:**
+- The `input/` folder is **required** - the script will exit with an error if it doesn't exist or is empty
+- All images (`.jpg`, `.jpeg`, `.png`) will be uploaded to S3's `input/` folder
+- Lambda functions will **process ALL images** in the S3 `input/` folder automatically
+
+### 5. Test the Pipeline
 
 ```bash
 chmod +x test_python_all.sh
@@ -140,45 +172,89 @@ chmod +x test_python_all.sh
 ```
 
 This will:
-1. Upload `input_image.jpeg` to S3
-2. Run rotate → resize → greyscale pipeline
-3. Download final output as `final_output_python.jpeg`
+1. Upload **ALL images** from local `input/` folder to S3 `input/` folder
+2. Run rotate → resize → greyscale pipeline (processes all images)
+3. Download **ALL processed images** to local `./final_output/` folder
+
+**How it works:**
+- The script syncs all `.jpg`, `.jpeg`, `.png` files from `input/` to S3
+- Each Lambda function auto-detects and processes the first image it finds
+- Final greyscale images are saved to S3's `output/` folder
+- All results are downloaded to `./final_output/` directory
+
+**Note:** Original filenames are preserved throughout all pipeline stages
 
 ## Usage
 
 ### Deploy All Functions
 
+#### Option 1: Automated Deployment (Recommended)
+
 ```bash
 ./deploy_all_python.sh
 ```
 
+This uploads images, deploys Lambda functions, and configures all settings automatically.
+
+#### Option 2: Manual Deployment via AWS Console
+
+```bash
+# Create deployment packages
+./create_deployment_packages.sh
+```
+
+This creates three ZIP files that you can upload manually in AWS Console:
+- `python_lambda_rotate.zip`
+- `python_lambda_resize.zip`
+- `python_lambda_greyscale.zip`
+
+**Manual Lambda configuration:**
+- Runtime: Python 3.12
+- Handler: `lambda_function.lambda_handler`
+- Memory: 512 MB
+- Timeout: 900 seconds (15 minutes)
+- IAM Role: Must have S3 read/write permissions (e.g., `AmazonS3FullAccess`)
+
 ### Test Complete Pipeline
 
 ```bash
+# Processes all images in local input/ folder
 ./test_python_all.sh
 ```
+
+This will upload all images from `input/`, process them through the pipeline, and download all results to `./final_output/`.
 
 ### Test Individual Functions
 
 ```bash
-# Test rotate only
+# Test rotate only (uploads all images from input/, processes first image found)
 ./test_python_rotate.sh
 
-# Test resize only
+# Test resize only (requires stage1/ to have output from rotate)
 ./test_python_resize.sh
 
-# Test greyscale only
+# Test greyscale only (requires stage2/ to have output from resize)
 ./test_python_greyscale.sh
 ```
+
+**Note:** Individual test scripts also upload images from local `input/` folder to S3.
 
 ### Custom Parameters
 
 #### Rotate with custom angle:
 ```bash
+# Auto-detects image in input/ folder
 aws lambda invoke \
   --function-name python_lambda_rotate \
   --cli-binary-format raw-in-base64-out \
-  --payload '{"bucket_name":"your-bucket","input_key":"input_image.jpeg","rotation_degrees":90}' \
+  --payload '{"bucket_name":"your-bucket","rotation_degrees":90}' \
+  response.json
+
+# Or specify a specific file
+aws lambda invoke \
+  --function-name python_lambda_rotate \
+  --cli-binary-format raw-in-base64-out \
+  --payload '{"bucket_name":"your-bucket","input_key":"input/myimage.jpg","rotation_degrees":90}' \
   response.json
 ```
 
@@ -206,8 +282,8 @@ aws lambda invoke \
 - **Runtime**: Python 3.12
 - **Memory**: 512 MB
 - **Timeout**: 900 seconds
-- **Input**: Root bucket / `input_image.jpeg`
-- **Output**: `stage1/input_image.jpeg`
+- **Input**: `input/*.jpg`, `input/*.jpeg`, `input/*.png` (auto-detects first image)
+- **Output**: `stage1/{filename}`
 - **Default Rotation**: 180 degrees
 - **Location**: `../python_lambda_rotate/`
 
@@ -215,8 +291,8 @@ aws lambda invoke \
 - **Runtime**: Python 3.12
 - **Memory**: 512 MB
 - **Timeout**: 900 seconds
-- **Input**: `stage1/input_image.jpeg`
-- **Output**: `stage2/input_image.jpeg`
+- **Input**: `stage1/{filename}` (auto-detects from previous stage)
+- **Output**: `stage2/{filename}`
 - **Default Scale**: 150%
 - **Location**: `../python_lambda_resize/`
 
@@ -224,8 +300,8 @@ aws lambda invoke \
 - **Runtime**: Python 3.12
 - **Memory**: 512 MB
 - **Timeout**: 900 seconds
-- **Input**: `stage2/input_image.jpeg`
-- **Output**: `output/input_image.jpeg`
+- **Input**: `stage2/{filename}` (auto-detects from previous stage)
+- **Output**: `output/{filename}`
 - **Conversion Mode**: L (Luminance/Greyscale)
 - **Location**: `../python_lambda_greyscale/`
 
@@ -341,6 +417,37 @@ sed -i 's/\r$//' *.sh
 sed -i 's/\r$//' python_lambda_*/deploy/*.sh
 ```
 **Note**: This is a common issue when working with files in VirtualBox shared folders or when editing files on Windows. The scripts have been pre-fixed, but if you encounter this error, run the fix command above.
+
+**Issue**: Lambda functions processing empty folder markers (0-byte objects)
+- **Cause**: S3 creates 0-byte placeholder objects for folders (e.g., `input/`, `stage1/`)
+- **Symptom**: Lambda error: `"cannot identify image file"` with `"input_size_bytes": 0`
+- **Solution**: Lambda handlers now automatically skip 0-byte objects
+- **How it works**: Functions check `obj['Size'] > 0` before processing files
+- **Prevention**: Fixed in all three handler files (`rotate`, `resize`, `greyscale`)
+
+**Issue**: Lambda timeout after 3 seconds
+- **Cause**: Default Lambda timeout too short for large images (>2MB)
+- **Symptom**: `"Error: Task timed out after 3.00 seconds"`
+- **Solution**: All functions now configured with 900-second (15-minute) timeout
+- **How to verify**:
+```bash
+aws lambda get-function-configuration --function-name python_lambda_rotate | grep Timeout
+```
+Should show `"Timeout": 900`
+
+**Issue**: AccessDenied - s3:ListBucket permission
+- **Cause**: Lambda IAM role lacks S3 permissions
+- **Symptom**: `"User is not authorized to perform: s3:ListBucket"`
+- **Solution**: Add S3 permissions to Lambda execution role
+```bash
+# Option 1: Attach AWS managed policy (easier but broader permissions)
+aws iam attach-role-policy \
+  --role-name LambdaS3 \
+  --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess
+
+# Option 2: Create custom policy (recommended for production)
+# See AWS IAM console to create minimal S3 permissions policy
+```
 
 ### Deployment Failures
 

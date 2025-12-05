@@ -59,10 +59,10 @@ fi
 
 # Update configuration
 if [ -n "$lambdaSubnets" ] && [ -n "$lambdaSecurityGroups" ]; then
-    aws lambda update-function-configuration --function-name $function --memory-size $memory --runtime $lambdaRuntime \
+    aws lambda update-function-configuration --function-name $function --memory-size $memory --timeout 900 --runtime $lambdaRuntime \
         --vpc-config SubnetIds=[$lambdaSubnets],SecurityGroupIds=[$lambdaSecurityGroups] --environment "$lambdaEnvironment"
 else
-    aws lambda update-function-configuration --function-name $function --memory-size $memory --runtime $lambdaRuntime \
+    aws lambda update-function-configuration --function-name $function --memory-size $memory --timeout 900 --runtime $lambdaRuntime \
         --environment "$lambdaEnvironment"
 fi
 

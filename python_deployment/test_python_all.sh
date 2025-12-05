@@ -1,27 +1,57 @@
 #!/bin/bash
 
 # Test the complete Python Image Pipeline
-# This script runs all three Lambda functions in sequence
+# This script uploads images from local input/ folder and runs all three Lambda functions in sequence
 
 BUCKET_NAME="tcss462-term-project-group-7"
-INPUT_IMAGE="input_image.jpeg"
 
 echo "=========================================="
 echo "  Python Image Pipeline - Complete Test"
 echo "=========================================="
 echo ""
 
-# Check if input image exists locally
-if [ ! -f "$INPUT_IMAGE" ]; then
-    echo "ERROR: $INPUT_IMAGE not found in current directory"
-    echo "Please provide an input image file"
+# Check if local input/ folder exists
+if [ ! -d "input" ]; then
+    echo "ERROR: Local input/ folder not found"
+    echo "Please create an input/ folder and add your image files (.jpg, .jpeg, .png)"
     exit 1
 fi
 
-# Upload input image to S3
-echo "Step 0: Uploading $INPUT_IMAGE to S3..."
-aws s3 cp $INPUT_IMAGE s3://${BUCKET_NAME}/
+# Check if input folder has any image files
+IMAGE_COUNT=$(find input/ -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) 2>/dev/null | wc -l)
+
+if [ "$IMAGE_COUNT" -eq 0 ]; then
+    echo "ERROR: input/ folder exists but contains no image files"
+    echo "Please add image files (.jpg, .jpeg, .png) to the input/ folder"
+    exit 1
+fi
+
+# Upload images from local input/ folder to S3
+echo "Found $IMAGE_COUNT image file(s) in local input/ folder"
+echo "Step 0: Uploading images to S3 input/ folder..."
 echo ""
+
+aws s3 sync input/ s3://${BUCKET_NAME}/input/ \
+    --exclude "*" \
+    --include "*.jpg" \
+    --include "*.jpeg" \
+    --include "*.png" \
+    --include "*.JPG" \
+    --include "*.JPEG" \
+    --include "*.PNG"
+
+if [ $? -eq 0 ]; then
+    echo ""
+    echo "✓ Images uploaded successfully"
+    echo ""
+    echo "S3 input/ folder contents:"
+    aws s3 ls s3://${BUCKET_NAME}/input/
+    echo ""
+else
+    echo ""
+    echo "✗ ERROR: Failed to upload images to S3"
+    exit 1
+fi
 
 # ===== Test 1: Rotate =====
 echo "=========================================="
@@ -32,7 +62,6 @@ echo ""
 cat > payload_rotate.json <<PAYLOAD
 {
   "bucket_name": "${BUCKET_NAME}",
-  "input_key": "${INPUT_IMAGE}",
   "rotation_degrees": 180
 }
 PAYLOAD
@@ -121,7 +150,7 @@ echo ""
 # Check if output/ was created
 aws s3 ls s3://${BUCKET_NAME}/output/
 if [ $? -eq 0 ]; then
-    echo "✓ Greyscale SUCCESS: output/${INPUT_IMAGE} created"
+    echo "✓ Greyscale SUCCESS: output/ folder created"
 else
     echo "✗ Greyscale FAILED"
     exit 1
@@ -129,16 +158,30 @@ fi
 
 echo ""
 
-# ===== Download Final Result =====
+# ===== Download Final Results =====
 echo "=========================================="
-echo "  Downloading Final Result"
+echo "  Downloading Final Results"
 echo "=========================================="
 echo ""
 
-OUTPUT_FILE="final_output_python.jpeg"
-aws s3 cp s3://${BUCKET_NAME}/output/${INPUT_IMAGE} $OUTPUT_FILE
+# Create output directory for downloaded images
+mkdir -p final_output
 
-echo "✓ Downloaded to: $OUTPUT_FILE"
+# Download all processed images from output/ folder
+echo "Downloading all processed images from S3 output/ folder..."
+aws s3 sync s3://${BUCKET_NAME}/output/ ./final_output/ \
+    --exclude "*" \
+    --include "*.jpg" \
+    --include "*.jpeg" \
+    --include "*.png"
+
+if [ $? -eq 0 ]; then
+    echo ""
+    echo "✓ All processed images downloaded to: ./final_output/"
+    echo ""
+    echo "Downloaded files:"
+    ls -lh ./final_output/
+fi
 
 echo ""
 echo "=========================================="
@@ -146,10 +189,10 @@ echo "  🎉 PIPELINE COMPLETE!"
 echo "=========================================="
 echo ""
 echo "Folder structure in S3:"
-echo "  ${INPUT_IMAGE} (original)"
-echo "  stage1/${INPUT_IMAGE} (rotated 180°)"
-echo "  stage2/${INPUT_IMAGE} (resized 150%)"
-echo "  output/${INPUT_IMAGE} (greyscale)"
+echo "  input/       → Original images ($IMAGE_COUNT file(s))"
+echo "  stage1/      → Rotated 180°"
+echo "  stage2/      → Resized 150%"
+echo "  output/      → Final greyscale images"
 echo ""
-echo "Final output: $OUTPUT_FILE"
+echo "Local output: ./final_output/"
 echo ""

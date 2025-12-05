@@ -1,26 +1,45 @@
 #!/bin/bash
 
 # Test python_lambda_rotate individually
+# Uploads images from local input/ folder to S3
 
 BUCKET_NAME="tcss462-term-project-group-7"
-INPUT_IMAGE="input_image.jpeg"
 
 echo "===== Testing python_lambda_rotate ====="
 echo ""
 
-# Check if input image exists locally
-if [ ! -f "$INPUT_IMAGE" ]; then
-    echo "ERROR: $INPUT_IMAGE not found in current directory"
-    echo "Please provide an input image file"
+# Check if local input/ folder exists
+if [ ! -d "input" ]; then
+    echo "ERROR: Local input/ folder not found"
+    echo "Please create an input/ folder and add your image files (.jpg, .jpeg, .png)"
     exit 1
 fi
 
-echo "Using image: $INPUT_IMAGE"
+# Check if input folder has any image files
+IMAGE_COUNT=$(find input/ -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) 2>/dev/null | wc -l)
+
+if [ "$IMAGE_COUNT" -eq 0 ]; then
+    echo "ERROR: input/ folder exists but contains no image files"
+    echo "Please add image files (.jpg, .jpeg, .png) to the input/ folder"
+    exit 1
+fi
+
+# Upload images from local input/ folder to S3
+echo "Found $IMAGE_COUNT image file(s) in local input/ folder"
+echo "Step 1: Uploading images to S3 input/ folder..."
 echo ""
 
-# Upload input image to S3
-echo "Step 1: Uploading $INPUT_IMAGE to S3..."
-aws s3 cp $INPUT_IMAGE s3://${BUCKET_NAME}/
+aws s3 sync input/ s3://${BUCKET_NAME}/input/ \
+    --exclude "*" \
+    --include "*.jpg" \
+    --include "*.jpeg" \
+    --include "*.png" \
+    --include "*.JPG" \
+    --include "*.JPEG" \
+    --include "*.PNG"
+
+echo ""
+echo "✓ Images uploaded successfully"
 echo ""
 
 # Create payload file
@@ -28,7 +47,6 @@ echo "Step 2: Creating payload..."
 cat > payload_rotate.json <<PAYLOAD
 {
   "bucket_name": "${BUCKET_NAME}",
-  "input_key": "${INPUT_IMAGE}",
   "rotation_degrees": 180
 }
 PAYLOAD

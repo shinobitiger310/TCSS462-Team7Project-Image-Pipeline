@@ -14,7 +14,6 @@
 
 	"test": {
 		"bucket_name": "tcss462-term-project-group-7",
-		"input_key": "input_image.jpeg",
 		"rotation_degrees": 180
 	}
 }

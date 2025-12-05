@@ -41,8 +41,22 @@ def lambda_handler(event, context):
             # List files in stage1/ folder
             response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix='stage1/')
             if 'Contents' in response and len(response['Contents']) > 0:
-                # Get the first file in stage1/
-                input_key = response['Contents'][0]['Key']
+                # Get the first non-empty image file in stage1/
+                for obj in response['Contents']:
+                    key = obj['Key']
+                    size = obj['Size']
+
+                    # Skip if it's just the folder itself or empty
+                    if key == 'stage1/' or size == 0:
+                        continue
+
+                    # Check if it's an image file
+                    if key.lower().endswith(('.jpg', '.jpeg', '.png')):
+                        input_key = key
+                        break
+
+                if not input_key:
+                    raise ValueError("Could not find image file (.jpg, .jpeg, .png) in stage1/ folder")
             else:
                 raise ValueError("Could not find input file in stage1/ folder")
 
