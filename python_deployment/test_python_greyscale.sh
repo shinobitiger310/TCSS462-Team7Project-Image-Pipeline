@@ -2,7 +2,7 @@
 
 # Test python_lambda_greyscale individually
 
-BUCKET_NAME="tcss462-term-project-group-7"
+BUCKET_NAME="tcss462-image-pipeline-bdiep-group7-local"
 
 echo "===== Testing python_lambda_greyscale ====="
 echo ""

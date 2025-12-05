@@ -3,7 +3,7 @@
 # Test the complete Python Image Pipeline
 # This script runs all three Lambda functions in sequence
 
-BUCKET_NAME="tcss462-term-project-group-7"
+BUCKET_NAME="tcss462-image-pipeline-bdiep-group7-local"
 INPUT_IMAGE="input_image.jpeg"
 
 echo "=========================================="

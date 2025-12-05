@@ -1,11 +1,11 @@
 {
 	"README": "Configure your Lambda function settings here",
 
-	"functionName": "python_lambda_greyscale",
+	"functionName": "python_lambda_resize",
 	"handlerFile": "handler.py",
 
 	"lambdaHandler": "lambda_function.lambda_handler",
-	"lambdaRoleARN": "arn:aws:iam::940336903991:role/LambdaS3",
+	"lambdaRoleARN": "arn:aws:iam::458329144069:role/lambda_image_pipeline_role",
 	"lambdaSubnets": "",
 	"lambdaSecurityGroups": "",
 	"lambdaEnvironment": "Variables={}",
@@ -13,7 +13,7 @@
 	"memorySetting": "512",
 
 	"test": {
-		"bucket_name": "tcss462-term-project-group-7",
-		"greyscale_mode": "L"
+		"bucket_name": "tcss462-image-pipeline-bdiep-group7-local",
+		"scale_percent": 150
 	}
 }
