@@ -78,6 +78,12 @@ Lambda: python_lambda_greyscale → output/input_image.jpeg (final)
 
 ## Quick Start
 
+> **Note for Ubuntu/Linux users**: If you're running these scripts on Ubuntu (especially from VirtualBox shared folders), you may need to fix line endings first:
+> ```bash
+> find . -name "*.sh" -type f -exec sed -i 's/\r$//' {} \;
+> ```
+> This converts Windows CRLF line endings to Unix LF format.
+
 ### 1. Install Python 3.12 (First Time Only)
 
 ```bash
@@ -323,11 +329,18 @@ which python3.12
 ```
 
 **Issue**: Line ending errors (bad interpreter: /bin/bash^M)
-- **Cause**: Windows CRLF line endings
-- **Solution**: Fix line endings
+- **Cause**: Windows CRLF line endings when running scripts on Ubuntu/Linux
+- **Solution**: Fix line endings for all shell scripts
 ```bash
+# Fix all scripts in python_deployment directory and subdirectories
+cd python_deployment
+find . -name "*.sh" -type f -exec sed -i 's/\r$//' {} \;
+
+# Or fix individual scripts
 sed -i 's/\r$//' *.sh
+sed -i 's/\r$//' python_lambda_*/deploy/*.sh
 ```
+**Note**: This is a common issue when working with files in VirtualBox shared folders or when editing files on Windows. The scripts have been pre-fixed, but if you encounter this error, run the fix command above.
 
 ### Deployment Failures
 
