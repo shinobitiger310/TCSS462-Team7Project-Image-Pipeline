@@ -116,4 +116,9 @@ def lambda_handler(event, context):
 
     # Collect final metrics
     inspector.inspectAllDeltas()
-    return inspector.finish()
+    result = inspector.finish()
+
+    # Print metrics to CloudWatch logs
+    print(json.dumps(result, indent=2))
+
+    return result
