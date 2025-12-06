@@ -1,23 +1,34 @@
 {
-	"README": "See ./deploy/README.md for help!",
-
-	"functionName":     "helloWorld",
-
-	"lambdaHandler": "index.handler",
-	"lambdaRoleARN": "",
-	"lambdaSubnets": "",
-	"lambdaSecurityGroups": "",
-	"lambdaEnvironment": "Variables={EXAMPLEVAR1=VAL1,EXAMPLEVAR2=VAL2}",
-	"lambdaRuntime": "nodejs10.x",
-
-	"googleHandler": "helloWorld",
-	"googleRuntime": "nodejs8",
-
-	"ibmRuntime": "nodejs:8",
-
-	"azureRuntime": "node",
-
-	"test": {
-		"name": "Bob"
-	}
+  "README": "Replace bucket and function names with your own values. IGNORE FOR NOW",
+  
+  "buckets": {
+    "input": "YOUR-INPUT-BUCKET-NAME",
+    "stage1": "YOUR-STAGE1-BUCKET-NAME",
+    "stage2": "YOUR-STAGE2-BUCKET-NAME",
+    "output": "YOUR-OUTPUT-BUCKET-NAME"
+  },
+  
+  "functions": {
+    "rotate": {
+      "functionName": "nodejs_lambda_rotate",
+      "lambdaHandler": "index.handler",
+      "lambdaRuntime": "nodejs20.x",
+      "lambdaTimeout": 90,
+      "lambdaMemory": 1024
+    },
+    "zoom": {
+      "functionName": "nodejs_lambda_resize",
+      "lambdaHandler": "index.handler",
+      "lambdaRuntime": "nodejs20.x",
+      "lambdaTimeout": 90,
+      "lambdaMemory": 1024
+    },
+    "greyscale": {
+      "functionName": "nodejs_lambda_greyscale",
+      "lambdaHandler": "index.handler",
+      "lambdaRuntime": "nodejs20.x",
+      "lambdaTimeout": 90,
+      "lambdaMemory": 1024
+    }
+  }
 }
