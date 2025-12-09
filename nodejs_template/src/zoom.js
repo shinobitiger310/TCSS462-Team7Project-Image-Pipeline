@@ -30,8 +30,8 @@ exports.handler = async (event) => {
   const filename = inputKey.split('/').pop();
   
   // Output bucket from config
-  const outputBucket = config.buckets.stage2;
-  const outputKey = filename;
+  const outputBucket = config.buckets.base;
+  const outputKey = config.buckets.stage2 + filename;
   
   try {
     // Download image from S3

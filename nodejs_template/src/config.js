@@ -7,16 +7,17 @@
 
 module.exports = {
   buckets: {
+    base: 'tcss462-term-project-group-7-js',
     // Bucket where original images are uploaded
-    input: 'YOUR-INPUT-BUCKET-NAME',
+    input: 'input/',
     
     // Bucket for images after rotate function
-    stage1: 'YOUR-STAGE1-BUCKET-NAME',
+    stage1: 'stage1/',
     
     // Bucket for images after zoom function
-    stage2: 'YOUR-STAGE2-BUCKET-NAME',
+    stage2: 'stage2/',
     
     // Bucket for final processed images
-    output: 'YOUR-OUTPUT-BUCKET-NAME'
+    output: 'output/'
   }
 };
