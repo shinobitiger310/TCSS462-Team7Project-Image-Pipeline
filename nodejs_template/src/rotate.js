@@ -14,13 +14,13 @@ exports.handler = async (event) => {
   inspector.inspectAll();
 
   const inputBucket = event.Records[0].s3.bucket.name;
-  const inputKey = decodeURIComponent(
-    event.Records[0].s3.object.key.replace(/\+/g, " ")
-  );
-  const filename = inputKey.split("/").pop();
-  const outputBucket = config.buckets.stage1;
-  const outputKey = filename;
-
+  const inputKey = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, ' '));
+  const filename = inputKey.split('/').pop();
+  
+  // Output bucket from config
+  const outputBucket = config.buckets.base;
+  const outputKey = config.buckets.stage1 + filename;
+  
   try {
     const response = await s3Client.send(
       new GetObjectCommand({
