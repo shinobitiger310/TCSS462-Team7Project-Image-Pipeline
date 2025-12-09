@@ -1,5 +1,5 @@
 {
-  "README": "Replace bucket and function names with your own values. IGNORE FOR NOW",
+  "README": "Replace bucket names with your own values",
   
   "buckets": {
     "input": "YOUR-INPUT-BUCKET-NAME",

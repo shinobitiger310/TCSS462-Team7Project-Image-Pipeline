@@ -8,15 +8,15 @@
 module.exports = {
   buckets: {
     // Bucket where original images are uploaded
-    input: 'YOUR-INPUT-BUCKET-NAME',
+    input: process.env.INPUT_BUCKET || 'YOUR-INPUT-BUCKET-NAME',
     
     // Bucket for images after rotate function
-    stage1: 'YOUR-STAGE1-BUCKET-NAME',
+    stage1: process.env.STAGE1_BUCKET || 'YOUR-STAGE1-BUCKET-NAME',
     
     // Bucket for images after zoom function
-    stage2: 'YOUR-STAGE2-BUCKET-NAME',
+    stage2: process.env.STAGE2_BUCKET || 'YOUR-STAGE2-BUCKET-NAME',
     
     // Bucket for final processed images
-    output: 'YOUR-OUTPUT-BUCKET-NAME'
+    output: process.env.OUTPUT_BUCKET || 'YOUR-OUTPUT-BUCKET-NAME'
   }
 };

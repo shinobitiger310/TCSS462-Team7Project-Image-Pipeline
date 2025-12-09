@@ -1,20 +1,5 @@
 #!/bin/bash
 
-# ==================================================
-# Zip Script for Lambda Functions
-# ==================================================
-# 
-# This script creates zip files for each Lambda function.
-# 
-# BEFORE RUNNING:
-# 1. Edit src/config.js and add your bucket names
-# 2. Run: npm install (in deploy folder)
-#
-# USAGE:
-# ./zip.sh
-#
-# ==================================================
-
 cd "$(dirname "$0")"
 
 echo "===== Creating zip files ====="
