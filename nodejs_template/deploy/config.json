@@ -2,10 +2,11 @@
   "README": "Replace bucket and function names with your own values. IGNORE FOR NOW",
   
   "buckets": {
-    "input": "YOUR-INPUT-BUCKET-NAME",
-    "stage1": "YOUR-STAGE1-BUCKET-NAME",
-    "stage2": "YOUR-STAGE2-BUCKET-NAME",
-    "output": "YOUR-OUTPUT-BUCKET-NAME"
+    "base": "tcss462-term-project-group-7-js",
+    "input": "input/",
+    "stage1": "stage1/",
+    "stage2": "stage2/",
+    "output": "output/"
   },
   
   "functions": {
