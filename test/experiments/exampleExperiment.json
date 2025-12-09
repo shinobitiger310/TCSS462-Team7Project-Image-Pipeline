@@ -3,17 +3,13 @@
     "callAsync": false,
     "memorySettings": [],
     "parentPayload": {
-      "name": "Jose"
+      "language": "Python",
+      "image": "../Kirmizi_Pistachio/kirmizi 1.jpg"
     },
-    "payloads": [
-        { "name": "Bob Amazing" },
-        { "name": "Joe" },
-        { "name": "Steve" }
-    ],
 
     "runs": 50,
     "threads": 50,
-    "iterations": 3,
+    "iterations": 1,
     "sleepTime": 5,
     "randomSeed": 42,
 
@@ -37,6 +33,6 @@
     "overlapFilter": "functionName",
 
     "openCSV": true,
-    "combineSheets": true,
+    "combineSheets": false,
     "warmupBuffer": 1
 } 
