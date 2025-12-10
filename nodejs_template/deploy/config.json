@@ -11,21 +11,21 @@
 
   "functions": {
     "rotate": {
-      "functionName": "nodejs_rotate",
+      "functionName": "nodejs_lambda_rotate",
       "lambdaHandler": "index.handler",
       "lambdaRuntime": "nodejs20.x",
       "lambdaTimeout": 90,
       "lambdaMemory": 1024
     },
     "zoom": {
-      "functionName": "nodejs_resize",
+      "functionName": "nodejs_lambda_resize",
       "lambdaHandler": "index.handler",
       "lambdaRuntime": "nodejs20.x",
       "lambdaTimeout": 90,
       "lambdaMemory": 1024
     },
     "greyscale": {
-      "functionName": "nodejs_greyscale",
+      "functionName": "nodejs_lambda_greyscale",
       "lambdaHandler": "index.handler",
       "lambdaRuntime": "nodejs20.x",
       "lambdaTimeout": 90,
