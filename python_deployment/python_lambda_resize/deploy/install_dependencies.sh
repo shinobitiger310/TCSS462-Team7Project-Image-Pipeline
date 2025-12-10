@@ -71,3 +71,4 @@ ls -d ./package/PIL 2>/dev/null && echo "✓ PIL found" || echo "✗ PIL not fou
 echo ""
 echo "Checking for _imaging.so:"
 find ./package/PIL -name "*_imaging*.so" 2>/dev/null | head -3
+

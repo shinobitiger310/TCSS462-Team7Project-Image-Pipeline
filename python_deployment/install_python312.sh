@@ -69,3 +69,4 @@ echo "Next steps:"
 echo "1. Clean old package folders: rm -rf python_lambda_*/deploy/package"
 echo "2. Run deployment: ./deploy_all_python.sh"
 echo ""
+
