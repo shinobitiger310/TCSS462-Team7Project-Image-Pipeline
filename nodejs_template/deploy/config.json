@@ -3,10 +3,10 @@
   
   "buckets": {
     "base": "tcss462-term-project-group-7-js",
-    "input": "input/",
-    "stage1": "stage1/",
-    "stage2": "stage2/",
-    "output": "output/"
+    "input": "/input",
+    "stage1": "/stage1",
+    "stage2": "/stage2",
+    "output": "/output"
   },
   
   "functions": {
