@@ -1,148 +1,154 @@
-import json
 import boto3
-import os
+import math
 from io import BytesIO
 from PIL import Image
 from Inspector import Inspector
 
-s3_client = boto3.client('s3')
+# Create an S3 client using the Lambda execution role credentials.
+# This client is used for both reading and writing objects in S3.
+s3 = boto3.client('s3')
 
 def lambda_handler(event, context):
     """
-    Lambda function to rotate an image.
-    Reads from S3 input/{filename}, rotates by specified degrees, and writes to S3 as stage1/{filename}
+    RotateHandler
 
-    Event parameters (Manual invocation):
-    - bucket_name: S3 bucket name (required)
-    - input_key: Input file name (default: auto-detects input/*)
-    - rotation_degrees: Degrees to rotate (default: 180). Positive = counter-clockwise, Negative = clockwise
+    This Lambda function rotates images uploaded to S3 by 180 degrees and writes
+    them to the "stage1/" prefix in the same bucket. It is intended to be
+    triggered by S3 events (new object created) in input.
 
-    Event parameters (S3 trigger):
-    - Records[0].s3.bucket.name: S3 bucket name (automatically provided)
-    - Records[0].s3.object.key: S3 object key (automatically provided)
-    - Environment variable ROTATION_DEGREES: Degrees to rotate (default: 180)
+    Lambda entry point.
+
+    S3Event event:
+         - Contains information about the S3 object that triggered this Lambda.
+         - Includes bucket name and object key (file path).
+
+    Context context:
+         - Provides metadata such as remaining time, request ID, and logger.
     """
-    # Initialize Inspector for performance monitoring
+    # Collect initial data.
     inspector = Inspector()
     inspector.inspectAll()
 
+    # Extract metadata about the uploaded S3 object from the event.
+    record = event['Records'][0]['s3']
+
+    # Bucket name where the triggering image lives.
+    bucket = record['bucket']['name']
+
+    # Key is the full path inside the bucket (e.g. "input/photo.jpg").
+    key = record['object']['key']
+
     try:
-        # Check if this is an S3 trigger event or manual invocation
-        if 'Records' in event and len(event['Records']) > 0:
-            # S3 trigger event format
-            s3_record = event['Records'][0]['s3']
-            bucket_name = s3_record['bucket']['name']
-            input_key = s3_record['object']['key']
-            rotation_degrees = int(os.environ.get('ROTATION_DEGREES', 180))
-            inspector.addAttribute("trigger_type", "s3_event")
-        else:
-            # Manual invocation format
-            bucket_name = event.get('bucket_name')
-            rotation_degrees = event.get('rotation_degrees', 180)
-            inspector.addAttribute("trigger_type", "manual_invoke")
+        # ----------------------------------------------------------
+        # 1. READ IMAGE FROM S3
+        # ----------------------------------------------------------
 
-            if not bucket_name:
-                raise ValueError("bucket_name is required in the event")
+        # Get the object from S3 as a stream.
+        obj = s3.get_object(Bucket=bucket, Key=key)
+        input_stream = obj['Body'].read()
 
-            # Auto-detect input file in input/ folder
-            input_key = event.get('input_key')
-            if not input_key:
-                # List files in input/ folder
-                response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix='input/')
-                if 'Contents' in response and len(response['Contents']) > 0:
-                    # Get the first image file in input/
-                    for obj in response['Contents']:
-                        key = obj['Key']
-                        size = obj['Size']
+        # Convert the downloaded bytes into a PIL Image.
+        src = Image.open(BytesIO(input_stream))
 
-                        # Skip if it's just the folder itself or empty
-                        if key == 'input/' or size == 0:
-                            continue
+        # ----------------------------------------------------------
+        # 2. ROTATE IMAGE BY 180 DEGREES
+        # ----------------------------------------------------------
 
-                        # Check if it's an image file
-                        if key.lower().endswith(('.jpg', '.jpeg', '.png')):
-                            input_key = key
-                            break
+        rotated = rotate(src)
 
-                    if not input_key:
-                        raise ValueError("Could not find image file (.jpg, .jpeg, .png) in input/ folder")
-                else:
-                    raise ValueError("Could not find input file in input/ folder")
+        # ----------------------------------------------------------
+        # 3. ENCODE ROTATED IMAGE BACK INTO JPEG BYTES
+        # ----------------------------------------------------------
 
-        # Extract filename from input_key (remove any path prefix)
-        filename = os.path.basename(input_key)
-        file_extension = os.path.splitext(filename)[1]  # e.g., '.jpeg', '.jpg', '.png'
-        if not file_extension:
-            file_extension = '.jpeg'  # default
-            filename = filename + file_extension
+        image_bytes = buffered_image_to_bytes(rotated)
 
-        inspector.addAttribute("input_key", input_key)
-        inspector.addAttribute("filename", filename)
-        inspector.addAttribute("rotation_degrees", rotation_degrees)
+        # ----------------------------------------------------------
+        # 4. WRITE PROCESSED IMAGE TO NEXT STAGE IN PIPELINE
+        # ----------------------------------------------------------
 
-        # Download image from S3
-        inspector.addAttribute("step", "downloading_image")
-        response = s3_client.get_object(Bucket=bucket_name, Key=input_key)
-        image_data = response['Body'].read()
+        # Extract just the filename from the original key.
+        # Example: "input/photo.jpg" → "photo.jpg"
+        filename = key[key.rfind('/') + 1:]
 
-        original_size = len(image_data)
-        inspector.addAttribute("input_size_bytes", original_size)
+        # Next-stage prefix where ResizeHandler listens.
+        new_key = "stage1/" + filename
 
-        # Open and rotate image
-        inspector.addAttribute("step", "rotating_image")
-        image = Image.open(BytesIO(image_data))
-
-        original_dimensions = image.size
-        inspector.addAttribute("original_width", original_dimensions[0])
-        inspector.addAttribute("original_height", original_dimensions[1])
-
-        # Rotate by specified degrees (expand=True ensures no cropping)
-        rotated_image = image.rotate(rotation_degrees, expand=True)
-
-        rotated_dimensions = rotated_image.size
-        inspector.addAttribute("rotated_width", rotated_dimensions[0])
-        inspector.addAttribute("rotated_height", rotated_dimensions[1])
-
-        # Save rotated image to BytesIO
-        output_buffer = BytesIO()
-
-        # Determine format based on extension
-        image_format = 'JPEG'
-        if file_extension.lower() in ['.png']:
-            image_format = 'PNG'
-        elif file_extension.lower() in ['.jpg', '.jpeg']:
-            image_format = 'JPEG'
-
-        rotated_image.save(output_buffer, format=image_format)
-        output_buffer.seek(0)
-
-        output_size = len(output_buffer.getvalue())
-        inspector.addAttribute("output_size_bytes", output_size)
-
-        # Upload to S3 in stage1 folder with original filename
-        output_key = f"stage1/{filename}"
-        inspector.addAttribute("step", "uploading_image")
-        s3_client.put_object(
-            Bucket=bucket_name,
-            Key=output_key,
-            Body=output_buffer.getvalue(),
-            ContentType=f'image/{image_format.lower()}'
+        # Metadata so S3 knows the file size + content type.
+        s3.put_object(
+            Bucket=bucket,
+            Key=new_key,
+            Body=image_bytes,
+            ContentLength=len(image_bytes),
+            ContentType='image/jpeg'
         )
 
-        inspector.addAttribute("output_key", output_key)
-        inspector.addAttribute("bucket_name", bucket_name)
-        inspector.addAttribute("image_format", image_format)
-        inspector.addAttribute("message", f"Successfully rotated {input_key} by {rotation_degrees} degrees to {output_key}")
+        # Create and populate a separate response object for function output. (OPTIONAL)
+        # response = Response()
+        # response.setValue("Bucket:" + bucketname + " filename:" + filename + " size:" + bytes.length)
 
+        # inspector.consumeResponse(response)
+
+        # ****************END FUNCTION IMPLEMENTATION***************************
+
+        # Collect final information such as total runtime and cpu deltas.
+        inspector.inspectAllDeltas()
+
+        # Get the metrics as a dict
+        metrics = inspector.finish()
+
+        # Log them to CloudWatch
+        context.log("INSPECTOR METRICS: " + str(metrics))
+
+        return metrics
     except Exception as e:
-        inspector.addAttribute("error", str(e))
-        inspector.addAttribute("message", f"Error rotating image: {str(e)}")
+        raise RuntimeError(str(e))
 
-    # Collect final metrics
-    inspector.inspectAllDeltas()
-    result = inspector.finish()
 
-    # Print metrics to CloudWatch logs
-    print(json.dumps(result, indent=2))
+# ----------------------------------------------------------------------
+# Helper method to rotate the image 180 degrees around its center.
+#
+# Why this transform?
+#   - 180° rotation is equivalent to flipping horizontally + vertically.
+#   - The affine transform in Java:
+#         translate(w, h)
+#         rotate(π radians)
+#     moves the origin so the rotation happens around the image center.
+#
+# In Python PIL, rotate() rotates counter-clockwise by default.
+# For 180°, we rotate by 180 degrees with expand=False to keep same dimensions.
+# ----------------------------------------------------------------------
+def rotate(src):
+    """
+    Rotate an image 180 degrees around its center.
 
-    return result
+    @param src PIL Image input
+    @return Rotated PIL Image
+    """
+    # Amount to rotate in radians (180 degrees).
+    rotate_amount = math.pi
+
+    w = src.width
+    h = src.height
+
+    # Destination image with same dimensions as the original.
+    # For 180° rotation, dimensions remain the same (expand=False)
+    # PIL's rotate() rotates counter-clockwise, so 180° is the same regardless of direction
+    dst = src.rotate(180, expand=False)
+
+    return dst
+
+
+# ----------------------------------------------------------------------
+# Convert a PIL Image back into a JPEG stored in a byte array.
+# This byte array can then be uploaded directly to S3.
+# ----------------------------------------------------------------------
+def buffered_image_to_bytes(img):
+    """
+    Convert a PIL Image to a JPEG byte array for S3 upload.
+
+    @param img PIL Image input
+    @return byte array containing JPEG image
+    """
+    baos = BytesIO()
+    img.save(baos, format='JPEG')
+    return baos.getvalue()

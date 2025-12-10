@@ -1,148 +1,114 @@
-import json
 import boto3
-import os
 from io import BytesIO
-from PIL import Image
+from PIL import Image, ImageOps
 from Inspector import Inspector
 
-s3_client = boto3.client('s3')
+# Amazon S3 client using Lambda execution role credentials
+s3 = boto3.client('s3')
 
 def lambda_handler(event, context):
     """
-    Lambda function to convert an image to greyscale.
-    Reads from S3 stage2/{filename}, converts to greyscale, and writes to S3 as output/{filename}
+    GrayscaleHandler
 
-    Event parameters (Manual invocation):
-    - bucket_name: S3 bucket name (required)
-    - input_key: Input file to convert (default: auto-detects stage2/*)
-    - greyscale_mode: Greyscale conversion mode - 'L' for standard or '1' for binary (default: 'L')
+    This Lambda function converts images uploaded to S3 into grayscale
+    and writes them to the "output/" prefix in the same bucket. It is intended
+    to be triggered by S3 events (new object created) in stage2.
 
-    Event parameters (S3 trigger):
-    - Records[0].s3.bucket.name: S3 bucket name (automatically provided)
-    - Records[0].s3.object.key: S3 object key (automatically provided)
-    - Environment variable GREYSCALE_MODE: 'L' for standard or '1' for binary (default: 'L')
+    Lambda entry point
+
+    @param event   S3Event object containing metadata about the triggering S3 object
+    @param context Context object for logging and Lambda runtime info
+    @return A dict containing optional metrics (if Inspector is added) or simple message
     """
-    # Initialize Inspector for performance monitoring
+    # Collect initial data.
     inspector = Inspector()
     inspector.inspectAll()
 
+    # Extract S3 record information from the event
+    record = event['Records'][0]['s3']
+
+    # Bucket name where the image resides
+    bucket = record['bucket']['name']
+
+    # Object key (full path inside bucket, e.g., "stage2/photo.jpg")
+    key = record['object']['key']
+
     try:
-        # Check if this is an S3 trigger event or manual invocation
-        if 'Records' in event and len(event['Records']) > 0:
-            # S3 trigger event format
-            s3_record = event['Records'][0]['s3']
-            bucket_name = s3_record['bucket']['name']
-            input_key = s3_record['object']['key']
-            greyscale_mode = os.environ.get('GREYSCALE_MODE', 'L')
-            inspector.addAttribute("trigger_type", "s3_event")
-        else:
-            # Manual invocation format
-            bucket_name = event.get('bucket_name')
-            greyscale_mode = event.get('greyscale_mode', 'L')
-            inspector.addAttribute("trigger_type", "manual_invoke")
+        # ----------------------------------------------------------
+        # 1. READ IMAGE FROM S3
+        # ----------------------------------------------------------
+        obj = s3.get_object(Bucket=bucket, Key=key)
+        input_stream = obj['Body'].read()
+        src = Image.open(BytesIO(input_stream))
 
-            if not bucket_name:
-                raise ValueError("bucket_name is required in the event")
+        # ----------------------------------------------------------
+        # 2. CONVERT IMAGE TO GRAYSCALE
+        # ----------------------------------------------------------
+        gray = to_grayscale(src)
 
-            # Auto-detect input file in stage2/ folder if not provided
-            input_key = event.get('input_key')
-            if not input_key:
-                # List files in stage2/ folder
-                response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix='stage2/')
-                if 'Contents' in response and len(response['Contents']) > 0:
-                    # Get the first non-empty image file in stage2/
-                    for obj in response['Contents']:
-                        key = obj['Key']
-                        size = obj['Size']
+        # ----------------------------------------------------------
+        # 3. ENCODE GRAYSCALE IMAGE INTO BYTES
+        # ----------------------------------------------------------
+        image_bytes = buffered_image_to_bytes(gray)
 
-                        # Skip if it's just the folder itself or empty
-                        if key == 'stage2/' or size == 0:
-                            continue
+        # ----------------------------------------------------------
+        # 4. WRITE PROCESSED IMAGE TO OUTPUT PREFIX
+        # ----------------------------------------------------------
+        filename = key[key.rfind('/') + 1:]
+        new_key = "output/" + filename
 
-                        # Check if it's an image file
-                        if key.lower().endswith(('.jpg', '.jpeg', '.png')):
-                            input_key = key
-                            break
-
-                    if not input_key:
-                        raise ValueError("Could not find image file (.jpg, .jpeg, .png) in stage2/ folder")
-                else:
-                    raise ValueError("Could not find input file in stage2/ folder")
-
-        # Extract filename from input_key
-        filename = os.path.basename(input_key)
-        file_extension = os.path.splitext(filename)[1]
-
-        inspector.addAttribute("input_key", input_key)
-        inspector.addAttribute("filename", filename)
-        inspector.addAttribute("greyscale_mode", greyscale_mode)
-
-        # Download image from S3
-        inspector.addAttribute("step", "downloading_image")
-        response = s3_client.get_object(Bucket=bucket_name, Key=input_key)
-        image_data = response['Body'].read()
-
-        original_size = len(image_data)
-        inspector.addAttribute("input_size_bytes", original_size)
-
-        # Open and convert to greyscale
-        inspector.addAttribute("step", "converting_to_greyscale")
-        image = Image.open(BytesIO(image_data))
-
-        original_dimensions = image.size
-        original_mode = image.mode
-        inspector.addAttribute("original_width", original_dimensions[0])
-        inspector.addAttribute("original_height", original_dimensions[1])
-        inspector.addAttribute("original_mode", original_mode)
-
-        # Convert to greyscale
-        greyscale_image = image.convert(greyscale_mode)
-
-        greyscale_dimensions = greyscale_image.size
-        inspector.addAttribute("greyscale_width", greyscale_dimensions[0])
-        inspector.addAttribute("greyscale_height", greyscale_dimensions[1])
-        inspector.addAttribute("greyscale_mode_result", greyscale_image.mode)
-
-        # Save greyscale image to BytesIO
-        output_buffer = BytesIO()
-
-        # Determine format based on extension
-        image_format = 'JPEG'
-        if file_extension.lower() in ['.png']:
-            image_format = 'PNG'
-        elif file_extension.lower() in ['.jpg', '.jpeg']:
-            image_format = 'JPEG'
-
-        greyscale_image.save(output_buffer, format=image_format)
-        output_buffer.seek(0)
-
-        output_size = len(output_buffer.getvalue())
-        inspector.addAttribute("output_size_bytes", output_size)
-
-        # Upload to S3 in output folder with original filename
-        output_key = f"output/{filename}"
-        inspector.addAttribute("step", "uploading_image")
-        s3_client.put_object(
-            Bucket=bucket_name,
-            Key=output_key,
-            Body=output_buffer.getvalue(),
-            ContentType=f'image/{image_format.lower()}'
+        s3.put_object(
+            Bucket=bucket,
+            Key=new_key,
+            Body=image_bytes,
+            ContentLength=len(image_bytes),
+            ContentType='image/jpeg'
         )
 
-        inspector.addAttribute("output_key", output_key)
-        inspector.addAttribute("bucket_name", bucket_name)
-        inspector.addAttribute("image_format", image_format)
-        inspector.addAttribute("message", f"Successfully converted {input_key} to greyscale as {output_key}")
+        # ****************END FUNCTION IMPLEMENTATION***************************
+
+        # Collect final information such as total runtime and cpu deltas.
+        inspector.inspectAllDeltas()
+
+        # Get the metrics as a dict
+        metrics = inspector.finish()
+
+        # Log them to CloudWatch
+        context.log("INSPECTOR METRICS: " + str(metrics))
+
+        return metrics
 
     except Exception as e:
-        inspector.addAttribute("error", str(e))
-        inspector.addAttribute("message", f"Error converting image to greyscale: {str(e)}")
+        # Re-throw exceptions as RuntimeError for Lambda to log
+        raise RuntimeError(str(e))
 
-    # Collect final metrics
-    inspector.inspectAllDeltas()
-    result = inspector.finish()
 
-    # Print metrics to CloudWatch logs
-    print(json.dumps(result, indent=2))
+# ---------------- Helper Methods --------------------
 
-    return result
+def to_grayscale(src):
+    """
+    Convert a PIL Image to grayscale efficiently using PIL's convert method.
+
+    @param src PIL Image input
+    @return Grayscale PIL Image
+    """
+    w = src.width
+    h = src.height
+
+    # Create destination grayscale image
+    # Convert to 'L' mode (8-bit grayscale)
+    gray = src.convert('L')
+
+    return gray
+
+
+def buffered_image_to_bytes(img):
+    """
+    Convert a PIL Image to a JPEG byte array for S3 upload.
+
+    @param img PIL Image input
+    @return byte array containing JPEG image
+    """
+    baos = BytesIO()
+    img.save(baos, format='JPEG')
+    return baos.getvalue()
