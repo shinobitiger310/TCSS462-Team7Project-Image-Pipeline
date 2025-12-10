@@ -5,13 +5,13 @@ A serverless image processing pipeline using AWS Lambda and S3. The pipeline pro
 ## Pipeline Overview
 
 ```
-YOUR-INPUT-BUCKET/photo.jpg
+tcss462-term-project-group-7-js/input/photo.jpg
     ↓ (S3 trigger)
-nodejs_lambda_rotate → YOUR-STAGE1-BUCKET/photo.jpg
+nodejs_lambda_rotate → tcss462-term-project-group-7-js/stage1/photo.jpg
     ↓ (S3 trigger)
-nodejs_lambda_resize → YOUR-STAGE2-BUCKET/photo.jpg
+nodejs_lambda_resize → tcss462-term-project-group-7-js/stage2/photo.jpg
     ↓ (S3 trigger)
-nodejs_lambda_greyscale → YOUR-OUTPUT-BUCKET/photo.jpg
+nodejs_lambda_greyscale → tcss462-term-project-group-7-js/output/photo.jpg
 ```
 
 ## Project Structure
@@ -19,16 +19,25 @@ nodejs_lambda_greyscale → YOUR-OUTPUT-BUCKET/photo.jpg
 ```
 nodejs_image_pipeline/
 ├── src/
-│   ├── config.js         # Bucket configuration (EDIT THIS)
-│   ├── rotate.js         # Rotate function (180 degrees)
-│   ├── zoom.js           # Zoom function (50% center crop)
-│   ├── greyscale.js      # Greyscale function
-│   └── Inspector.js      # SAAF metrics collector
+│   ├── nodejs_rotate/
+|   |    ├── node_modules      # Dependencies
+|   |    ├── index.js          # Rotate function
+|   |    ├── Inspector.js      # SAAF metrics collector
+│   ├── nodejs_resize/
+|   |    ├── node_modules      # Dependencies
+|   |    ├── index.js          # Resize function
+|   |    ├── Inspector.js      # SAAF metrics collector
+│   └── nodejs_greyscale/
+│        ├── node_modules      # Dependencies
+|        ├── index.js          # Greyscale function
+|        ├── Inspector.js      # SAAF metrics collector
 ├── deploy/
-│   ├── config.json       # Bucket and function settings (EDIT THIS)
-│   ├── zip.sh            # Script to create zip files
-│   ├── run.sh            # Script to run the pipeline
-│   └── node_modules/     # Dependencies
+│   ├── config.json       # Bucket and their prefixes function settings (EDIT THIS)
+│   ├── zip.sh            # Script to create zip files (DON'T USE FOR NOW)
+│   ├── nodejs_lambda_greyscale.zip     # READY TO USE FOR LAMBDA, Greyscale Function
+|   ├── nodejs_lambda_resize.zip        # READY TO USE FOR LAMBDA, Resize Function
+|   └──nodejs_lambda_rotate.zip         # READY TO USE FOR LAMBDA, Rotate Function
+│
 └── README.md
 ```
 
@@ -45,20 +54,7 @@ nodejs_image_pipeline/
 
 ### Step 1: Create Project Folders
 
-```bash
-mkdir -p nodejs_image_pipeline/src nodejs_image_pipeline/deploy
-cd nodejs_image_pipeline
-```
-
-### Step 2: Copy Source Files
-
-Create the following files in `src/`:
-
-- config.js
-- rotate.js
-- zoom.js
-- greyscale.js
-- Inspector.js (copy your SAAF Inspector.js)
+### Step 2: Copy Source Files AND place into structure outline
 
 ### Step 3: Create Deploy Files
 
@@ -73,8 +69,8 @@ Create the following files in `deploy/`:
 ```bash
 cd deploy
 npm init -y
-npm install @aws-sdk/client-s3 uuid@3
 npm install --os=linux --cpu=x64 sharp
+npm install aws-sdk uuid@3
 ```
 
 ### Step 5: Make Scripts Executable
@@ -85,9 +81,8 @@ chmod +x zip.sh run.sh
 
 ### Step 6: Edit Configuration Files
 
-Edit both config files with your bucket names:
+Edit deploy/config files with your bucket and prefixes names:
 
-**src/config.js** - Used by Lambda functions
 **deploy/config.json** - Used by scripts
 
 ### Step 7: Create Zip Files
@@ -96,18 +91,8 @@ Edit both config files with your bucket names:
 ./zip.sh
 ```
 
-### Step 8: Create S3 Buckets
 
-Create 4 buckets in AWS S3 Console:
-
-| Bucket | Purpose |
-|--------|---------|
-| YOUR-INPUT-BUCKET | Upload original images |
-| YOUR-STAGE1-BUCKET | After rotate |
-| YOUR-STAGE2-BUCKET | After zoom |
-| YOUR-OUTPUT-BUCKET | Final processed images |
-
-### Step 9: Create Lambda Functions
+### Step 8: Create Lambda Functions
 
 Create 3 functions in AWS Lambda Console:
 
@@ -152,11 +137,13 @@ For each function:
 
 ### Step 13: Add S3 Triggers
 
-| Function | Trigger Bucket | Event Type |
-|----------|----------------|------------|
-| nodejs_lambda_rotate | YOUR-INPUT-BUCKET | PUT |
-| nodejs_lambda_resize | YOUR-STAGE1-BUCKET | PUT |
-| nodejs_lambda_greyscale | YOUR-STAGE2-BUCKET | PUT |
+1. Go to S3 → Your bucket → Properties → Event notifications
+2. Create 3 event notifications:
+
+Name            | Prefix    | Event Type    | Destination
+TriggerRotate   | input/    | PUT           | Lambda for rotate function
+TriggerResize   | stage1/    | PUT          | Lambda for resize function
+TriggerGrayscale| stage2/    | PUT          | Lambda for greyscale function
 
 ---
 
@@ -166,59 +153,8 @@ For each function:
 cd deploy
 ./run.sh photo.jpg
 ```
-
-**Output:**
-
-```
-===== Image Processing Pipeline =====
-
-Uploading photo.jpg...
-upload: ./photo.jpg to s3://your-input-bucket/photo.jpg
-
-Waiting for pipeline to complete...
-
-===== SAAF Output =====
-
------ Rotate -----
-{
-  "version": 0.5,
-  "lang": "node.js",
-  "uuid": "abc12345-1234-5678-abcd-123456789abc",
-  "newcontainer": 1,
-  "platform": "AWS Lambda",
-  "functionName": "nodejs_lambda_rotate",
-  "functionMemory": "1024",
-  "inputBucket": "your-input-bucket",
-  "outputBucket": "your-stage1-bucket",
-  "message": "Image rotated successfully",
-  "runtime": 1234
-}
-
------ Zoom -----
-{
-  ...
-}
-
------ Greyscale -----
-{
-  ...
-}
-
-===== Pipeline Complete =====
-
-Download result:
-  aws s3 cp s3://your-output-bucket/photo.jpg ./
-```
-
----
-
-## Download Result
-
-```bash
-aws s3 cp s3://YOUR-OUTPUT-BUCKET/photo.jpg ./result.jpg
-```
-
----
+# Output
+Check the s3 bucket for the photo transformations and the SAAF results
 
 ## Updating Functions
 
@@ -230,13 +166,6 @@ When you make changes to source files:
 
 ---
 
-## Functions Summary
-
-| Function | Input | Output | Action |
-|----------|-------|--------|--------|
-| nodejs_lambda_rotate | INPUT-BUCKET | STAGE1-BUCKET | Rotate 180° |
-| nodejs_lambda_resize | STAGE1-BUCKET | STAGE2-BUCKET | Zoom 50% |
-| nodejs_lambda_greyscale | STAGE2-BUCKET | OUTPUT-BUCKET | Greyscale |
 
 ## Lambda Configuration
 
@@ -270,15 +199,5 @@ Increase timeout to 1 min 30 sec and memory to 1024 MB.
 ### No SAAF Output
 
 Make sure functions have `console.log(JSON.stringify(result))` before return.
-
----
-
-## Dependencies
-
-| Package | Version | Purpose |
-|---------|---------|---------|
-| @aws-sdk/client-s3 | latest | S3 operations |
-| sharp | latest | Image processing |
-| uuid | 3.x | UUID for Inspector.js |
 
 ---
