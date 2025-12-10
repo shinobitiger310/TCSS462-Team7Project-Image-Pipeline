@@ -1,14 +1,14 @@
 {
   "README": "Replace bucket names with your own values",
-  
+
   "buckets": {
     "base": "tcss462-term-project-group-7-js",
-    "input": "/input",
-    "stage1": "/stage1",
-    "stage2": "/stage2",
-    "output": "/output"
+    "input": "tcss462-term-project-group-7-js/input",
+    "stage1": "tcss462-term-project-group-7-js/stage1",
+    "stage2": "tcss462-term-project-group-7-js/stage2",
+    "output": "tcss462-term-project-group-7-js/output"
   },
-  
+
   "functions": {
     "rotate": {
       "functionName": "nodejs_lambda_rotate",
