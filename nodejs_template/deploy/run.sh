@@ -1,6 +1,4 @@
 #!/bin/bash
-
-# Runs the program, set bucket and subfolders info in deploy/config.json
 set -e
 
 cd "$(dirname "$0")"
