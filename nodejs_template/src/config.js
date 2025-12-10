@@ -9,15 +9,15 @@ module.exports = {
   buckets: {
     base: 'tcss462-term-project-group-7-js',
     // Bucket where original images are uploaded
-    input: 'input/',
+    input: process.env.INPUT_BUCKET || 'input/',
     
     // Bucket for images after rotate function
-    stage1: 'stage1/',
+    stage1: process.env.STAGE1_BUCKET || 'stage1/',
     
     // Bucket for images after zoom function
-    stage2: 'stage2/',
+    stage2: process.env.STAGE2_BUCKET || 'stage2/',
     
     // Bucket for final processed images
-    output: 'output/'
+    output: process.env.OUTPUT_BUCKET || 'output/'
   }
 };
