@@ -1,0 +1,6 @@
+{
+    "function": "python_lambda_greyscale",
+    "platform": "AWS Lambda",
+    "source": "../../python_deployment/python_lambda_greyscale",
+    "endpoint": "python_lambda_greyscale"
+}

@@ -89,7 +89,8 @@ def callGoogle(function, payload):
 #
 def callIBM(function, payload):
     cmd = ['ibmcloud', 'fn', 'action', 'invoke', '--result', str(function['endpoint'])]
-    jsonDict = ast.literal_eval(payload)
+    # Parse JSON payload string
+    jsonDict = json.loads(payload)
     for key in jsonDict:
         cmd.append('-p')
         cmd.append(str(key))
@@ -114,7 +115,8 @@ def callHTTP(function, payload):
 #
 def callPostProcessor(function, response, thread_id, run_id, payload, roundTripTime, pipelineStage):
     try:
-        dictionary = ast.literal_eval(response)
+        # Parse JSON response from Lambda (not Python dict literal)
+        dictionary = json.loads(response)
         dictionary['2_thread_id'] = thread_id
         dictionary['1_run_id'] = run_id
         if pipelineStage != -1:

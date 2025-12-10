@@ -1,0 +1,6 @@
+{
+    "function": "python_lambda_rotate",
+    "platform": "AWS Lambda",
+    "source": "../../python_deployment/python_lambda_rotate",
+    "endpoint": "python_lambda_rotate"
+}

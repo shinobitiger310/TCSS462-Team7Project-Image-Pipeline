@@ -1,0 +1,6 @@
+{
+    "function": "python_lambda_resize",
+    "platform": "AWS Lambda",
+    "source": "../../python_deployment/python_lambda_resize",
+    "endpoint": "python_lambda_resize"
+}

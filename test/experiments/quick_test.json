@@ -1,0 +1,10 @@
+{
+    "callWithCLI": true,
+    "callAsync": false,
+    "runs": 3,
+    "threads": 1,
+    "iterations": 1,
+    "sleepTime": 1,
+    "openCSV": true,
+    "experimentName": "quick_test"
+}
