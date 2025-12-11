@@ -1,0 +1,39 @@
+{
+    "callWithCLI": true,
+    "callAsync": false,
+    "memorySettings": [],
+    "parentPayload": {
+        "image": "./Kirmizi_Pistachio/kirmizi 1.jpg"
+    },
+
+    "passPayloads": true,
+    "transitions": {},
+
+    "runs": 10,
+    "threads": 5,
+    "iterations": 1,
+    "sleepTime": 2,
+    "randomSeed": 42,
+
+    "outputGroups": [
+        "uuid",
+        "newcontainer",
+        "cpuType",
+        "vmID",
+        "zAll"
+    ],
+    "outputRawOfGroup": ["cpuType"],
+    "showAsList": ["cpuType", "containerID", "vmID", "operation"],
+    "showAsSum": ["newcontainer"],
+
+    "ignoreFromAll": ["zAll", "lang", "version", "linuxVersion", "platform", "hostname"],
+    "ignoreFromGroups": ["1_run_id", "2_thread_id", "cpuIdle", "cpuIowait"],
+
+    "invalidators": {},
+    "removeDuplicateContainers": false,
+
+    "openCSV": true,
+    "combineSheets": false,
+    "warmupBuffer": 2,
+    "experimentName": "pipeline_nodejs"
+}

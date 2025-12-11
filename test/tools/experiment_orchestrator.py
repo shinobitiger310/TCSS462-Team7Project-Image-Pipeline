@@ -99,16 +99,16 @@ def prepare_payloads(experiments):
         payloadFolder = exp['payloadFolder']
         payloadsFromFolder = []
         if (payloadFolder != "" and os.path.isdir(payloadFolder)):
-            for filename in os.listdir(payloadsFromFolder):
+            for filename in os.listdir(payloadFolder):
                 if filename.endswith(".json"):
                     try:
-                        payloadsFromFolder.append(json.load(open(payloadsFromFolder + '/' + str(filename))))
+                        payloadsFromFolder.append(json.load(open(payloadFolder + '/' + str(filename))))
                     except Exception as e:
-                        print("Error loading: " + payloadsFromFolder + '/' + str(filename) + " with exception " + str(e))
+                        print("Error loading: " + payloadFolder + '/' + str(filename) + " with exception " + str(e))
                         pass
-            
+
             # Duplicate payloads to have same number as payloads folder. Trim some off if there is more.
-            while len(exp['payloads'] < len(payloadsFromFolder)):
+            while len(exp['payloads']) < len(payloadsFromFolder):
                 exp['payloads'] += exp['payloads']
             exp['payloads'] = exp['payloads'][:len(payloadsFromFolder)]
 

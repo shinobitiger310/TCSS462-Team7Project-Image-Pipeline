@@ -1,4 +1,5 @@
 import boto3
+import base64
 from io import BytesIO
 from PIL import Image, ImageOps
 from Inspector import Inspector
@@ -8,22 +9,40 @@ s3 = boto3.client('s3')
 
 def lambda_handler(event, context):
     """
-    GrayscaleHandler
+    GrayscaleHandler - Dual Mode Support
 
-    This Lambda function converts images uploaded to S3 into grayscale
-    and writes them to the "output/" prefix in the same bucket. It is intended
-    to be triggered by S3 events (new object created) in stage2.
+    This Lambda function converts images to grayscale and supports TWO invocation modes:
 
-    Lambda entry point
+    MODE 1 - S3 Event Trigger (Original Behavior):
+         - Triggered automatically when images are uploaded to S3 stage2/ prefix
+         - Reads from S3, processes, writes back to S3 output/ prefix
+         - Event contains 'Records' array with S3 metadata
 
-    @param event   S3Event object containing metadata about the triggering S3 object
-    @param context Context object for logging and Lambda runtime info
-    @return A dict containing optional metrics (if Inspector is added) or simple message
+    MODE 2 - Direct Invocation (FaaS Runner Pipeline):
+         - Invoked directly with image data in the payload
+         - Used for synchronous pipelines and performance testing
+         - Event contains 'image_data' (base64) or 's3_bucket'/'s3_key'
+         - Returns processed image and metrics in response
+
+    Lambda entry point - automatically detects invocation mode.
     """
     # Collect initial data.
     inspector = Inspector()
     inspector.inspectAll()
 
+    # DETECT INVOCATION MODE
+    if 'Records' in event and len(event['Records']) > 0:
+        # MODE 1: S3 Event Trigger
+        return handle_s3_event(event, context, inspector)
+    else:
+        # MODE 2: Direct Invocation (FaaS Runner)
+        return handle_direct_invocation(event, context, inspector)
+
+def handle_s3_event(event, context, inspector):
+    """
+    Handle S3 event-triggered invocation (original behavior).
+    Reads from S3, processes, writes back to S3.
+    """
     # Extract S3 record information from the event
     record = event['Records'][0]['s3']
 
@@ -79,8 +98,105 @@ def lambda_handler(event, context):
         return metrics
 
     except Exception as e:
-        # Re-throw exceptions as RuntimeError for Lambda to log
+        context.log("ERROR in S3 event handler: " + str(e))
         raise RuntimeError(str(e))
+
+def handle_direct_invocation(event, context, inspector):
+    """
+    Handle direct invocation for FaaS Runner pipelines.
+    Accepts image data in payload, processes it, returns result with metrics.
+
+    Expected event format:
+    {
+        "image_data": "base64_encoded_image",  # Option 1: Direct base64 data
+        OR
+        "s3_bucket": "bucket-name",            # Option 2: S3 reference
+        "s3_key": "path/to/image.jpg",
+
+        "operation": "grayscale"               # Operation name (for logging)
+    }
+
+    Returns:
+    {
+        "image_data": "base64_encoded_grayscale_image",
+        "operation": "grayscale",
+        "success": true,
+        "runtime": 123,                        # Inspector metrics
+        "version": "1.0",                      # SAAF version (required by FaaS Runner)
+        ... other Inspector metrics ...
+    }
+    """
+    try:
+        # ----------------------------------------------------------
+        # 1. READ IMAGE FROM PAYLOAD OR S3
+        # ----------------------------------------------------------
+
+        if 'image_data' in event:
+            # Option 1: Image data provided as base64 in payload
+            image_b64 = event['image_data']
+            image_bytes = base64.b64decode(image_b64)
+            src = Image.open(BytesIO(image_bytes))
+            inspector.addAttribute("input_source", "payload")
+
+        elif 's3_bucket' in event and 's3_key' in event:
+            # Option 2: S3 reference provided
+            bucket = event['s3_bucket']
+            key = event['s3_key']
+
+            obj = s3.get_object(Bucket=bucket, Key=key)
+            input_stream = obj['Body'].read()
+            src = Image.open(BytesIO(input_stream))
+            inspector.addAttribute("input_source", "s3")
+            inspector.addAttribute("s3_bucket", bucket)
+            inspector.addAttribute("s3_key", key)
+
+        else:
+            raise ValueError("Missing required fields: either 'image_data' or ('s3_bucket' and 's3_key')")
+
+        # Add operation info
+        operation = event.get('operation', 'grayscale')
+        inspector.addAttribute("operation", operation)
+
+        # ----------------------------------------------------------
+        # 2. CONVERT IMAGE TO GRAYSCALE
+        # ----------------------------------------------------------
+
+        gray = to_grayscale(src)
+
+        # ----------------------------------------------------------
+        # 3. ENCODE GRAYSCALE IMAGE BACK INTO BASE64
+        # ----------------------------------------------------------
+
+        image_bytes = buffered_image_to_bytes(gray)
+        result_b64 = base64.b64encode(image_bytes).decode('utf-8')
+
+        # Add result info
+        inspector.addAttribute("output_size", len(image_bytes))
+        inspector.addAttribute("success", True)
+
+        # ----------------------------------------------------------
+        # 4. COLLECT METRICS AND RETURN RESPONSE
+        # ----------------------------------------------------------
+
+        inspector.inspectAllDeltas()
+        metrics = inspector.finish()
+
+        # Add processed image to response
+        metrics['image_data'] = result_b64
+        metrics['operation'] = operation
+
+        context.log("INSPECTOR METRICS (without image_data): " + str({k: v for k, v in metrics.items() if k != 'image_data'}))
+
+        return metrics
+
+    except Exception as e:
+        context.log("ERROR in direct invocation handler: " + str(e))
+
+        # Return error with metrics
+        inspector.addAttribute("success", False)
+        inspector.addAttribute("error", str(e))
+        inspector.inspectAllDeltas()
+        return inspector.finish()
 
 
 # ---------------- Helper Methods --------------------

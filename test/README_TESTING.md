@@ -168,3 +168,143 @@ Check that runs completed successfully. Look for "Run X.Y successful" messages.
 ✅ **Takes ~30-40 minutes**: Automated, hands-off
 
 This gives you comprehensive, publication-ready performance comparison data!
+
+---
+
+# Pipeline Testing (Tutorial 10 - FaaS Runner Pipelines)
+
+## What are Pipelines?
+
+The dual-mode functions now support **synchronous pipeline execution** where output from one function becomes input to the next:
+
+```
+rotate → resize → greyscale (all in one chain)
+```
+
+Benefits:
+- Measures end-to-end pipeline latency
+- Tests payload passing between functions
+- Compares language performance in multi-stage workflows
+
+## Pipeline Experiment Files
+
+Created pipeline experiments in `test/experiments/`:
+
+1. **pipeline_python.json** - Python pipeline (rotate → resize → greyscale)
+2. **pipeline_java.json** - Java pipeline (rotate → resize → grayscale)
+3. **pipeline_nodejs.json** - Node.js pipeline (rotate → resize → greyscale)
+4. **pipeline_all_languages.json** - All languages comparison
+
+Key settings:
+- `passPayloads: true` - Passes image_data between stages
+- `transitions: {}` - Linear pipeline flow (default)
+- Uses base64 encoded image data between stages
+
+## How to Run Pipeline Tests
+
+### Test Python Pipeline
+
+```bash
+python3 faas_runner.py \
+  -f ./functions/python_rotate.json \
+     ./functions/python_resize.json \
+     ./functions/python_greyscale.json \
+  -e ./experiments/pipeline_python.json \
+  -o ./history/pipeline_python
+```
+
+### Test Java Pipeline
+
+```bash
+python3 faas_runner.py \
+  -f ./functions/java_rotate.json \
+     ./functions/java_resize.json \
+     ./functions/java_grayscale.json \
+  -e ./experiments/pipeline_java.json \
+  -o ./history/pipeline_java
+```
+
+### Test Node.js Pipeline
+
+```bash
+python3 faas_runner.py \
+  -f ./functions/nodejs_rotate.json \
+     ./functions/nodejs_resize.json \
+     ./functions/nodejs_greyscale.json \
+  -e ./experiments/pipeline_nodejs.json \
+  -o ./history/pipeline_nodejs
+```
+
+### Compare All Languages (Pipeline Mode)
+
+```bash
+python3 faas_runner.py \
+  -f ./functions/python_rotate.json \
+     ./functions/python_resize.json \
+     ./functions/python_greyscale.json \
+     ./functions/java_rotate.json \
+     ./functions/java_resize.json \
+     ./functions/java_grayscale.json \
+     ./functions/nodejs_rotate.json \
+     ./functions/nodejs_resize.json \
+     ./functions/nodejs_greyscale.json \
+  -e ./experiments/pipeline_all_languages.json \
+  -o ./history/pipeline_comparison
+```
+
+## What Pipeline Tests Measure
+
+Pipeline experiments measure:
+- **End-to-end latency**: Total time for all 3 stages
+- **Per-stage runtime**: Time for rotate, resize, greyscale
+- **Payload passing overhead**: Cost of base64 encoding/decoding
+- **Container reuse**: How often containers are reused across stages
+- **Total pipeline throughput**: Runs/second for complete pipeline
+
+## Dual-Mode Function Architecture
+
+All 9 functions now support TWO invocation modes:
+
+### MODE 1: S3 Event Trigger (Original)
+- Triggered by S3 PUT events
+- Reads from S3, processes, writes to S3
+- Asynchronous pipeline via S3
+
+### MODE 2: Direct Invocation (FaaS Runner Pipeline)
+- Invoked with image_data in payload
+- Processes and returns result
+- Synchronous pipeline via payload passing
+
+The function automatically detects which mode to use based on event structure:
+- **S3 Event**: Contains `Records` array
+- **Direct Invocation**: Contains `image_data` or `s3_bucket`/`s3_key`
+
+## Pipeline vs Individual Function Testing
+
+**Individual Testing** (existing):
+- Tests each function independently
+- 50 runs per function = 450 total calls
+- Measures isolated function performance
+
+**Pipeline Testing** (new):
+- Tests entire workflow (rotate → resize → greyscale)
+- 10 runs × 3 functions = 30 calls per pipeline
+- Measures end-to-end workflow performance
+- Shows impact of payload passing
+
+## Expected Pipeline Results
+
+Pipeline latency should be approximately:
+```
+Total Pipeline Time ≈ Rotate + Resize + Greyscale + Overhead
+
+Example:
+Python:   245ms + 387ms + 312ms + ~50ms = ~994ms
+Java:     313ms + 426ms + 349ms + ~50ms = ~1138ms
+Node.js:  199ms + 357ms + 289ms + ~50ms = ~895ms
+```
+
+The overhead includes:
+- Base64 encoding/decoding between stages
+- Network latency for function invocations
+- Lambda startup time if new containers needed
