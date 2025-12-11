@@ -85,6 +85,10 @@ def lambda_handler(event, context):
         inspector.addAttribute("input_key", input_key)
         inspector.addAttribute("filename", filename)
 
+        # Pipeline tracking for CloudWatch metrics
+        inspector.addAttribute("image_id", filename)
+        inspector.addAttribute("pipeline_stage", "resize")
+
         # Download image from S3
         inspector.addAttribute("step", "downloading_image")
         response = s3_client.get_object(Bucket=bucket_name, Key=input_key)

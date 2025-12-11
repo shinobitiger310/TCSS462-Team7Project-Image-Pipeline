@@ -77,6 +77,11 @@ public class GrayscaleHandler implements RequestHandler<S3Event, HashMap<String,
             // 4. WRITE PROCESSED IMAGE TO OUTPUT PREFIX
             // ----------------------------------------------------------
             String filename = key.substring(key.lastIndexOf('/') + 1);
+
+            // Pipeline tracking for CloudWatch metrics
+            inspector.addAttribute("image_id", filename);
+            inspector.addAttribute("pipeline_stage", "greyscale");
+
             String newKey = "output/" + filename;
 
             ObjectMetadata meta = new ObjectMetadata();

@@ -86,6 +86,10 @@ exports.handler = async (event, context) => {
         // String filename = key.substring(key.lastIndexOf('/') + 1);
         const filename = key.substring(key.lastIndexOf('/') + 1);
 
+        // Pipeline tracking for CloudWatch metrics
+        inspector.addAttribute("image_id", filename);
+        inspector.addAttribute("pipeline_stage", "resize");
+
         // Next-stage prefix where the next handler listens
         // String newKey = "stage2/" + filename;
         const newKey = `stage2/${filename}`;
