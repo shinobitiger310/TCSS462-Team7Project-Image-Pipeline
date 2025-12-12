@@ -1,7 +1,7 @@
 ================================================================================
 LAMBDA PERFORMANCE ANALYSIS REPORT
 ================================================================================
-Generated: 2025-12-12 02:11:43
+Generated: 2025-12-12 02:22:43
 
 
 ================================================================================
@@ -83,74 +83,74 @@ JAVA PIPELINE
 ================================================================================
 
 Pipeline Overview:
-  Total Invocations: 1823
-  Images Processed: 608
-  Pipeline Duration: 3960.82s
-  Overall Throughput: 0.15 images/second
+  Total Invocations: 1500
+  Images Processed: 500
+  Pipeline Duration: 775.55s
+  Overall Throughput: 0.64 images/second
 
 
 rotate:
-  Invocations: 625
-  Cold Starts: 43 (6.9%)
-  Warm Starts: 582 (93.1%)
+  Invocations: 500
+  Cold Starts: 37 (7.4%)
+  Warm Starts: 463 (92.6%)
 
   Runtime Statistics:
-    Average: 339.42 ms
-    Std Dev: 662.70 ms
-    CV: 1.9524
+    Average: 354.19 ms
+    Std Dev: 686.95 ms
+    CV: 1.9395
     Min: 102.61 ms
     Max: 3098.35 ms
 
   Billing:
-    Avg Billed Duration: 480.15 ms
+    Avg Billed Duration: 505.25 ms
     Memory Size: 512 MB
-    Avg Memory Used: 178.08 MB (34.8%)
+    Avg Memory Used: 178.19 MB (34.8%)
 
   Cost Estimates:
-    Per Invocation: $0.00000420
-    Per 100k Invocations: $0.4201
+    Per Invocation: $0.00000441
+    Per 100k Invocations: $0.4410
 
 resize:
-  Invocations: 611
-  Cold Starts: 40 (6.5%)
-  Warm Starts: 571 (93.5%)
+  Invocations: 500
+  Cold Starts: 35 (7.0%)
+  Warm Starts: 465 (93.0%)
 
   Runtime Statistics:
-    Average: 433.39 ms
-    Std Dev: 683.24 ms
-    CV: 1.5765
+    Average: 445.81 ms
+    Std Dev: 706.20 ms
+    CV: 1.5841
     Min: 193.83 ms
     Max: 3279.89 ms
 
   Billing:
-    Avg Billed Duration: 568.35 ms
+    Avg Billed Duration: 590.46 ms
     Memory Size: 512 MB
-    Avg Memory Used: 190.74 MB (37.3%)
+    Avg Memory Used: 190.98 MB (37.3%)
 
   Cost Estimates:
-    Per Invocation: $0.00000494
-    Per 100k Invocations: $0.4936
+    Per Invocation: $0.00000512
+    Per 100k Invocations: $0.5120
 
 greyscale:
-  Invocations: 587
-  Cold Starts: 24 (4.1%)
-  Warm Starts: 563 (95.9%)
+  Invocations: 500
+  Cold Starts: 24 (4.8%)
+  Warm Starts: 476 (95.2%)
 
   Runtime Statistics:
-    Average: 396.26 ms
-    Std Dev: 502.34 ms
-    CV: 1.2677
+    Average: 413.46 ms
+    Std Dev: 541.99 ms
+    CV: 1.3109
     Min: 212.08 ms
     Max: 2963.43 ms
 
   Billing:
-    Avg Billed Duration: 478.84 ms
+    Avg Billed Duration: 510.32 ms
     Memory Size: 512 MB
-    Avg Memory Used: 190.69 MB (37.2%)
+    Avg Memory Used: 190.71 MB (37.2%)
 
   Cost Estimates:
-    Per Invocation: $0.00000419
-    Per 100k Invocations: $0.4190
+    Per Invocation: $0.00000445
+    Per 100k Invocations: $0.4453
 
 ================================================================================
 JAVASCRIPT PIPELINE
