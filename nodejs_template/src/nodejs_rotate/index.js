@@ -116,8 +116,7 @@ exports.handler = async (event, context) => {
         // inspector.inspectAllDeltas();
 
         inspector.addAttribute("bucket name", bucket);
-        inspector.addAttribute("initial folder", getParams.Key);
-        inspector.addAttribute("final folder", newKey)
+        inspector.addAttribute("new file", newKey)
         inspector.addAttribute("message", "Image rotated successfully");
 
         inspector.inspectAllDeltas();

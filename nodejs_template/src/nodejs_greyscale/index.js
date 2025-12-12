@@ -109,10 +109,8 @@ exports.handler = async (event, context) => {
         // Collect final information such as total runtime and cpu deltas.
         // inspector.inspectAllDeltas();
         inspector.addAttribute("bucket name", bucket);
-        inspector.addAttribute("subfolder", getParams.Key);
-        inspector.addAttribute("file", filename)
         inspector.addAttribute("new file", newKey)
-        inspector.addAttribute("message", "Image rotated successfully");
+        inspector.addAttribute("message", "Image greyscaled successfully");
         inspector.inspectAllDeltas();
 
         // Get the metrics as a HashMap
