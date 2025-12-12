@@ -1,0 +1,548 @@
+====================================================================================================
+LAMBDA SCALABILITY ANALYSIS REPORT
+====================================================================================================
+Generated: 2025-12-12 02:53:38
+
+
+====================================================================================================
+PYTHON - SCALABILITY ACROSS CONCURRENCY LEVELS
+====================================================================================================
+
+Concur.  Batch   Invocs   Avg RT (ms)  StdDev     CV       Cold %   Throughput   Timeouts  
+----------------------------------------------------------------------------------------------------
+1        100     1500     114.33       80.34      0.7215   4.3      0.64         NO        
+5        100     1500     114.33       80.34      0.7215   4.3      0.64         NO        
+10       100     1500     114.33       80.34      0.7215   4.3      0.64         NO        
+50       100     1500     114.33       80.34      0.7215   4.3      0.64         NO        
+100      100     1500     114.33       80.34      0.7215   4.3      0.64         NO        
+
+
+====================================================================================================
+JAVA - SCALABILITY ACROSS CONCURRENCY LEVELS
+====================================================================================================
+
+Concur.  Batch   Invocs   Avg RT (ms)  StdDev     CV       Cold %   Throughput   Timeouts  
+----------------------------------------------------------------------------------------------------
+1        100     1500     404.49       645.05     1.6115   6.4      0.64         YES       
+5        100     1500     404.49       645.05     1.6115   6.4      0.64         YES       
+10       100     1500     404.49       645.05     1.6115   6.4      0.64         YES       
+50       100     1500     404.49       645.05     1.6115   6.4      0.64         YES       
+100      100     1500     404.49       645.05     1.6115   6.4      0.64         YES       
+
+
+====================================================================================================
+JAVASCRIPT - SCALABILITY ACROSS CONCURRENCY LEVELS
+====================================================================================================
+
+Concur.  Batch   Invocs   Avg RT (ms)  StdDev     CV       Cold %   Throughput   Timeouts  
+----------------------------------------------------------------------------------------------------
+1        100     1688     1800.71      525.12     0.2938   7.7      0.67         YES       
+5        100     1688     1800.71      525.12     0.2938   7.7      0.67         YES       
+10       100     1688     1800.71      525.12     0.2938   7.7      0.67         YES       
+50       100     1688     1800.71      525.12     0.2938   7.7      0.67         YES       
+100      100     1688     1800.71      525.12     0.2938   7.7      0.67         YES       
+
+
+====================================================================================================
+DETAILED BREAKDOWN BY CONCURRENCY AND STAGE
+====================================================================================================
+
+
+CONCURRENCY LEVEL: 1
+====================================================================================================
+
+PYTHON:
+----------------------------------------------------------------------------------------------------
+
+  rotate:
+    Invocations: 500
+    Cold Starts: 26 (5.2%)
+    Avg Runtime: 99.30 ms
+    Std Dev: 91.47 ms
+    CV: 0.9211
+    Min/Max: 53.45 / 555.60 ms
+    Memory: 107.5 MB / 512 MB (21.0%)
+
+  resize:
+    Invocations: 500
+    Cold Starts: 21 (4.2%)
+    Avg Runtime: 143.61 ms
+    Std Dev: 82.81 ms
+    CV: 0.5767
+    Min/Max: 95.25 / 570.36 ms
+    Memory: 110.4 MB / 512 MB (21.6%)
+
+  greyscale:
+    Invocations: 500
+    Cold Starts: 18 (3.6%)
+    Avg Runtime: 100.09 ms
+    Std Dev: 66.73 ms
+    CV: 0.6667
+    Min/Max: 58.49 / 440.98 ms
+    Memory: 108.8 MB / 512 MB (21.2%)
+
+JAVA:
+----------------------------------------------------------------------------------------------------
+
+  rotate:
+    Invocations: 500
+    Cold Starts: 37 (7.4%)
+    Avg Runtime: 354.19 ms
+    Std Dev: 686.95 ms
+    CV: 1.9395
+    Min/Max: 102.61 / 3098.35 ms
+    Memory: 178.2 MB / 512 MB (34.8%)
+    ⚠ TIMEOUT WARNING
+
+  resize:
+    Invocations: 500
+    Cold Starts: 35 (7.0%)
+    Avg Runtime: 445.81 ms
+    Std Dev: 706.20 ms
+    CV: 1.5841
+    Min/Max: 193.83 / 3279.89 ms
+    Memory: 191.0 MB / 512 MB (37.3%)
+    ⚠ TIMEOUT WARNING
+
+  greyscale:
+    Invocations: 500
+    Cold Starts: 24 (4.8%)
+    Avg Runtime: 413.46 ms
+    Std Dev: 541.99 ms
+    CV: 1.3109
+    Min/Max: 212.08 / 2963.43 ms
+    Memory: 190.7 MB / 512 MB (37.2%)
+
+JAVASCRIPT:
+----------------------------------------------------------------------------------------------------
+
+  rotate:
+    Invocations: 505
+    Cold Starts: 50 (9.9%)
+    Avg Runtime: 1598.64 ms
+    Std Dev: 515.81 ms
+    CV: 0.3227
+    Min/Max: 1190.95 / 3000.00 ms
+    Memory: 108.6 MB / 128 MB (84.8%)
+    ⚠ TIMEOUT WARNING
+
+  resize:
+    Invocations: 577
+    Cold Starts: 43 (7.5%)
+    Avg Runtime: 2037.68 ms
+    Std Dev: 547.05 ms
+    CV: 0.2685
+    Min/Max: 1438.92 / 3000.00 ms
+    Memory: 113.3 MB / 128 MB (88.5%)
+    ⚠ TIMEOUT WARNING
+
+  greyscale:
+    Invocations: 606
+    Cold Starts: 37 (6.1%)
+    Avg Runtime: 1765.81 ms
+    Std Dev: 512.50 ms
+    CV: 0.2902
+    Min/Max: 1316.35 / 3000.00 ms
+    Memory: 110.2 MB / 128 MB (86.1%)
+    ⚠ TIMEOUT WARNING
+
+
+CONCURRENCY LEVEL: 5
+====================================================================================================
+
+PYTHON:
+----------------------------------------------------------------------------------------------------
+
+  rotate:
+    Invocations: 500
+    Cold Starts: 26 (5.2%)
+    Avg Runtime: 99.30 ms
+    Std Dev: 91.47 ms
+    CV: 0.9211
+    Min/Max: 53.45 / 555.60 ms
+    Memory: 107.5 MB / 512 MB (21.0%)
+
+  resize:
+    Invocations: 500
+    Cold Starts: 21 (4.2%)
+    Avg Runtime: 143.61 ms
+    Std Dev: 82.81 ms
+    CV: 0.5767
+    Min/Max: 95.25 / 570.36 ms
+    Memory: 110.4 MB / 512 MB (21.6%)
+
+  greyscale:
+    Invocations: 500
+    Cold Starts: 18 (3.6%)
+    Avg Runtime: 100.09 ms
+    Std Dev: 66.73 ms
+    CV: 0.6667
+    Min/Max: 58.49 / 440.98 ms
+    Memory: 108.8 MB / 512 MB (21.2%)
+
+JAVA:
+----------------------------------------------------------------------------------------------------
+
+  rotate:
+    Invocations: 500
+    Cold Starts: 37 (7.4%)
+    Avg Runtime: 354.19 ms
+    Std Dev: 686.95 ms
+    CV: 1.9395
+    Min/Max: 102.61 / 3098.35 ms
+    Memory: 178.2 MB / 512 MB (34.8%)
+    ⚠ TIMEOUT WARNING
+
+  resize:
+    Invocations: 500
+    Cold Starts: 35 (7.0%)
+    Avg Runtime: 445.81 ms
+    Std Dev: 706.20 ms
+    CV: 1.5841
+    Min/Max: 193.83 / 3279.89 ms
+    Memory: 191.0 MB / 512 MB (37.3%)
+    ⚠ TIMEOUT WARNING
+
+  greyscale:
+    Invocations: 500
+    Cold Starts: 24 (4.8%)
+    Avg Runtime: 413.46 ms
+    Std Dev: 541.99 ms
+    CV: 1.3109
+    Min/Max: 212.08 / 2963.43 ms
+    Memory: 190.7 MB / 512 MB (37.2%)
+
+JAVASCRIPT:
+----------------------------------------------------------------------------------------------------
+
+  rotate:
+    Invocations: 505
+    Cold Starts: 50 (9.9%)
+    Avg Runtime: 1598.64 ms
+    Std Dev: 515.81 ms
+    CV: 0.3227
+    Min/Max: 1190.95 / 3000.00 ms
+    Memory: 108.6 MB / 128 MB (84.8%)
+    ⚠ TIMEOUT WARNING
+
+  resize:
+    Invocations: 577
+    Cold Starts: 43 (7.5%)
+    Avg Runtime: 2037.68 ms
+    Std Dev: 547.05 ms
+    CV: 0.2685
+    Min/Max: 1438.92 / 3000.00 ms
+    Memory: 113.3 MB / 128 MB (88.5%)
+    ⚠ TIMEOUT WARNING
+
+  greyscale:
+    Invocations: 606
+    Cold Starts: 37 (6.1%)
+    Avg Runtime: 1765.81 ms
+    Std Dev: 512.50 ms
+    CV: 0.2902
+    Min/Max: 1316.35 / 3000.00 ms
+    Memory: 110.2 MB / 128 MB (86.1%)
+    ⚠ TIMEOUT WARNING
+
+
+CONCURRENCY LEVEL: 10
+====================================================================================================
+
+PYTHON:
+----------------------------------------------------------------------------------------------------
+
+  rotate:
+    Invocations: 500
+    Cold Starts: 26 (5.2%)
+    Avg Runtime: 99.30 ms
+    Std Dev: 91.47 ms
+    CV: 0.9211
+    Min/Max: 53.45 / 555.60 ms
+    Memory: 107.5 MB / 512 MB (21.0%)
+
+  resize:
+    Invocations: 500
+    Cold Starts: 21 (4.2%)
+    Avg Runtime: 143.61 ms
+    Std Dev: 82.81 ms
+    CV: 0.5767
+    Min/Max: 95.25 / 570.36 ms
+    Memory: 110.4 MB / 512 MB (21.6%)
+
+  greyscale:
+    Invocations: 500
+    Cold Starts: 18 (3.6%)
+    Avg Runtime: 100.09 ms
+    Std Dev: 66.73 ms
+    CV: 0.6667
+    Min/Max: 58.49 / 440.98 ms
+    Memory: 108.8 MB / 512 MB (21.2%)
+
+JAVA:
+----------------------------------------------------------------------------------------------------
+
+  rotate:
+    Invocations: 500
+    Cold Starts: 37 (7.4%)
+    Avg Runtime: 354.19 ms
+    Std Dev: 686.95 ms
+    CV: 1.9395
+    Min/Max: 102.61 / 3098.35 ms
+    Memory: 178.2 MB / 512 MB (34.8%)
+    ⚠ TIMEOUT WARNING
+
+  resize:
+    Invocations: 500
+    Cold Starts: 35 (7.0%)
+    Avg Runtime: 445.81 ms
+    Std Dev: 706.20 ms
+    CV: 1.5841
+    Min/Max: 193.83 / 3279.89 ms
+    Memory: 191.0 MB / 512 MB (37.3%)
+    ⚠ TIMEOUT WARNING
+
+  greyscale:
+    Invocations: 500
+    Cold Starts: 24 (4.8%)
+    Avg Runtime: 413.46 ms
+    Std Dev: 541.99 ms
+    CV: 1.3109
+    Min/Max: 212.08 / 2963.43 ms
+    Memory: 190.7 MB / 512 MB (37.2%)
+
+JAVASCRIPT:
+----------------------------------------------------------------------------------------------------
+
+  rotate:
+    Invocations: 505
+    Cold Starts: 50 (9.9%)
+    Avg Runtime: 1598.64 ms
+    Std Dev: 515.81 ms
+    CV: 0.3227
+    Min/Max: 1190.95 / 3000.00 ms
+    Memory: 108.6 MB / 128 MB (84.8%)
+    ⚠ TIMEOUT WARNING
+
+  resize:
+    Invocations: 577
+    Cold Starts: 43 (7.5%)
+    Avg Runtime: 2037.68 ms
+    Std Dev: 547.05 ms
+    CV: 0.2685
+    Min/Max: 1438.92 / 3000.00 ms
+    Memory: 113.3 MB / 128 MB (88.5%)
+    ⚠ TIMEOUT WARNING
+
+  greyscale:
+    Invocations: 606
+    Cold Starts: 37 (6.1%)
+    Avg Runtime: 1765.81 ms
+    Std Dev: 512.50 ms
+    CV: 0.2902
+    Min/Max: 1316.35 / 3000.00 ms
+    Memory: 110.2 MB / 128 MB (86.1%)
+    ⚠ TIMEOUT WARNING
+
+
+CONCURRENCY LEVEL: 50
+====================================================================================================
+
+PYTHON:
+----------------------------------------------------------------------------------------------------
+
+  rotate:
+    Invocations: 500
+    Cold Starts: 26 (5.2%)
+    Avg Runtime: 99.30 ms
+    Std Dev: 91.47 ms
+    CV: 0.9211
+    Min/Max: 53.45 / 555.60 ms
+    Memory: 107.5 MB / 512 MB (21.0%)
+
+  resize:
+    Invocations: 500
+    Cold Starts: 21 (4.2%)
+    Avg Runtime: 143.61 ms
+    Std Dev: 82.81 ms
+    CV: 0.5767
+    Min/Max: 95.25 / 570.36 ms
+    Memory: 110.4 MB / 512 MB (21.6%)
+
+  greyscale:
+    Invocations: 500
+    Cold Starts: 18 (3.6%)
+    Avg Runtime: 100.09 ms
+    Std Dev: 66.73 ms
+    CV: 0.6667
+    Min/Max: 58.49 / 440.98 ms
+    Memory: 108.8 MB / 512 MB (21.2%)
+
+JAVA:
+----------------------------------------------------------------------------------------------------
+
+  rotate:
+    Invocations: 500
+    Cold Starts: 37 (7.4%)
+    Avg Runtime: 354.19 ms
+    Std Dev: 686.95 ms
+    CV: 1.9395
+    Min/Max: 102.61 / 3098.35 ms
+    Memory: 178.2 MB / 512 MB (34.8%)
+    ⚠ TIMEOUT WARNING
+
+  resize:
+    Invocations: 500
+    Cold Starts: 35 (7.0%)
+    Avg Runtime: 445.81 ms
+    Std Dev: 706.20 ms
+    CV: 1.5841
+    Min/Max: 193.83 / 3279.89 ms
+    Memory: 191.0 MB / 512 MB (37.3%)
+    ⚠ TIMEOUT WARNING
+
+  greyscale:
+    Invocations: 500
+    Cold Starts: 24 (4.8%)
+    Avg Runtime: 413.46 ms
+    Std Dev: 541.99 ms
+    CV: 1.3109
+    Min/Max: 212.08 / 2963.43 ms
+    Memory: 190.7 MB / 512 MB (37.2%)
+
+JAVASCRIPT:
+----------------------------------------------------------------------------------------------------
+
+  rotate:
+    Invocations: 505
+    Cold Starts: 50 (9.9%)
+    Avg Runtime: 1598.64 ms
+    Std Dev: 515.81 ms
+    CV: 0.3227
+    Min/Max: 1190.95 / 3000.00 ms
+    Memory: 108.6 MB / 128 MB (84.8%)
+    ⚠ TIMEOUT WARNING
+
+  resize:
+    Invocations: 577
+    Cold Starts: 43 (7.5%)
+    Avg Runtime: 2037.68 ms
+    Std Dev: 547.05 ms
+    CV: 0.2685
+    Min/Max: 1438.92 / 3000.00 ms
+    Memory: 113.3 MB / 128 MB (88.5%)
+    ⚠ TIMEOUT WARNING
+
+  greyscale:
+    Invocations: 606
+    Cold Starts: 37 (6.1%)
+    Avg Runtime: 1765.81 ms
+    Std Dev: 512.50 ms
+    CV: 0.2902
+    Min/Max: 1316.35 / 3000.00 ms
+    Memory: 110.2 MB / 128 MB (86.1%)
+    ⚠ TIMEOUT WARNING
+
+
+CONCURRENCY LEVEL: 100
+====================================================================================================
+
+PYTHON:
+----------------------------------------------------------------------------------------------------
+
+  rotate:
+    Invocations: 500
+    Cold Starts: 26 (5.2%)
+    Avg Runtime: 99.30 ms
+    Std Dev: 91.47 ms
+    CV: 0.9211
+    Min/Max: 53.45 / 555.60 ms
+    Memory: 107.5 MB / 512 MB (21.0%)
+
+  resize:
+    Invocations: 500
+    Cold Starts: 21 (4.2%)
+    Avg Runtime: 143.61 ms
+    Std Dev: 82.81 ms
+    CV: 0.5767
+    Min/Max: 95.25 / 570.36 ms
+    Memory: 110.4 MB / 512 MB (21.6%)
+
+  greyscale:
+    Invocations: 500
+    Cold Starts: 18 (3.6%)
+    Avg Runtime: 100.09 ms
+    Std Dev: 66.73 ms
+    CV: 0.6667
+    Min/Max: 58.49 / 440.98 ms
+    Memory: 108.8 MB / 512 MB (21.2%)
+
+JAVA:
+----------------------------------------------------------------------------------------------------
+
+  rotate:
+    Invocations: 500
+    Cold Starts: 37 (7.4%)
+    Avg Runtime: 354.19 ms
+    Std Dev: 686.95 ms
+    CV: 1.9395
+    Min/Max: 102.61 / 3098.35 ms
+    Memory: 178.2 MB / 512 MB (34.8%)
+    ⚠ TIMEOUT WARNING
+
+  resize:
+    Invocations: 500
+    Cold Starts: 35 (7.0%)
+    Avg Runtime: 445.81 ms
+    Std Dev: 706.20 ms
+    CV: 1.5841
+    Min/Max: 193.83 / 3279.89 ms
+    Memory: 191.0 MB / 512 MB (37.3%)
+    ⚠ TIMEOUT WARNING
+
+  greyscale:
+    Invocations: 500
+    Cold Starts: 24 (4.8%)
+    Avg Runtime: 413.46 ms
+    Std Dev: 541.99 ms
+    CV: 1.3109
+    Min/Max: 212.08 / 2963.43 ms
+    Memory: 190.7 MB / 512 MB (37.2%)
+
+JAVASCRIPT:
+----------------------------------------------------------------------------------------------------
+
+  rotate:
+    Invocations: 505
+    Cold Starts: 50 (9.9%)
+    Avg Runtime: 1598.64 ms
+    Std Dev: 515.81 ms
+    CV: 0.3227
+    Min/Max: 1190.95 / 3000.00 ms
+    Memory: 108.6 MB / 128 MB (84.8%)
+    ⚠ TIMEOUT WARNING
+
+  resize:
+    Invocations: 577
+    Cold Starts: 43 (7.5%)
+    Avg Runtime: 2037.68 ms
+    Std Dev: 547.05 ms
+    CV: 0.2685
+    Min/Max: 1438.92 / 3000.00 ms
+    Memory: 113.3 MB / 128 MB (88.5%)
+    ⚠ TIMEOUT WARNING
+
+  greyscale:
+    Invocations: 606
+    Cold Starts: 37 (6.1%)
+    Avg Runtime: 1765.81 ms
+    Std Dev: 512.50 ms
+    CV: 0.2902
+    Min/Max: 1316.35 / 3000.00 ms
+    Memory: 110.2 MB / 128 MB (86.1%)
+    ⚠ TIMEOUT WARNING
+
+
+====================================================================================================
+END OF REPORT
+====================================================================================================
