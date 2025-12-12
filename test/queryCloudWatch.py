@@ -212,7 +212,7 @@ def format_report(all_metrics):
             report.append(f"    Max: {metrics['max_duration_ms']:.2f} ms")
             
             # Flag timeouts
-            if metrics['max_duration_ms'] >= 3000:
+            if metrics['max_duration_ms'] >= 30000:
                 report.append(f"    ⚠ WARNING: Hitting timeout limit!")
             
             report.append("")

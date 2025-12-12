@@ -1,0 +1,687 @@
+{
+  "1": {
+    "python": {
+      "batch_size": 100,
+      "concurrency": 1,
+      "stages": {
+        "rotate": {
+          "invocations": 100,
+          "cold_starts": 1,
+          "warm_starts": 99,
+          "avg_duration_ms": 78.1463,
+          "stddev_duration_ms": 39.54460998797447,
+          "cv": 0.5060330429972304,
+          "min_duration_ms": 58.75,
+          "max_duration_ms": 445.52,
+          "avg_billed_ms": 84.48,
+          "avg_memory_mb": 107.99,
+          "memory_size_mb": 512
+        },
+        "resize": {
+          "invocations": 100,
+          "cold_starts": 2,
+          "warm_starts": 98,
+          "avg_duration_ms": 128.4889,
+          "stddev_duration_ms": 54.4787973378987,
+          "cv": 0.42399613770449196,
+          "min_duration_ms": 104.63,
+          "max_duration_ms": 508.85,
+          "avg_billed_ms": 140.67,
+          "avg_memory_mb": 110,
+          "memory_size_mb": 512
+        },
+        "greyscale": {
+          "invocations": 100,
+          "cold_starts": 3,
+          "warm_starts": 97,
+          "avg_duration_ms": 89.8576,
+          "stddev_duration_ms": 58.853780001325696,
+          "cv": 0.6549671925504987,
+          "min_duration_ms": 60.4,
+          "max_duration_ms": 425.67,
+          "avg_billed_ms": 107.65,
+          "avg_memory_mb": 108.94,
+          "memory_size_mb": 512
+        }
+      }
+    },
+    "java": {
+      "batch_size": 100,
+      "concurrency": 1,
+      "stages": {
+        "rotate": {
+          "invocations": 100,
+          "cold_starts": 3,
+          "warm_starts": 97,
+          "avg_duration_ms": 209.2041,
+          "stddev_duration_ms": 435.46749811592537,
+          "cv": 2.0815438039499483,
+          "min_duration_ms": 101.51,
+          "max_duration_ms": 2745.98,
+          "avg_billed_ms": 269.2,
+          "avg_memory_mb": 178.78,
+          "memory_size_mb": 512
+        },
+        "resize": {
+          "invocations": 100,
+          "cold_starts": 5,
+          "warm_starts": 95,
+          "avg_duration_ms": 364.4624,
+          "stddev_duration_ms": 600.5716730625004,
+          "cv": 1.6478288928089713,
+          "min_duration_ms": 197.45,
+          "max_duration_ms": 3077.52,
+          "avg_billed_ms": 464.81,
+          "avg_memory_mb": 194.46,
+          "memory_size_mb": 512
+        },
+        "greyscale": {
+          "invocations": 100,
+          "cold_starts": 8,
+          "warm_starts": 92,
+          "avg_duration_ms": 475.024,
+          "stddev_duration_ms": 688.0735643296383,
+          "cv": 1.4485027373977701,
+          "min_duration_ms": 219.67,
+          "max_duration_ms": 2962.03,
+          "avg_billed_ms": 633.47,
+          "avg_memory_mb": 192.08,
+          "memory_size_mb": 512
+        }
+      }
+    },
+    "javascript": {
+      "batch_size": 100,
+      "concurrency": 1,
+      "stages": {
+        "rotate": {
+          "invocations": 100,
+          "cold_starts": 1,
+          "warm_starts": 99,
+          "avg_duration_ms": 336.2107,
+          "stddev_duration_ms": 44.23342226144836,
+          "cv": 0.13156458810337793,
+          "min_duration_ms": 287.15,
+          "max_duration_ms": 710.29,
+          "avg_billed_ms": 344.69,
+          "avg_memory_mb": 142.66,
+          "memory_size_mb": 512
+        },
+        "resize": {
+          "invocations": 100,
+          "cold_starts": 2,
+          "warm_starts": 98,
+          "avg_duration_ms": 432.1455,
+          "stddev_duration_ms": 58.95997535351307,
+          "cv": 0.1364354722044151,
+          "min_duration_ms": 371.5,
+          "max_duration_ms": 796.82,
+          "avg_billed_ms": 448.62,
+          "avg_memory_mb": 147.65,
+          "memory_size_mb": 512
+        },
+        "greyscale": {
+          "invocations": 100,
+          "cold_starts": 2,
+          "warm_starts": 98,
+          "avg_duration_ms": 383.3927,
+          "stddev_duration_ms": 65.97701572326135,
+          "cv": 0.1720873029748906,
+          "min_duration_ms": 329.44,
+          "max_duration_ms": 756.84,
+          "avg_billed_ms": 399.99,
+          "avg_memory_mb": 132.74,
+          "memory_size_mb": 512
+        }
+      }
+    }
+  },
+  "5": {
+    "python": {
+      "batch_size": 100,
+      "concurrency": 5,
+      "stages": {
+        "rotate": {
+          "invocations": 100,
+          "cold_starts": 4,
+          "warm_starts": 96,
+          "avg_duration_ms": 94.0781,
+          "stddev_duration_ms": 77.22930133856207,
+          "cv": 0.82090626127188,
+          "min_duration_ms": 54.3,
+          "max_duration_ms": 473.86,
+          "avg_billed_ms": 118.91,
+          "avg_memory_mb": 107.32,
+          "memory_size_mb": 512
+        },
+        "resize": {
+          "invocations": 100,
+          "cold_starts": 3,
+          "warm_starts": 97,
+          "avg_duration_ms": 133.7112,
+          "stddev_duration_ms": 73.6806928684561,
+          "cv": 0.5510435391235448,
+          "min_duration_ms": 98.35,
+          "max_duration_ms": 586.89,
+          "avg_billed_ms": 152.04,
+          "avg_memory_mb": 110.46,
+          "memory_size_mb": 512
+        },
+        "greyscale": {
+          "invocations": 100,
+          "cold_starts": 2,
+          "warm_starts": 98,
+          "avg_duration_ms": 88.0315,
+          "stddev_duration_ms": 52.819562671017785,
+          "cv": 0.6000075276579155,
+          "min_duration_ms": 57.2,
+          "max_duration_ms": 464.18,
+          "avg_billed_ms": 100.52,
+          "avg_memory_mb": 109.21,
+          "memory_size_mb": 512
+        }
+      }
+    },
+    "java": {
+      "batch_size": 100,
+      "concurrency": 5,
+      "stages": {
+        "rotate": {
+          "invocations": 100,
+          "cold_starts": 5,
+          "warm_starts": 95,
+          "avg_duration_ms": 288.06919999999997,
+          "stddev_duration_ms": 588.2634499240329,
+          "cv": 2.042090754318868,
+          "min_duration_ms": 112.59,
+          "max_duration_ms": 3049.14,
+          "avg_billed_ms": 393.55,
+          "avg_memory_mb": 177.5,
+          "memory_size_mb": 512
+        },
+        "resize": {
+          "invocations": 100,
+          "cold_starts": 0,
+          "warm_starts": 100,
+          "avg_duration_ms": 241.8725,
+          "stddev_duration_ms": 47.111444627595425,
+          "cv": 0.19477801166976577,
+          "min_duration_ms": 198.16,
+          "max_duration_ms": 430.59,
+          "avg_billed_ms": 242.41,
+          "avg_memory_mb": 192.99,
+          "memory_size_mb": 512
+        },
+        "greyscale": {
+          "invocations": 100,
+          "cold_starts": 0,
+          "warm_starts": 100,
+          "avg_duration_ms": 287.1382,
+          "stddev_duration_ms": 59.570982383890716,
+          "cv": 0.20746449752729076,
+          "min_duration_ms": 209.25,
+          "max_duration_ms": 591.72,
+          "avg_billed_ms": 287.62,
+          "avg_memory_mb": 191.47,
+          "memory_size_mb": 512
+        }
+      }
+    },
+    "javascript": {
+      "batch_size": 100,
+      "concurrency": 5,
+      "stages": {
+        "rotate": {
+          "invocations": 100,
+          "cold_starts": 4,
+          "warm_starts": 96,
+          "avg_duration_ms": 362.1637,
+          "stddev_duration_ms": 87.15728825676443,
+          "cv": 0.24065716209759408,
+          "min_duration_ms": 294.43,
+          "max_duration_ms": 738.55,
+          "avg_billed_ms": 393.94,
+          "avg_memory_mb": 135.07,
+          "memory_size_mb": 512
+        },
+        "resize": {
+          "invocations": 100,
+          "cold_starts": 5,
+          "warm_starts": 95,
+          "avg_duration_ms": 428.332,
+          "stddev_duration_ms": 98.70741972663913,
+          "cv": 0.23044605522501035,
+          "min_duration_ms": 311.43,
+          "max_duration_ms": 854.14,
+          "avg_billed_ms": 467.97,
+          "avg_memory_mb": 142.79,
+          "memory_size_mb": 512
+        },
+        "greyscale": {
+          "invocations": 100,
+          "cold_starts": 3,
+          "warm_starts": 97,
+          "avg_duration_ms": 386.3124,
+          "stddev_duration_ms": 73.82282669782136,
+          "cv": 0.19109618717344137,
+          "min_duration_ms": 341.91,
+          "max_duration_ms": 779.79,
+          "avg_billed_ms": 410.96,
+          "avg_memory_mb": 133.59,
+          "memory_size_mb": 512
+        }
+      }
+    }
+  },
+  "10": {
+    "python": {
+      "batch_size": 100,
+      "concurrency": 10,
+      "stages": {
+        "rotate": {
+          "invocations": 100,
+          "cold_starts": 4,
+          "warm_starts": 96,
+          "avg_duration_ms": 90.4865,
+          "stddev_duration_ms": 78.79880930719908,
+          "cv": 0.8708349787780395,
+          "min_duration_ms": 50.55,
+          "max_duration_ms": 492.17,
+          "avg_billed_ms": 115.24,
+          "avg_memory_mb": 107.66,
+          "memory_size_mb": 512
+        },
+        "resize": {
+          "invocations": 100,
+          "cold_starts": 3,
+          "warm_starts": 97,
+          "avg_duration_ms": 135.4201,
+          "stddev_duration_ms": 69.82413632205709,
+          "cv": 0.5156113185712984,
+          "min_duration_ms": 95.11,
+          "max_duration_ms": 535.73,
+          "avg_billed_ms": 153.98,
+          "avg_memory_mb": 110.44,
+          "memory_size_mb": 512
+        },
+        "greyscale": {
+          "invocations": 100,
+          "cold_starts": 3,
+          "warm_starts": 97,
+          "avg_duration_ms": 91.5343,
+          "stddev_duration_ms": 58.14586520913755,
+          "cv": 0.6352358100639601,
+          "min_duration_ms": 54.34,
+          "max_duration_ms": 403.87,
+          "avg_billed_ms": 110.12,
+          "avg_memory_mb": 108.84,
+          "memory_size_mb": 512
+        }
+      }
+    },
+    "java": {
+      "batch_size": 100,
+      "concurrency": 10,
+      "stages": {
+        "rotate": {
+          "invocations": 100,
+          "cold_starts": 1,
+          "warm_starts": 99,
+          "avg_duration_ms": 179.7227,
+          "stddev_duration_ms": 248.1840706266991,
+          "cv": 1.3809277883467093,
+          "min_duration_ms": 112.49,
+          "max_duration_ms": 2606.91,
+          "avg_billed_ms": 199.81,
+          "avg_memory_mb": 180.03,
+          "memory_size_mb": 512
+        },
+        "resize": {
+          "invocations": 100,
+          "cold_starts": 6,
+          "warm_starts": 94,
+          "avg_duration_ms": 416.3432,
+          "stddev_duration_ms": 661.6446373141902,
+          "cv": 1.5891808424256482,
+          "min_duration_ms": 205.46,
+          "max_duration_ms": 3146.88,
+          "avg_billed_ms": 537.52,
+          "avg_memory_mb": 190.75,
+          "memory_size_mb": 512
+        },
+        "greyscale": {
+          "invocations": 100,
+          "cold_starts": 3,
+          "warm_starts": 97,
+          "avg_duration_ms": 377.287,
+          "stddev_duration_ms": 452.4675629548074,
+          "cv": 1.1992662428199419,
+          "min_duration_ms": 225.73,
+          "max_duration_ms": 3021.25,
+          "avg_billed_ms": 438.31,
+          "avg_memory_mb": 190.16,
+          "memory_size_mb": 512
+        }
+      }
+    },
+    "javascript": {
+      "batch_size": 100,
+      "concurrency": 10,
+      "stages": {
+        "rotate": {
+          "invocations": 100,
+          "cold_starts": 5,
+          "warm_starts": 95,
+          "avg_duration_ms": 364.2183,
+          "stddev_duration_ms": 91.32961741008624,
+          "cv": 0.2507551581293039,
+          "min_duration_ms": 309.39,
+          "max_duration_ms": 757.19,
+          "avg_billed_ms": 404.76,
+          "avg_memory_mb": 135.73,
+          "memory_size_mb": 512
+        },
+        "resize": {
+          "invocations": 100,
+          "cold_starts": 3,
+          "warm_starts": 97,
+          "avg_duration_ms": 429.7432,
+          "stddev_duration_ms": 76.30929487687631,
+          "cv": 0.17756952262857517,
+          "min_duration_ms": 321.55,
+          "max_duration_ms": 818.07,
+          "avg_billed_ms": 453.79,
+          "avg_memory_mb": 144.3,
+          "memory_size_mb": 512
+        },
+        "greyscale": {
+          "invocations": 100,
+          "cold_starts": 3,
+          "warm_starts": 97,
+          "avg_duration_ms": 392.158,
+          "stddev_duration_ms": 76.8906960259402,
+          "cv": 0.19607070626109935,
+          "min_duration_ms": 331.55,
+          "max_duration_ms": 797.57,
+          "avg_billed_ms": 417.15,
+          "avg_memory_mb": 134.93,
+          "memory_size_mb": 512
+        }
+      }
+    }
+  },
+  "50": {
+    "python": {
+      "batch_size": 100,
+      "concurrency": 50,
+      "stages": {
+        "rotate": {
+          "invocations": 100,
+          "cold_starts": 20,
+          "warm_starts": 80,
+          "avg_duration_ms": 161.7551,
+          "stddev_duration_ms": 151.84956912492126,
+          "cv": 0.9387621727223516,
+          "min_duration_ms": 59.86,
+          "max_duration_ms": 516.6,
+          "avg_billed_ms": 280.38,
+          "avg_memory_mb": 107.36,
+          "memory_size_mb": 512
+        },
+        "resize": {
+          "invocations": 100,
+          "cold_starts": 25,
+          "warm_starts": 75,
+          "avg_duration_ms": 228.6982,
+          "stddev_duration_ms": 172.7666162300922,
+          "cv": 0.7554349628903603,
+          "min_duration_ms": 100.81,
+          "max_duration_ms": 763.13,
+          "avg_billed_ms": 378.67,
+          "avg_memory_mb": 110.22,
+          "memory_size_mb": 512
+        },
+        "greyscale": {
+          "invocations": 100,
+          "cold_starts": 9,
+          "warm_starts": 91,
+          "avg_duration_ms": 113.3082,
+          "stddev_duration_ms": 94.8783172362145,
+          "cv": 0.8373473167539022,
+          "min_duration_ms": 59.06,
+          "max_duration_ms": 432.3,
+          "avg_billed_ms": 167.24,
+          "avg_memory_mb": 108.56,
+          "memory_size_mb": 512
+        }
+      }
+    },
+    "java": {
+      "batch_size": 100,
+      "concurrency": 50,
+      "stages": {
+        "rotate": {
+          "invocations": 100,
+          "cold_starts": 24,
+          "warm_starts": 76,
+          "avg_duration_ms": 776.005,
+          "stddev_duration_ms": 1101.193399985083,
+          "cv": 1.4190545163820891,
+          "min_duration_ms": 110.41,
+          "max_duration_ms": 2834.14,
+          "avg_billed_ms": 1257.43,
+          "avg_memory_mb": 177.62,
+          "memory_size_mb": 512
+        },
+        "resize": {
+          "invocations": 100,
+          "cold_starts": 20,
+          "warm_starts": 80,
+          "avg_duration_ms": 794.293,
+          "stddev_duration_ms": 1101.73041452338,
+          "cv": 1.3870579427533416,
+          "min_duration_ms": 203.71,
+          "max_duration_ms": 3140.6,
+          "avg_billed_ms": 1196.15,
+          "avg_memory_mb": 191.08,
+          "memory_size_mb": 512
+        },
+        "greyscale": {
+          "invocations": 100,
+          "cold_starts": 12,
+          "warm_starts": 88,
+          "avg_duration_ms": 612.6998,
+          "stddev_duration_ms": 827.4534601065996,
+          "cv": 1.3505038847843587,
+          "min_duration_ms": 235.96,
+          "max_duration_ms": 2994.9,
+          "avg_billed_ms": 853.93,
+          "avg_memory_mb": 186.46,
+          "memory_size_mb": 512
+        }
+      }
+    },
+    "javascript": {
+      "batch_size": 100,
+      "concurrency": 50,
+      "stages": {
+        "rotate": {
+          "invocations": 100,
+          "cold_starts": 25,
+          "warm_starts": 75,
+          "avg_duration_ms": 439.455,
+          "stddev_duration_ms": 164.32851319072643,
+          "cv": 0.37393706566252843,
+          "min_duration_ms": 288.51,
+          "max_duration_ms": 775.83,
+          "avg_billed_ms": 634.56,
+          "avg_memory_mb": 128.3,
+          "memory_size_mb": 512
+        },
+        "resize": {
+          "invocations": 100,
+          "cold_starts": 28,
+          "warm_starts": 72,
+          "avg_duration_ms": 521.6125,
+          "stddev_duration_ms": 170.72171369814183,
+          "cv": 0.3272960554015516,
+          "min_duration_ms": 336.77,
+          "max_duration_ms": 830.46,
+          "avg_billed_ms": 746.42,
+          "avg_memory_mb": 133.09,
+          "memory_size_mb": 512
+        },
+        "greyscale": {
+          "invocations": 100,
+          "cold_starts": 27,
+          "warm_starts": 73,
+          "avg_duration_ms": 483.7859,
+          "stddev_duration_ms": 177.834182077978,
+          "cv": 0.36758860082110284,
+          "min_duration_ms": 300.36,
+          "max_duration_ms": 832.27,
+          "avg_billed_ms": 700.86,
+          "avg_memory_mb": 129.11,
+          "memory_size_mb": 512
+        }
+      }
+    }
+  },
+  "100": {
+    "python": {
+      "batch_size": 100,
+      "concurrency": 100,
+      "stages": {
+        "rotate": {
+          "invocations": 100,
+          "cold_starts": 0,
+          "warm_starts": 100,
+          "avg_duration_ms": 89.9685,
+          "stddev_duration_ms": 32.98650273026435,
+          "cv": 0.3666450227609035,
+          "min_duration_ms": 53.2,
+          "max_duration_ms": 176.85,
+          "avg_billed_ms": 90.44,
+          "avg_memory_mb": 107.87,
+          "memory_size_mb": 512
+        },
+        "resize": {
+          "invocations": 100,
+          "cold_starts": 0,
+          "warm_starts": 100,
+          "avg_duration_ms": 137.8116,
+          "stddev_duration_ms": 31.7146900200949,
+          "cv": 0.2301307728819265,
+          "min_duration_ms": 99.19,
+          "max_duration_ms": 215.45,
+          "avg_billed_ms": 138.27,
+          "avg_memory_mb": 110.66,
+          "memory_size_mb": 512
+        },
+        "greyscale": {
+          "invocations": 100,
+          "cold_starts": 8,
+          "warm_starts": 92,
+          "avg_duration_ms": 116.4357,
+          "stddev_duration_ms": 92.86827455432221,
+          "cv": 0.7975927877302427,
+          "min_duration_ms": 58.6,
+          "max_duration_ms": 438.35,
+          "avg_billed_ms": 164.69,
+          "avg_memory_mb": 108.7,
+          "memory_size_mb": 512
+        }
+      }
+    },
+    "java": {
+      "batch_size": 100,
+      "concurrency": 100,
+      "stages": {
+        "rotate": {
+          "invocations": 100,
+          "cold_starts": 0,
+          "warm_starts": 100,
+          "avg_duration_ms": 184.8186,
+          "stddev_duration_ms": 59.07540663192487,
+          "cv": 0.31963994225648756,
+          "min_duration_ms": 113.78,
+          "max_duration_ms": 409.5,
+          "avg_billed_ms": 185.36,
+          "avg_memory_mb": 178.47,
+          "memory_size_mb": 512
+        },
+        "resize": {
+          "invocations": 100,
+          "cold_starts": 0,
+          "warm_starts": 100,
+          "avg_duration_ms": 279.0704,
+          "stddev_duration_ms": 59.22436957328913,
+          "cv": 0.21222017660521908,
+          "min_duration_ms": 214.31,
+          "max_duration_ms": 431.09,
+          "avg_billed_ms": 279.57,
+          "avg_memory_mb": 189.01,
+          "memory_size_mb": 512
+        },
+        "greyscale": {
+          "invocations": 100,
+          "cold_starts": 15,
+          "warm_starts": 85,
+          "avg_duration_ms": 685.3768,
+          "stddev_duration_ms": 902.4453303745934,
+          "cv": 1.3167141496102486,
+          "min_duration_ms": 207.3,
+          "max_duration_ms": 3006.08,
+          "avg_billed_ms": 984.12,
+          "avg_memory_mb": 189.06,
+          "memory_size_mb": 512
+        }
+      }
+    },
+    "javascript": {
+      "batch_size": 100,
+      "concurrency": 100,
+      "stages": {
+        "rotate": {
+          "invocations": 100,
+          "cold_starts": 0,
+          "warm_starts": 100,
+          "avg_duration_ms": 386.0605,
+          "stddev_duration_ms": 63.66623143393993,
+          "cv": 0.1649125757075379,
+          "min_duration_ms": 297.88,
+          "max_duration_ms": 521.04,
+          "avg_billed_ms": 386.58,
+          "avg_memory_mb": 131.53,
+          "memory_size_mb": 512
+        },
+        "resize": {
+          "invocations": 100,
+          "cold_starts": 0,
+          "warm_starts": 100,
+          "avg_duration_ms": 487.0049,
+          "stddev_duration_ms": 65.25654709202547,
+          "cv": 0.13399566840503138,
+          "min_duration_ms": 386.17,
+          "max_duration_ms": 644.07,
+          "avg_billed_ms": 487.46,
+          "avg_memory_mb": 132.99,
+          "memory_size_mb": 512
+        },
+        "greyscale": {
+          "invocations": 100,
+          "cold_starts": 8,
+          "warm_starts": 92,
+          "avg_duration_ms": 470.9335,
+          "stddev_duration_ms": 111.76880402998383,
+          "cv": 0.23733457914967576,
+          "min_duration_ms": 334.12,
+          "max_duration_ms": 813.44,
+          "avg_billed_ms": 537.02,
+          "avg_memory_mb": 127.6,
+          "memory_size_mb": 512
+        }
+      }
+    }
+  }
+}
