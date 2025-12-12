@@ -1,0 +1,3186 @@
+=== Performance Testing Suite ===
+Started: Fri Dec 12 12:44:04 AM UTC 2025
+
+========================================
+Testing: Python with concurrency 1
+========================================
+=== Configuration ===
+Language: Python
+Requested Concurrency: 1
+Batch Size: 100
+
+Actual Concurrency: 1
+
+Searching for *.jpg in ./Kirmizi_Pistachio/...
+✓ Found 1232 files
+✓ Target bucket: s3://tcss462-term-project-group-7-python/input/
+
+System Check:
+  Available Memory: 6584MB
+
+Starting uploads (Ctrl+C to cancel)...
+================================================
+Processing batch: 1-1 (1 uploads)
+  [1] ✓
+  Progress: 1/100 (1%)
+
+Processing batch: 2-2 (1 uploads)
+  [2] ✓
+  Progress: 2/100 (2%)
+
+Processing batch: 3-3 (1 uploads)
+  [3] ✓
+  Progress: 3/100 (3%)
+
+Processing batch: 4-4 (1 uploads)
+  [4] ✓
+  Progress: 4/100 (4%)
+
+Processing batch: 5-5 (1 uploads)
+  [5] ✓
+  Progress: 5/100 (5%)
+
+Processing batch: 6-6 (1 uploads)
+  [6] ✓
+  Progress: 6/100 (6%)
+
+Processing batch: 7-7 (1 uploads)
+  [7] ✓
+  Progress: 7/100 (7%)
+
+Processing batch: 8-8 (1 uploads)
+  [8] ✓
+  Progress: 8/100 (8%)
+
+Processing batch: 9-9 (1 uploads)
+  [9] ✓
+  Progress: 9/100 (9%)
+
+Processing batch: 10-10 (1 uploads)
+  [10] ✓
+  Progress: 10/100 (10%)
+
+Processing batch: 11-11 (1 uploads)
+  [11] ✓
+  Progress: 11/100 (11%)
+
+Processing batch: 12-12 (1 uploads)
+  [12] ✓
+  Progress: 12/100 (12%)
+
+Processing batch: 13-13 (1 uploads)
+  [13] ✓
+  Progress: 13/100 (13%)
+
+Processing batch: 14-14 (1 uploads)
+  [14] ✓
+  Progress: 14/100 (14%)
+
+Processing batch: 15-15 (1 uploads)
+  [15] ✓
+  Progress: 15/100 (15%)
+
+Processing batch: 16-16 (1 uploads)
+  [16] ✓
+  Progress: 16/100 (16%)
+
+Processing batch: 17-17 (1 uploads)
+  [17] ✓
+  Progress: 17/100 (17%)
+
+Processing batch: 18-18 (1 uploads)
+  [18] ✓
+  Progress: 18/100 (18%)
+
+Processing batch: 19-19 (1 uploads)
+  [19] ✓
+  Progress: 19/100 (19%)
+
+Processing batch: 20-20 (1 uploads)
+  [20] ✓
+  Progress: 20/100 (20%)
+
+Processing batch: 21-21 (1 uploads)
+  [21] ✓
+  Progress: 21/100 (21%)
+
+Processing batch: 22-22 (1 uploads)
+  [22] ✓
+  Progress: 22/100 (22%)
+
+Processing batch: 23-23 (1 uploads)
+  [23] ✓
+  Progress: 23/100 (23%)
+
+Processing batch: 24-24 (1 uploads)
+  [24] ✓
+  Progress: 24/100 (24%)
+
+Processing batch: 25-25 (1 uploads)
+  [25] ✓
+  Progress: 25/100 (25%)
+
+Processing batch: 26-26 (1 uploads)
+  [26] ✓
+  Progress: 26/100 (26%)
+
+Processing batch: 27-27 (1 uploads)
+  [27] ✓
+  Progress: 27/100 (27%)
+
+Processing batch: 28-28 (1 uploads)
+  [28] ✓
+  Progress: 28/100 (28%)
+
+Processing batch: 29-29 (1 uploads)
+  [29] ✓
+  Progress: 29/100 (29%)
+
+Processing batch: 30-30 (1 uploads)
+  [30] ✓
+  Progress: 30/100 (30%)
+
+Processing batch: 31-31 (1 uploads)
+  [31] ✓
+  Progress: 31/100 (31%)
+
+Processing batch: 32-32 (1 uploads)
+  [32] ✓
+  Progress: 32/100 (32%)
+
+Processing batch: 33-33 (1 uploads)
+  [33] ✓
+  Progress: 33/100 (33%)
+
+Processing batch: 34-34 (1 uploads)
+  [34] ✓
+  Progress: 34/100 (34%)
+
+Processing batch: 35-35 (1 uploads)
+  [35] ✓
+  Progress: 35/100 (35%)
+
+Processing batch: 36-36 (1 uploads)
+  [36] ✓
+  Progress: 36/100 (36%)
+
+Processing batch: 37-37 (1 uploads)
+  [37] ✓
+  Progress: 37/100 (37%)
+
+Processing batch: 38-38 (1 uploads)
+  [38] ✓
+  Progress: 38/100 (38%)
+
+Processing batch: 39-39 (1 uploads)
+  [39] ✓
+  Progress: 39/100 (39%)
+
+Processing batch: 40-40 (1 uploads)
+  [40] ✓
+  Progress: 40/100 (40%)
+
+Processing batch: 41-41 (1 uploads)
+  [41] ✓
+  Progress: 41/100 (41%)
+
+Processing batch: 42-42 (1 uploads)
+  [42] ✓
+  Progress: 42/100 (42%)
+
+Processing batch: 43-43 (1 uploads)
+  [43] ✓
+  Progress: 43/100 (43%)
+
+Processing batch: 44-44 (1 uploads)
+  [44] ✓
+  Progress: 44/100 (44%)
+
+Processing batch: 45-45 (1 uploads)
+  [45] ✓
+  Progress: 45/100 (45%)
+
+Processing batch: 46-46 (1 uploads)
+  [46] ✓
+  Progress: 46/100 (46%)
+
+Processing batch: 47-47 (1 uploads)
+  [47] ✓
+  Progress: 47/100 (47%)
+
+Processing batch: 48-48 (1 uploads)
+  [48] ✓
+  Progress: 48/100 (48%)
+
+Processing batch: 49-49 (1 uploads)
+  [49] ✓
+  Progress: 49/100 (49%)
+
+Processing batch: 50-50 (1 uploads)
+  [50] ✓
+  Progress: 50/100 (50%)
+
+Processing batch: 51-51 (1 uploads)
+  [51] ✓
+  Progress: 51/100 (51%)
+
+Processing batch: 52-52 (1 uploads)
+  [52] ✓
+  Progress: 52/100 (52%)
+
+Processing batch: 53-53 (1 uploads)
+  [53] ✓
+  Progress: 53/100 (53%)
+
+Processing batch: 54-54 (1 uploads)
+  [54] ✓
+  Progress: 54/100 (54%)
+
+Processing batch: 55-55 (1 uploads)
+  [55] ✓
+  Progress: 55/100 (55%)
+
+Processing batch: 56-56 (1 uploads)
+  [56] ✓
+  Progress: 56/100 (56%)
+
+Processing batch: 57-57 (1 uploads)
+  [57] ✓
+  Progress: 57/100 (57%)
+
+Processing batch: 58-58 (1 uploads)
+  [58] ✓
+  Progress: 58/100 (58%)
+
+Processing batch: 59-59 (1 uploads)
+  [59] ✓
+  Progress: 59/100 (59%)
+
+Processing batch: 60-60 (1 uploads)
+  [60] ✓
+  Progress: 60/100 (60%)
+
+Processing batch: 61-61 (1 uploads)
+  [61] ✓
+  Progress: 61/100 (61%)
+
+Processing batch: 62-62 (1 uploads)
+  [62] ✓
+  Progress: 62/100 (62%)
+
+Processing batch: 63-63 (1 uploads)
+  [63] ✓
+  Progress: 63/100 (63%)
+
+Processing batch: 64-64 (1 uploads)
+  [64] ✓
+  Progress: 64/100 (64%)
+
+Processing batch: 65-65 (1 uploads)
+  [65] ✓
+  Progress: 65/100 (65%)
+
+Processing batch: 66-66 (1 uploads)
+  [66] ✓
+  Progress: 66/100 (66%)
+
+Processing batch: 67-67 (1 uploads)
+  [67] ✓
+  Progress: 67/100 (67%)
+
+Processing batch: 68-68 (1 uploads)
+  [68] ✓
+  Progress: 68/100 (68%)
+
+Processing batch: 69-69 (1 uploads)
+  [69] ✓
+  Progress: 69/100 (69%)
+
+Processing batch: 70-70 (1 uploads)
+  [70] ✓
+  Progress: 70/100 (70%)
+
+Processing batch: 71-71 (1 uploads)
+  [71] ✓
+  Progress: 71/100 (71%)
+
+Processing batch: 72-72 (1 uploads)
+  [72] ✓
+  Progress: 72/100 (72%)
+
+Processing batch: 73-73 (1 uploads)
+  [73] ✓
+  Progress: 73/100 (73%)
+
+Processing batch: 74-74 (1 uploads)
+  [74] ✓
+  Progress: 74/100 (74%)
+
+Processing batch: 75-75 (1 uploads)
+  [75] ✓
+  Progress: 75/100 (75%)
+
+Processing batch: 76-76 (1 uploads)
+  [76] ✓
+  Progress: 76/100 (76%)
+
+Processing batch: 77-77 (1 uploads)
+  [77] ✓
+  Progress: 77/100 (77%)
+
+Processing batch: 78-78 (1 uploads)
+  [78] ✓
+  Progress: 78/100 (78%)
+
+Processing batch: 79-79 (1 uploads)
+  [79] ✓
+  Progress: 79/100 (79%)
+
+Processing batch: 80-80 (1 uploads)
+  [80] ✓
+  Progress: 80/100 (80%)
+
+Processing batch: 81-81 (1 uploads)
+  [81] ✓
+  Progress: 81/100 (81%)
+
+Processing batch: 82-82 (1 uploads)
+  [82] ✓
+  Progress: 82/100 (82%)
+
+Processing batch: 83-83 (1 uploads)
+  [83] ✓
+  Progress: 83/100 (83%)
+
+Processing batch: 84-84 (1 uploads)
+  [84] ✓
+  Progress: 84/100 (84%)
+
+Processing batch: 85-85 (1 uploads)
+  [85] ✓
+  Progress: 85/100 (85%)
+
+Processing batch: 86-86 (1 uploads)
+  [86] ✓
+  Progress: 86/100 (86%)
+
+Processing batch: 87-87 (1 uploads)
+  [87] ✓
+  Progress: 87/100 (87%)
+
+Processing batch: 88-88 (1 uploads)
+  [88] ✓
+  Progress: 88/100 (88%)
+
+Processing batch: 89-89 (1 uploads)
+  [89] ✓
+  Progress: 89/100 (89%)
+
+Processing batch: 90-90 (1 uploads)
+  [90] ✓
+  Progress: 90/100 (90%)
+
+Processing batch: 91-91 (1 uploads)
+  [91] ✓
+  Progress: 91/100 (91%)
+
+Processing batch: 92-92 (1 uploads)
+  [92] ✓
+  Progress: 92/100 (92%)
+
+Processing batch: 93-93 (1 uploads)
+  [93] ✓
+  Progress: 93/100 (93%)
+
+Processing batch: 94-94 (1 uploads)
+  [94] ✓
+  Progress: 94/100 (94%)
+
+Processing batch: 95-95 (1 uploads)
+  [95] ✓
+  Progress: 95/100 (95%)
+
+Processing batch: 96-96 (1 uploads)
+  [96] ✓
+  Progress: 96/100 (96%)
+
+Processing batch: 97-97 (1 uploads)
+  [97] ✓
+  Progress: 97/100 (97%)
+
+Processing batch: 98-98 (1 uploads)
+  [98] ✓
+  Progress: 98/100 (98%)
+
+Processing batch: 99-99 (1 uploads)
+  [99] ✓
+  Progress: 99/100 (99%)
+
+Processing batch: 100-100 (1 uploads)
+  [100] ✓
+  Progress: 100/100 (100%)
+
+================================================
+✓ Upload batch complete!
+✓ Uploaded: 100 images
+✓ Duration: 198s
+✓ Upload rate: .50 images/second
+
+Next steps:
+  1. Wait 2-3 minutes for Lambda processing
+  2. Query CloudWatch Logs for performance metrics
+  3. Check s3://tcss462-term-project-group-7-python/output/ for processed images
+
+Waiting 2 minutes for Lambda processing...
+---
+========================================
+Testing: Python with concurrency 5
+========================================
+=== Configuration ===
+Language: Python
+Requested Concurrency: 5
+Batch Size: 100
+
+Actual Concurrency: 5
+
+Searching for *.jpg in ./Kirmizi_Pistachio/...
+✓ Found 1232 files
+✓ Target bucket: s3://tcss462-term-project-group-7-python/input/
+
+System Check:
+  Available Memory: 6584MB
+
+Starting uploads (Ctrl+C to cancel)...
+================================================
+Processing batch: 1-5 (5 uploads)
+  [3] ✓
+  [5] ✓
+  [4] ✓
+  [2] ✓
+  [1] ✓
+  Progress: 5/100 (5%)
+
+Processing batch: 6-10 (5 uploads)
+  [10] ✓
+  [6] ✓
+  [9] ✓
+  [8] ✓
+  [7] ✓
+  Progress: 10/100 (10%)
+
+Processing batch: 11-15 (5 uploads)
+  [13] ✓
+  [15] ✓
+  [11] ✓
+  [14] ✓
+  [12] ✓
+  Progress: 15/100 (15%)
+
+Processing batch: 16-20 (5 uploads)
+  [20] ✓
+  [16] ✓
+  [17] ✓
+  [19] ✓
+  [18] ✓
+  Progress: 20/100 (20%)
+
+Processing batch: 21-25 (5 uploads)
+  [25] ✓
+  [24] ✓
+  [21] ✓
+  [22] ✓
+  [23] ✓
+  Progress: 25/100 (25%)
+
+Processing batch: 26-30 (5 uploads)
+  [30] ✓
+  [27] ✓
+  [28] ✓
+  [29] ✓
+  [26] ✓
+  Progress: 30/100 (30%)
+
+Processing batch: 31-35 (5 uploads)
+  [34] ✓
+  [33] ✓
+  [32] ✓
+  [31] ✓
+  [35] ✓
+  Progress: 35/100 (35%)
+
+Processing batch: 36-40 (5 uploads)
+  [36] ✓
+  [40] ✓
+  [39] ✓
+  [38] ✓
+  [37] ✓
+  Progress: 40/100 (40%)
+
+Processing batch: 41-45 (5 uploads)
+  [44] ✓
+  [43] ✓
+  [42] ✓
+  [45] ✓
+  [41] ✓
+  Progress: 45/100 (45%)
+
+Processing batch: 46-50 (5 uploads)
+  [50] ✓
+  [47] ✓
+  [46] ✓
+  [48] ✓
+  [49] ✓
+  Progress: 50/100 (50%)
+
+Processing batch: 51-55 (5 uploads)
+  [53] ✓
+  [51] ✓
+  [55] ✓
+  [54] ✓
+  [52] ✓
+  Progress: 55/100 (55%)
+
+Processing batch: 56-60 (5 uploads)
+  [59] ✓
+  [60] ✓
+  [58] ✓
+  [56] ✓
+  [57] ✓
+  Progress: 60/100 (60%)
+
+Processing batch: 61-65 (5 uploads)
+  [62] ✓
+  [64] ✓
+  [65] ✓
+  [63] ✓
+  [61] ✓
+  Progress: 65/100 (65%)
+
+Processing batch: 66-70 (5 uploads)
+  [67] ✓
+  [66] ✓
+  [69] ✓
+  [70] ✓
+  [68] ✓
+  Progress: 70/100 (70%)
+
+Processing batch: 71-75 (5 uploads)
+  [75] ✓
+  [73] ✓
+  [72] ✓
+  [74] ✓
+  [71] ✓
+  Progress: 75/100 (75%)
+
+Processing batch: 76-80 (5 uploads)
+  [78] ✓
+  [77] ✓
+  [79] ✓
+  [80] ✓
+  [76] ✓
+  Progress: 80/100 (80%)
+
+Processing batch: 81-85 (5 uploads)
+  [81] ✓
+  [82] ✓
+  [85] ✓
+  [83] ✓
+  [84] ✓
+  Progress: 85/100 (85%)
+
+Processing batch: 86-90 (5 uploads)
+  [86] ✓
+  [88] ✓
+  [89] ✓
+  [90] ✓
+  [87] ✓
+  Progress: 90/100 (90%)
+
+Processing batch: 91-95 (5 uploads)
+  [94] ✓
+  [92] ✓
+  [93] ✓
+  [95] ✓
+  [91] ✓
+  Progress: 95/100 (95%)
+
+Processing batch: 96-100 (5 uploads)
+  [97] ✓
+  [98] ✓
+  [100] ✓
+  [96] ✓
+  [99] ✓
+  Progress: 100/100 (100%)
+
+================================================
+✓ Upload batch complete!
+✓ Uploaded: 100 images
+✓ Duration: 43s
+✓ Upload rate: 2.32 images/second
+
+Next steps:
+  1. Wait 2-3 minutes for Lambda processing
+  2. Query CloudWatch Logs for performance metrics
+  3. Check s3://tcss462-term-project-group-7-python/output/ for processed images
+
+Waiting 2 minutes for Lambda processing...
+---
+========================================
+Testing: Python with concurrency 10
+========================================
+=== Configuration ===
+Language: Python
+Requested Concurrency: 10
+Batch Size: 100
+
+Actual Concurrency: 10
+
+Searching for *.jpg in ./Kirmizi_Pistachio/...
+✓ Found 1232 files
+✓ Target bucket: s3://tcss462-term-project-group-7-python/input/
+
+System Check:
+  Available Memory: 6578MB
+
+Starting uploads (Ctrl+C to cancel)...
+================================================
+Processing batch: 1-10 (10 uploads)
+  [3] ✓
+  [1] ✓
+  [10] ✓
+  [4] ✓
+  [2] ✓
+  [8] ✓
+  [7] ✓
+  [6] ✓
+  [5] ✓
+  [9] ✓
+  Progress: 10/100 (10%)
+
+Processing batch: 11-20 (10 uploads)
+  [15] ✓
+  [16] ✓
+  [19] ✓
+  [17] ✓
+  [14] ✓
+  [18] ✓
+  [11] ✓
+  [13] ✓
+  [20] ✓
+  [12] ✓
+  Progress: 20/100 (20%)
+
+Processing batch: 21-30 (10 uploads)
+  [26] ✓
+  [23] ✓
+  [24] ✓
+  [25] ✓
+  [30] ✓
+  [22] ✓
+  [29] ✓
+  [21] ✓
+  [28] ✓
+  [27] ✓
+  Progress: 30/100 (30%)
+
+Processing batch: 31-40 (10 uploads)
+  [39] ✓
+  [33] ✓
+  [31] ✓
+  [40] ✓
+  [34] ✓
+  [32] ✓
+  [35] ✓
+  [37] ✓
+  [38] ✓
+  [36] ✓
+  Progress: 40/100 (40%)
+
+Processing batch: 41-50 (10 uploads)
+  [46] ✓
+  [47] ✓
+  [42] ✓
+  [44] ✓
+  [41] ✓
+  [43] ✓
+  [49] ✓
+  [45] ✓
+  [48] ✓
+  [50] ✓
+  Progress: 50/100 (50%)
+
+Processing batch: 51-60 (10 uploads)
+  [56] ✓
+  [55] ✓
+  [52] ✓
+  [53] ✓
+  [60] ✓
+  [51] ✓
+  [58] ✓
+  [59] ✓
+  [54] ✓
+  [57] ✓
+  Progress: 60/100 (60%)
+
+Processing batch: 61-70 (10 uploads)
+  [65] ✓
+  [64] ✓
+  [62] ✓
+  [63] ✓
+  [67] ✓
+  [68] ✓
+  [61] ✓
+  [66] ✓
+  [70] ✓
+  [69] ✓
+  Progress: 70/100 (70%)
+
+Processing batch: 71-80 (10 uploads)
+  [79] ✓
+  [78] ✓
+  [74] ✓
+  [76] ✓
+  [75] ✓
+  [72] ✓
+  [80] ✓
+  [77] ✓
+  [73] ✓
+  [71] ✓
+  Progress: 80/100 (80%)
+
+Processing batch: 81-90 (10 uploads)
+  [86] ✓
+  [82] ✓
+  [90] ✓
+  [89] ✓
+  [85] ✓
+  [84] ✓
+  [87] ✓
+  [88] ✓
+  [81] ✓
+  [83] ✓
+  Progress: 90/100 (90%)
+
+Processing batch: 91-100 (10 uploads)
+  [91] ✓
+  [95] ✓
+  [96] ✓
+  [99] ✓
+  [97] ✓
+  [93] ✓
+  [94] ✓
+  [92] ✓
+  [98] ✓
+  [100] ✓
+  Progress: 100/100 (100%)
+
+================================================
+✓ Upload batch complete!
+✓ Uploaded: 100 images
+✓ Duration: 25s
+✓ Upload rate: 4.00 images/second
+
+Next steps:
+  1. Wait 2-3 minutes for Lambda processing
+  2. Query CloudWatch Logs for performance metrics
+  3. Check s3://tcss462-term-project-group-7-python/output/ for processed images
+
+Waiting 2 minutes for Lambda processing...
+---
+========================================
+Testing: Python with concurrency 50
+========================================
+=== Configuration ===
+Language: Python
+Requested Concurrency: 50
+Batch Size: 100
+
+Actual Concurrency: 50
+
+Searching for *.jpg in ./Kirmizi_Pistachio/...
+✓ Found 1232 files
+✓ Target bucket: s3://tcss462-term-project-group-7-python/input/
+
+System Check:
+  Available Memory: 6576MB
+
+Starting uploads (Ctrl+C to cancel)...
+================================================
+Processing batch: 1-50 (50 uploads)
+  [48] ✓
+  [32] ✓
+  [10] ✓
+  [44] ✓
+  [1] ✓
+  [11] ✓
+  [19] ✓
+  [6] ✓
+  [50] ✓
+  [8] ✓
+  [5] ✓
+  [9] ✓
+  [2] ✓
+  [16] ✓
+  [25] ✓
+  [43] ✓
+  [4] ✓
+  [13] ✓
+  [34] ✓
+  [14] ✓
+  [27] ✓
+  [37] ✓
+  [28] ✓
+  [7] ✓
+  [40] ✓
+  [12] ✓
+  [3] ✓
+  [35] ✓
+  [23] ✓
+  [46] ✓
+  [26] ✓
+  [38] ✓
+  [31] ✓
+  [47] ✓
+  [36] ✓
+  [17] ✓
+  [22] ✓
+  [45] ✓
+  [15] ✓
+  [30] ✓
+  [49] ✓
+  [24] ✓
+  [41] ✓
+  [33] ✓
+  [20] ✓
+  [21] ✓
+  [18] ✓
+  [42] ✓
+  [39] ✓
+  [29] ✓
+  Progress: 50/100 (50%)
+
+Processing batch: 51-100 (50 uploads)
+  [72] ✓
+  [53] ✓
+  [56] ✓
+  [61] ✓
+  [55] ✓
+  [71] ✓
+  [97] ✓
+  [64] ✓
+  [66] ✓
+  [91] ✓
+  [63] ✓
+  [52] ✓
+  [92] ✓
+  [87] ✓
+  [82] ✓
+  [80] ✓
+  [73] ✓
+  [89] ✓
+  [90] ✓
+  [67] ✓
+  [51] ✓
+  [96] ✓
+  [69] ✓
+  [60] ✓
+  [70] ✓
+  [83] ✓
+  [94] ✓
+  [58] ✓
+  [86] ✓
+  [76] ✓
+  [78] ✓
+  [81] ✓
+  [57] ✓
+  [54] ✓
+  [77] ✓
+  [88] ✓
+  [99] ✓
+  [62] ✓
+  [84] ✓
+  [98] ✓
+  [100] ✓
+  [75] ✓
+  [93] ✓
+  [59] ✓
+  [74] ✓
+  [65] ✓
+  [68] ✓
+  [95] ✓
+  [85] ✓
+  [79] ✓
+  Progress: 100/100 (100%)
+
+================================================
+✓ Upload batch complete!
+✓ Uploaded: 100 images
+✓ Duration: 16s
+✓ Upload rate: 6.25 images/second
+
+Next steps:
+  1. Wait 2-3 minutes for Lambda processing
+  2. Query CloudWatch Logs for performance metrics
+  3. Check s3://tcss462-term-project-group-7-python/output/ for processed images
+
+Waiting 2 minutes for Lambda processing...
+---
+========================================
+Testing: Python with concurrency 100
+========================================
+=== Configuration ===
+Language: Python
+Requested Concurrency: 100
+Batch Size: 100
+
+Actual Concurrency: 100
+
+Searching for *.jpg in ./Kirmizi_Pistachio/...
+✓ Found 1232 files
+✓ Target bucket: s3://tcss462-term-project-group-7-python/input/
+
+System Check:
+  Available Memory: 6586MB
+
+Starting uploads (Ctrl+C to cancel)...
+================================================
+Processing batch: 1-100 (100 uploads)
+  [4] ✓
+  [20] ✓
+  [6] ✓
+  [56] ✓
+  [51] ✓
+  [19] ✓
+  [26] ✓
+  [8] ✓
+  [2] ✓
+  [14] ✓
+  [63] ✓
+  [64] ✓
+  [5] ✓
+  [75] ✓
+  [78] ✓
+  [3] ✓
+  [25] ✓
+  [9] ✓
+  [80] ✓
+  [1] ✓
+  [37] ✓
+  [38] ✓
+  [10] ✓
+  [39] ✓
+  [12] ✓
+  [17] ✓
+  [27] ✓
+  [72] ✓
+  [45] ✓
+  [69] ✓
+  [33] ✓
+  [36] ✓
+  [31] ✓
+  [59] ✓
+  [94] ✓
+  [13] ✓
+  [11] ✓
+  [15] ✓
+  [30] ✓
+  [95] ✓
+  [7] ✓
+  [44] ✓
+  [89] ✓
+  [35] ✓
+  [96] ✓
+  [81] ✓
+  [40] ✓
+  [16] ✓
+  [48] ✓
+  [71] ✓
+  [28] ✓
+  [32] ✓
+  [46] ✓
+  [24] ✓
+  [61] ✓
+  [79] ✓
+  [62] ✓
+  [91] ✓
+  [84] ✓
+  [87] ✓
+  [21] ✓
+  [70] ✓
+  [90] ✓
+  [52] ✓
+  [41] ✓
+  [54] ✓
+  [29] ✓
+  [43] ✓
+  [92] ✓
+  [74] ✓
+  [55] ✓
+  [47] ✓
+  [53] ✓
+  [98] ✓
+  [83] ✓
+  [99] ✓
+  [76] ✓
+  [42] ✓
+  [23] ✓
+  [85] ✓
+  [88] ✓
+  [68] ✓
+  [67] ✓
+  [66] ✓
+  [86] ✓
+  [57] ✓
+  [18] ✓
+  [22] ✓
+  [93] ✓
+  [73] ✓
+  [82] ✓
+  [50] ✓
+  [60] ✓
+  [34] ✓
+  [100] ✓
+  [49] ✓
+  [77] ✓
+  [97] ✓
+  [65] ✓
+  [58] ✓
+  Progress: 100/100 (100%)
+
+================================================
+✓ Upload batch complete!
+✓ Uploaded: 100 images
+✓ Duration: 20s
+✓ Upload rate: 5.00 images/second
+
+Next steps:
+  1. Wait 2-3 minutes for Lambda processing
+  2. Query CloudWatch Logs for performance metrics
+  3. Check s3://tcss462-term-project-group-7-python/output/ for processed images
+
+Waiting 2 minutes for Lambda processing...
+---
+Waiting 5 minutes for cold start reset...
+========================================
+Testing: Java with concurrency 1
+========================================
+=== Configuration ===
+Language: Java
+Requested Concurrency: 1
+Batch Size: 100
+
+Actual Concurrency: 1
+
+Searching for *.jpg in ./Kirmizi_Pistachio/...
+✓ Found 1232 files
+✓ Target bucket: s3://tcss462-term-project-group-7-jav/input/
+
+System Check:
+  Available Memory: 6599MB
+
+Starting uploads (Ctrl+C to cancel)...
+================================================
+Processing batch: 1-1 (1 uploads)
+  [1] ✓
+  Progress: 1/100 (1%)
+
+Processing batch: 2-2 (1 uploads)
+  [2] ✓
+  Progress: 2/100 (2%)
+
+Processing batch: 3-3 (1 uploads)
+  [3] ✓
+  Progress: 3/100 (3%)
+
+Processing batch: 4-4 (1 uploads)
+  [4] ✓
+  Progress: 4/100 (4%)
+
+Processing batch: 5-5 (1 uploads)
+  [5] ✓
+  Progress: 5/100 (5%)
+
+Processing batch: 6-6 (1 uploads)
+  [6] ✓
+  Progress: 6/100 (6%)
+
+Processing batch: 7-7 (1 uploads)
+  [7] ✓
+  Progress: 7/100 (7%)
+
+Processing batch: 8-8 (1 uploads)
+  [8] ✓
+  Progress: 8/100 (8%)
+
+Processing batch: 9-9 (1 uploads)
+  [9] ✓
+  Progress: 9/100 (9%)
+
+Processing batch: 10-10 (1 uploads)
+  [10] ✓
+  Progress: 10/100 (10%)
+
+Processing batch: 11-11 (1 uploads)
+  [11] ✓
+  Progress: 11/100 (11%)
+
+Processing batch: 12-12 (1 uploads)
+  [12] ✓
+  Progress: 12/100 (12%)
+
+Processing batch: 13-13 (1 uploads)
+  [13] ✓
+  Progress: 13/100 (13%)
+
+Processing batch: 14-14 (1 uploads)
+  [14] ✓
+  Progress: 14/100 (14%)
+
+Processing batch: 15-15 (1 uploads)
+  [15] ✓
+  Progress: 15/100 (15%)
+
+Processing batch: 16-16 (1 uploads)
+  [16] ✓
+  Progress: 16/100 (16%)
+
+Processing batch: 17-17 (1 uploads)
+  [17] ✓
+  Progress: 17/100 (17%)
+
+Processing batch: 18-18 (1 uploads)
+  [18] ✓
+  Progress: 18/100 (18%)
+
+Processing batch: 19-19 (1 uploads)
+  [19] ✓
+  Progress: 19/100 (19%)
+
+Processing batch: 20-20 (1 uploads)
+  [20] ✓
+  Progress: 20/100 (20%)
+
+Processing batch: 21-21 (1 uploads)
+  [21] ✓
+  Progress: 21/100 (21%)
+
+Processing batch: 22-22 (1 uploads)
+  [22] ✓
+  Progress: 22/100 (22%)
+
+Processing batch: 23-23 (1 uploads)
+  [23] ✓
+  Progress: 23/100 (23%)
+
+Processing batch: 24-24 (1 uploads)
+  [24] ✓
+  Progress: 24/100 (24%)
+
+Processing batch: 25-25 (1 uploads)
+  [25] ✓
+  Progress: 25/100 (25%)
+
+Processing batch: 26-26 (1 uploads)
+  [26] ✓
+  Progress: 26/100 (26%)
+
+Processing batch: 27-27 (1 uploads)
+  [27] ✓
+  Progress: 27/100 (27%)
+
+Processing batch: 28-28 (1 uploads)
+  [28] ✓
+  Progress: 28/100 (28%)
+
+Processing batch: 29-29 (1 uploads)
+  [29] ✓
+  Progress: 29/100 (29%)
+
+Processing batch: 30-30 (1 uploads)
+  [30] ✓
+  Progress: 30/100 (30%)
+
+Processing batch: 31-31 (1 uploads)
+  [31] ✓
+  Progress: 31/100 (31%)
+
+Processing batch: 32-32 (1 uploads)
+  [32] ✓
+  Progress: 32/100 (32%)
+
+Processing batch: 33-33 (1 uploads)
+  [33] ✓
+  Progress: 33/100 (33%)
+
+Processing batch: 34-34 (1 uploads)
+  [34] ✓
+  Progress: 34/100 (34%)
+
+Processing batch: 35-35 (1 uploads)
+  [35] ✓
+  Progress: 35/100 (35%)
+
+Processing batch: 36-36 (1 uploads)
+  [36] ✓
+  Progress: 36/100 (36%)
+
+Processing batch: 37-37 (1 uploads)
+  [37] ✓
+  Progress: 37/100 (37%)
+
+Processing batch: 38-38 (1 uploads)
+  [38] ✓
+  Progress: 38/100 (38%)
+
+Processing batch: 39-39 (1 uploads)
+  [39] ✓
+  Progress: 39/100 (39%)
+
+Processing batch: 40-40 (1 uploads)
+  [40] ✓
+  Progress: 40/100 (40%)
+
+Processing batch: 41-41 (1 uploads)
+  [41] ✓
+  Progress: 41/100 (41%)
+
+Processing batch: 42-42 (1 uploads)
+  [42] ✓
+  Progress: 42/100 (42%)
+
+Processing batch: 43-43 (1 uploads)
+  [43] ✓
+  Progress: 43/100 (43%)
+
+Processing batch: 44-44 (1 uploads)
+  [44] ✓
+  Progress: 44/100 (44%)
+
+Processing batch: 45-45 (1 uploads)
+  [45] ✓
+  Progress: 45/100 (45%)
+
+Processing batch: 46-46 (1 uploads)
+  [46] ✓
+  Progress: 46/100 (46%)
+
+Processing batch: 47-47 (1 uploads)
+  [47] ✓
+  Progress: 47/100 (47%)
+
+Processing batch: 48-48 (1 uploads)
+  [48] ✓
+  Progress: 48/100 (48%)
+
+Processing batch: 49-49 (1 uploads)
+  [49] ✓
+  Progress: 49/100 (49%)
+
+Processing batch: 50-50 (1 uploads)
+  [50] ✓
+  Progress: 50/100 (50%)
+
+Processing batch: 51-51 (1 uploads)
+  [51] ✓
+  Progress: 51/100 (51%)
+
+Processing batch: 52-52 (1 uploads)
+  [52] ✓
+  Progress: 52/100 (52%)
+
+Processing batch: 53-53 (1 uploads)
+  [53] ✓
+  Progress: 53/100 (53%)
+
+Processing batch: 54-54 (1 uploads)
+  [54] ✓
+  Progress: 54/100 (54%)
+
+Processing batch: 55-55 (1 uploads)
+  [55] ✓
+  Progress: 55/100 (55%)
+
+Processing batch: 56-56 (1 uploads)
+  [56] ✓
+  Progress: 56/100 (56%)
+
+Processing batch: 57-57 (1 uploads)
+  [57] ✓
+  Progress: 57/100 (57%)
+
+Processing batch: 58-58 (1 uploads)
+  [58] ✓
+  Progress: 58/100 (58%)
+
+Processing batch: 59-59 (1 uploads)
+  [59] ✓
+  Progress: 59/100 (59%)
+
+Processing batch: 60-60 (1 uploads)
+  [60] ✓
+  Progress: 60/100 (60%)
+
+Processing batch: 61-61 (1 uploads)
+  [61] ✓
+  Progress: 61/100 (61%)
+
+Processing batch: 62-62 (1 uploads)
+  [62] ✓
+  Progress: 62/100 (62%)
+
+Processing batch: 63-63 (1 uploads)
+  [63] ✓
+  Progress: 63/100 (63%)
+
+Processing batch: 64-64 (1 uploads)
+  [64] ✓
+  Progress: 64/100 (64%)
+
+Processing batch: 65-65 (1 uploads)
+  [65] ✓
+  Progress: 65/100 (65%)
+
+Processing batch: 66-66 (1 uploads)
+  [66] ✓
+  Progress: 66/100 (66%)
+
+Processing batch: 67-67 (1 uploads)
+  [67] ✓
+  Progress: 67/100 (67%)
+
+Processing batch: 68-68 (1 uploads)
+  [68] ✓
+  Progress: 68/100 (68%)
+
+Processing batch: 69-69 (1 uploads)
+  [69] ✓
+  Progress: 69/100 (69%)
+
+Processing batch: 70-70 (1 uploads)
+  [70] ✓
+  Progress: 70/100 (70%)
+
+Processing batch: 71-71 (1 uploads)
+  [71] ✓
+  Progress: 71/100 (71%)
+
+Processing batch: 72-72 (1 uploads)
+  [72] ✓
+  Progress: 72/100 (72%)
+
+Processing batch: 73-73 (1 uploads)
+  [73] ✓
+  Progress: 73/100 (73%)
+
+Processing batch: 74-74 (1 uploads)
+  [74] ✓
+  Progress: 74/100 (74%)
+
+Processing batch: 75-75 (1 uploads)
+  [75] ✓
+  Progress: 75/100 (75%)
+
+Processing batch: 76-76 (1 uploads)
+  [76] ✓
+  Progress: 76/100 (76%)
+
+Processing batch: 77-77 (1 uploads)
+  [77] ✓
+  Progress: 77/100 (77%)
+
+Processing batch: 78-78 (1 uploads)
+  [78] ✓
+  Progress: 78/100 (78%)
+
+Processing batch: 79-79 (1 uploads)
+  [79] ✓
+  Progress: 79/100 (79%)
+
+Processing batch: 80-80 (1 uploads)
+  [80] ✓
+  Progress: 80/100 (80%)
+
+Processing batch: 81-81 (1 uploads)
+  [81] ✓
+  Progress: 81/100 (81%)
+
+Processing batch: 82-82 (1 uploads)
+  [82] ✓
+  Progress: 82/100 (82%)
+
+Processing batch: 83-83 (1 uploads)
+  [83] ✓
+  Progress: 83/100 (83%)
+
+Processing batch: 84-84 (1 uploads)
+  [84] ✓
+  Progress: 84/100 (84%)
+
+Processing batch: 85-85 (1 uploads)
+  [85] ✓
+  Progress: 85/100 (85%)
+
+Processing batch: 86-86 (1 uploads)
+  [86] ✓
+  Progress: 86/100 (86%)
+
+Processing batch: 87-87 (1 uploads)
+  [87] ✓
+  Progress: 87/100 (87%)
+
+Processing batch: 88-88 (1 uploads)
+  [88] ✓
+  Progress: 88/100 (88%)
+
+Processing batch: 89-89 (1 uploads)
+  [89] ✓
+  Progress: 89/100 (89%)
+
+Processing batch: 90-90 (1 uploads)
+  [90] ✓
+  Progress: 90/100 (90%)
+
+Processing batch: 91-91 (1 uploads)
+  [91] ✓
+  Progress: 91/100 (91%)
+
+Processing batch: 92-92 (1 uploads)
+  [92] ✓
+  Progress: 92/100 (92%)
+
+Processing batch: 93-93 (1 uploads)
+  [93] ✓
+  Progress: 93/100 (93%)
+
+Processing batch: 94-94 (1 uploads)
+  [94] ✓
+  Progress: 94/100 (94%)
+
+Processing batch: 95-95 (1 uploads)
+  [95] ✓
+  Progress: 95/100 (95%)
+
+Processing batch: 96-96 (1 uploads)
+  [96] ✓
+  Progress: 96/100 (96%)
+
+Processing batch: 97-97 (1 uploads)
+  [97] ✓
+  Progress: 97/100 (97%)
+
+Processing batch: 98-98 (1 uploads)
+  [98] ✓
+  Progress: 98/100 (98%)
+
+Processing batch: 99-99 (1 uploads)
+  [99] ✓
+  Progress: 99/100 (99%)
+
+Processing batch: 100-100 (1 uploads)
+  [100] ✓
+  Progress: 100/100 (100%)
+
+================================================
+✓ Upload batch complete!
+✓ Uploaded: 100 images
+✓ Duration: 197s
+✓ Upload rate: .50 images/second
+
+Next steps:
+  1. Wait 2-3 minutes for Lambda processing
+  2. Query CloudWatch Logs for performance metrics
+  3. Check s3://tcss462-term-project-group-7-jav/output/ for processed images
+
+Waiting 2 minutes for Lambda processing...
+---
+========================================
+Testing: Java with concurrency 5
+========================================
+=== Configuration ===
+Language: Java
+Requested Concurrency: 5
+Batch Size: 100
+
+Actual Concurrency: 5
+
+Searching for *.jpg in ./Kirmizi_Pistachio/...
+✓ Found 1232 files
+✓ Target bucket: s3://tcss462-term-project-group-7-jav/input/
+
+System Check:
+  Available Memory: 6593MB
+
+Starting uploads (Ctrl+C to cancel)...
+================================================
+Processing batch: 1-5 (5 uploads)
+  [2] ✓
+  [3] ✓
+  [1] ✓
+  [4] ✓
+  [5] ✓
+  Progress: 5/100 (5%)
+
+Processing batch: 6-10 (5 uploads)
+  [6] ✓
+  [8] ✓
+  [9] ✓
+  [10] ✓
+  [7] ✓
+  Progress: 10/100 (10%)
+
+Processing batch: 11-15 (5 uploads)
+  [15] ✓
+  [12] ✓
+  [14] ✓
+  [11] ✓
+  [13] ✓
+  Progress: 15/100 (15%)
+
+Processing batch: 16-20 (5 uploads)
+  [18] ✓
+  [20] ✓
+  [17] ✓
+  [16] ✓
+  [19] ✓
+  Progress: 20/100 (20%)
+
+Processing batch: 21-25 (5 uploads)
+  [21] ✓
+  [22] ✓
+  [23] ✓
+  [25] ✓
+  [24] ✓
+  Progress: 25/100 (25%)
+
+Processing batch: 26-30 (5 uploads)
+  [28] ✓
+  [29] ✓
+  [30] ✓
+  [27] ✓
+  [26] ✓
+  Progress: 30/100 (30%)
+
+Processing batch: 31-35 (5 uploads)
+  [33] ✓
+  [31] ✓
+  [35] ✓
+  [32] ✓
+  [34] ✓
+  Progress: 35/100 (35%)
+
+Processing batch: 36-40 (5 uploads)
+  [36] ✓
+  [39] ✓
+  [37] ✓
+  [38] ✓
+  [40] ✓
+  Progress: 40/100 (40%)
+
+Processing batch: 41-45 (5 uploads)
+  [42] ✓
+  [45] ✓
+  [44] ✓
+  [43] ✓
+  [41] ✓
+  Progress: 45/100 (45%)
+
+Processing batch: 46-50 (5 uploads)
+  [49] ✓
+  [46] ✓
+  [50] ✓
+  [47] ✓
+  [48] ✓
+  Progress: 50/100 (50%)
+
+Processing batch: 51-55 (5 uploads)
+  [53] ✓
+  [55] ✓
+  [54] ✓
+  [51] ✓
+  [52] ✓
+  Progress: 55/100 (55%)
+
+Processing batch: 56-60 (5 uploads)
+  [58] ✓
+  [60] ✓
+  [56] ✓
+  [59] ✓
+  [57] ✓
+  Progress: 60/100 (60%)
+
+Processing batch: 61-65 (5 uploads)
+  [65] ✓
+  [63] ✓
+  [62] ✓
+  [61] ✓
+  [64] ✓
+  Progress: 65/100 (65%)
+
+Processing batch: 66-70 (5 uploads)
+  [68] ✓
+  [69] ✓
+  [66] ✓
+  [70] ✓
+  [67] ✓
+  Progress: 70/100 (70%)
+
+Processing batch: 71-75 (5 uploads)
+  [74] ✓
+  [71] ✓
+  [73] ✓
+  [75] ✓
+  [72] ✓
+  Progress: 75/100 (75%)
+
+Processing batch: 76-80 (5 uploads)
+  [79] ✓
+  [77] ✓
+  [80] ✓
+  [76] ✓
+  [78] ✓
+  Progress: 80/100 (80%)
+
+Processing batch: 81-85 (5 uploads)
+  [82] ✓
+  [83] ✓
+  [84] ✓
+  [81] ✓
+  [85] ✓
+  Progress: 85/100 (85%)
+
+Processing batch: 86-90 (5 uploads)
+  [89] ✓
+  [87] ✓
+  [86] ✓
+  [90] ✓
+  [88] ✓
+  Progress: 90/100 (90%)
+
+Processing batch: 91-95 (5 uploads)
+  [93] ✓
+  [92] ✓
+  [95] ✓
+  [94] ✓
+  [91] ✓
+  Progress: 95/100 (95%)
+
+Processing batch: 96-100 (5 uploads)
+  [97] ✓
+  [98] ✓
+  [100] ✓
+  [99] ✓
+  [96] ✓
+  Progress: 100/100 (100%)
+
+================================================
+✓ Upload batch complete!
+✓ Uploaded: 100 images
+✓ Duration: 43s
+✓ Upload rate: 2.32 images/second
+
+Next steps:
+  1. Wait 2-3 minutes for Lambda processing
+  2. Query CloudWatch Logs for performance metrics
+  3. Check s3://tcss462-term-project-group-7-jav/output/ for processed images
+
+Waiting 2 minutes for Lambda processing...
+---
+========================================
+Testing: Java with concurrency 10
+========================================
+=== Configuration ===
+Language: Java
+Requested Concurrency: 10
+Batch Size: 100
+
+Actual Concurrency: 10
+
+Searching for *.jpg in ./Kirmizi_Pistachio/...
+✓ Found 1232 files
+✓ Target bucket: s3://tcss462-term-project-group-7-jav/input/
+
+System Check:
+  Available Memory: 6590MB
+
+Starting uploads (Ctrl+C to cancel)...
+================================================
+Processing batch: 1-10 (10 uploads)
+  [2] ✓
+  [5] ✓
+  [1] ✓
+  [6] ✓
+  [3] ✓
+  [4] ✓
+  [10] ✓
+  [7] ✓
+  [9] ✓
+  [8] ✓
+  Progress: 10/100 (10%)
+
+Processing batch: 11-20 (10 uploads)
+  [15] ✓
+  [14] ✓
+  [16] ✓
+  [13] ✓
+  [19] ✓
+  [17] ✓
+  [18] ✓
+  [12] ✓
+  [11] ✓
+  [20] ✓
+  Progress: 20/100 (20%)
+
+Processing batch: 21-30 (10 uploads)
+  [21] ✓
+  [29] ✓
+  [22] ✓
+  [27] ✓
+  [26] ✓
+  [25] ✓
+  [28] ✓
+  [24] ✓
+  [23] ✓
+  [30] ✓
+  Progress: 30/100 (30%)
+
+Processing batch: 31-40 (10 uploads)
+  [36] ✓
+  [39] ✓
+  [38] ✓
+  [35] ✓
+  [33] ✓
+  [32] ✓
+  [34] ✓
+  [31] ✓
+  [37] ✓
+  [40] ✓
+  Progress: 40/100 (40%)
+
+Processing batch: 41-50 (10 uploads)
+  [45] ✓
+  [46] ✓
+  [41] ✓
+  [44] ✓
+  [43] ✓
+  [48] ✓
+  [50] ✓
+  [47] ✓
+  [42] ✓
+  [49] ✓
+  Progress: 50/100 (50%)
+
+Processing batch: 51-60 (10 uploads)
+  [56] ✓
+  [53] ✓
+  [51] ✓
+  [52] ✓
+  [55] ✓
+  [54] ✓
+  [59] ✓
+  [57] ✓
+  [58] ✓
+  [60] ✓
+  Progress: 60/100 (60%)
+
+Processing batch: 61-70 (10 uploads)
+  [70] ✓
+  [67] ✓
+  [68] ✓
+  [61] ✓
+  [64] ✓
+  [69] ✓
+  [66] ✓
+  [62] ✓
+  [65] ✓
+  [63] ✓
+  Progress: 70/100 (70%)
+
+Processing batch: 71-80 (10 uploads)
+  [73] ✓
+  [76] ✓
+  [79] ✓
+  [75] ✓
+  [71] ✓
+  [80] ✓
+  [72] ✓
+  [78] ✓
+  [77] ✓
+  [74] ✓
+  Progress: 80/100 (80%)
+
+Processing batch: 81-90 (10 uploads)
+  [88] ✓
+  [82] ✓
+  [87] ✓
+  [81] ✓
+  [86] ✓
+  [89] ✓
+  [85] ✓
+  [84] ✓
+  [90] ✓
+  [83] ✓
+  Progress: 90/100 (90%)
+
+Processing batch: 91-100 (10 uploads)
+  [92] ✓
+  [93] ✓
+  [99] ✓
+  [91] ✓
+  [96] ✓
+  [98] ✓
+  [95] ✓
+  [94] ✓
+  [100] ✓
+  [97] ✓
+  Progress: 100/100 (100%)
+
+================================================
+✓ Upload batch complete!
+✓ Uploaded: 100 images
+✓ Duration: 25s
+✓ Upload rate: 4.00 images/second
+
+Next steps:
+  1. Wait 2-3 minutes for Lambda processing
+  2. Query CloudWatch Logs for performance metrics
+  3. Check s3://tcss462-term-project-group-7-jav/output/ for processed images
+
+Waiting 2 minutes for Lambda processing...
+---
+========================================
+Testing: Java with concurrency 50
+========================================
+=== Configuration ===
+Language: Java
+Requested Concurrency: 50
+Batch Size: 100
+
+Actual Concurrency: 50
+
+Searching for *.jpg in ./Kirmizi_Pistachio/...
+✓ Found 1232 files
+✓ Target bucket: s3://tcss462-term-project-group-7-jav/input/
+
+System Check:
+  Available Memory: 6589MB
+
+Starting uploads (Ctrl+C to cancel)...
+================================================
+Processing batch: 1-50 (50 uploads)
+  [2] ✓
+  [43] ✓
+  [33] ✓
+  [9] ✓
+  [16] ✓
+  [3] ✓
+  [7] ✓
+  [46] ✓
+  [8] ✓
+  [30] ✓
+  [15] ✓
+  [10] ✓
+  [26] ✓
+  [29] ✓
+  [21] ✓
+  [42] ✓
+  [12] ✓
+  [48] ✓
+  [18] ✓
+  [39] ✓
+  [44] ✓
+  [23] ✓
+  [24] ✓
+  [5] ✓
+  [4] ✓
+  [50] ✓
+  [40] ✓
+  [36] ✓
+  [17] ✓
+  [27] ✓
+  [11] ✓
+  [38] ✓
+  [1] ✓
+  [35] ✓
+  [14] ✓
+  [31] ✓
+  [28] ✓
+  [34] ✓
+  [19] ✓
+  [13] ✓
+  [41] ✓
+  [45] ✓
+  [6] ✓
+  [32] ✓
+  [37] ✓
+  [47] ✓
+  [49] ✓
+  [20] ✓
+  [25] ✓
+  [22] ✓
+  Progress: 50/100 (50%)
+
+Processing batch: 51-100 (50 uploads)
+  [61] ✓
+  [58] ✓
+  [74] ✓
+  [80] ✓
+  [73] ✓
+  [52] ✓
+  [51] ✓
+  [72] ✓
+  [59] ✓
+  [99] ✓
+  [69] ✓
+  [55] ✓
+  [62] ✓
+  [64] ✓
+  [97] ✓
+  [91] ✓
+  [54] ✓
+  [98] ✓
+  [96] ✓
+  [75] ✓
+  [90] ✓
+  [66] ✓
+  [81] ✓
+  [57] ✓
+  [70] ✓
+  [88] ✓
+  [68] ✓
+  [94] ✓
+  [77] ✓
+  [67] ✓
+  [95] ✓
+  [53] ✓
+  [85] ✓
+  [93] ✓
+  [76] ✓
+  [92] ✓
+  [86] ✓
+  [89] ✓
+  [65] ✓
+  [60] ✓
+  [79] ✓
+  [100] ✓
+  [63] ✓
+  [78] ✓
+  [71] ✓
+  [82] ✓
+  [84] ✓
+  [83] ✓
+  [87] ✓
+  [56] ✓
+  Progress: 100/100 (100%)
+
+================================================
+✓ Upload batch complete!
+✓ Uploaded: 100 images
+✓ Duration: 16s
+✓ Upload rate: 6.25 images/second
+
+Next steps:
+  1. Wait 2-3 minutes for Lambda processing
+  2. Query CloudWatch Logs for performance metrics
+  3. Check s3://tcss462-term-project-group-7-jav/output/ for processed images
+
+Waiting 2 minutes for Lambda processing...
+---
+========================================
+Testing: Java with concurrency 100
+========================================
+=== Configuration ===
+Language: Java
+Requested Concurrency: 100
+Batch Size: 100
+
+Actual Concurrency: 100
+
+Searching for *.jpg in ./Kirmizi_Pistachio/...
+✓ Found 1232 files
+✓ Target bucket: s3://tcss462-term-project-group-7-jav/input/
+
+System Check:
+  Available Memory: 6581MB
+
+Starting uploads (Ctrl+C to cancel)...
+================================================
+Processing batch: 1-100 (100 uploads)
+  [33] ✓
+  [3] ✓
+  [59] ✓
+  [31] ✓
+  [18] ✓
+  [60] ✓
+  [20] ✓
+  [11] ✓
+  [67] ✓
+  [50] ✓
+  [4] ✓
+  [29] ✓
+  [43] ✓
+  [79] ✓
+  [53] ✓
+  [19] ✓
+  [21] ✓
+  [34] ✓
+  [36] ✓
+  [8] ✓
+  [17] ✓
+  [94] ✓
+  [1] ✓
+  [74] ✓
+  [7] ✓
+  [5] ✓
+  [6] ✓
+  [10] ✓
+  [9] ✓
+  [15] ✓
+  [81] ✓
+  [25] ✓
+  [78] ✓
+  [83] ✓
+  [30] ✓
+  [12] ✓
+  [55] ✓
+  [62] ✓
+  [35] ✓
+  [13] ✓
+  [39] ✓
+  [41] ✓
+  [76] ✓
+  [27] ✓
+  [85] ✓
+  [54] ✓
+  [37] ✓
+  [58] ✓
+  [84] ✓
+  [44] ✓
+  [16] ✓
+  [22] ✓
+  [75] ✓
+  [56] ✓
+  [90] ✓
+  [40] ✓
+  [2] ✓
+  [24] ✓
+  [93] ✓
+  [23] ✓
+  [49] ✓
+  [46] ✓
+  [72] ✓
+  [28] ✓
+  [98] ✓
+  [64] ✓
+  [65] ✓
+  [47] ✓
+  [99] ✓
+  [86] ✓
+  [51] ✓
+  [48] ✓
+  [68] ✓
+  [14] ✓
+  [42] ✓
+  [77] ✓
+  [26] ✓
+  [63] ✓
+  [95] ✓
+  [80] ✓
+  [100] ✓
+  [71] ✓
+  [61] ✓
+  [32] ✓
+  [70] ✓
+  [89] ✓
+  [45] ✓
+  [87] ✓
+  [57] ✓
+  [38] ✓
+  [52] ✓
+  [73] ✓
+  [96] ✓
+  [82] ✓
+  [88] ✓
+  [91] ✓
+  [92] ✓
+  [66] ✓
+  [69] ✓
+  [97] ✓
+  Progress: 100/100 (100%)
+
+================================================
+✓ Upload batch complete!
+✓ Uploaded: 100 images
+✓ Duration: 19s
+✓ Upload rate: 5.26 images/second
+
+Next steps:
+  1. Wait 2-3 minutes for Lambda processing
+  2. Query CloudWatch Logs for performance metrics
+  3. Check s3://tcss462-term-project-group-7-jav/output/ for processed images
+
+Waiting 2 minutes for Lambda processing...
+---
+Waiting 5 minutes for cold start reset...
+========================================
+Testing: JavaScript with concurrency 1
+========================================
+=== Configuration ===
+Language: JavaScript
+Requested Concurrency: 1
+Batch Size: 100
+
+Actual Concurrency: 1
+
+Searching for *.jpg in ./Kirmizi_Pistachio/...
+✓ Found 1232 files
+✓ Target bucket: s3://tcss462-term-project-group-7-js/input/
+
+System Check:
+  Available Memory: 6581MB
+
+Starting uploads (Ctrl+C to cancel)...
+================================================
+Processing batch: 1-1 (1 uploads)
+  [1] ✓
+  Progress: 1/100 (1%)
+
+Processing batch: 2-2 (1 uploads)
+  [2] ✓
+  Progress: 2/100 (2%)
+
+Processing batch: 3-3 (1 uploads)
+  [3] ✓
+  Progress: 3/100 (3%)
+
+Processing batch: 4-4 (1 uploads)
+  [4] ✓
+  Progress: 4/100 (4%)
+
+Processing batch: 5-5 (1 uploads)
+  [5] ✓
+  Progress: 5/100 (5%)
+
+Processing batch: 6-6 (1 uploads)
+  [6] ✓
+  Progress: 6/100 (6%)
+
+Processing batch: 7-7 (1 uploads)
+  [7] ✓
+  Progress: 7/100 (7%)
+
+Processing batch: 8-8 (1 uploads)
+  [8] ✓
+  Progress: 8/100 (8%)
+
+Processing batch: 9-9 (1 uploads)
+  [9] ✓
+  Progress: 9/100 (9%)
+
+Processing batch: 10-10 (1 uploads)
+  [10] ✓
+  Progress: 10/100 (10%)
+
+Processing batch: 11-11 (1 uploads)
+  [11] ✓
+  Progress: 11/100 (11%)
+
+Processing batch: 12-12 (1 uploads)
+  [12] ✓
+  Progress: 12/100 (12%)
+
+Processing batch: 13-13 (1 uploads)
+  [13] ✓
+  Progress: 13/100 (13%)
+
+Processing batch: 14-14 (1 uploads)
+  [14] ✓
+  Progress: 14/100 (14%)
+
+Processing batch: 15-15 (1 uploads)
+  [15] ✓
+  Progress: 15/100 (15%)
+
+Processing batch: 16-16 (1 uploads)
+  [16] ✓
+  Progress: 16/100 (16%)
+
+Processing batch: 17-17 (1 uploads)
+  [17] ✓
+  Progress: 17/100 (17%)
+
+Processing batch: 18-18 (1 uploads)
+  [18] ✓
+  Progress: 18/100 (18%)
+
+Processing batch: 19-19 (1 uploads)
+  [19] ✓
+  Progress: 19/100 (19%)
+
+Processing batch: 20-20 (1 uploads)
+  [20] ✓
+  Progress: 20/100 (20%)
+
+Processing batch: 21-21 (1 uploads)
+  [21] ✓
+  Progress: 21/100 (21%)
+
+Processing batch: 22-22 (1 uploads)
+  [22] ✓
+  Progress: 22/100 (22%)
+
+Processing batch: 23-23 (1 uploads)
+  [23] ✓
+  Progress: 23/100 (23%)
+
+Processing batch: 24-24 (1 uploads)
+  [24] ✓
+  Progress: 24/100 (24%)
+
+Processing batch: 25-25 (1 uploads)
+  [25] ✓
+  Progress: 25/100 (25%)
+
+Processing batch: 26-26 (1 uploads)
+  [26] ✓
+  Progress: 26/100 (26%)
+
+Processing batch: 27-27 (1 uploads)
+  [27] ✓
+  Progress: 27/100 (27%)
+
+Processing batch: 28-28 (1 uploads)
+  [28] ✓
+  Progress: 28/100 (28%)
+
+Processing batch: 29-29 (1 uploads)
+  [29] ✓
+  Progress: 29/100 (29%)
+
+Processing batch: 30-30 (1 uploads)
+  [30] ✓
+  Progress: 30/100 (30%)
+
+Processing batch: 31-31 (1 uploads)
+  [31] ✓
+  Progress: 31/100 (31%)
+
+Processing batch: 32-32 (1 uploads)
+  [32] ✓
+  Progress: 32/100 (32%)
+
+Processing batch: 33-33 (1 uploads)
+  [33] ✓
+  Progress: 33/100 (33%)
+
+Processing batch: 34-34 (1 uploads)
+  [34] ✓
+  Progress: 34/100 (34%)
+
+Processing batch: 35-35 (1 uploads)
+  [35] ✓
+  Progress: 35/100 (35%)
+
+Processing batch: 36-36 (1 uploads)
+  [36] ✓
+  Progress: 36/100 (36%)
+
+Processing batch: 37-37 (1 uploads)
+  [37] ✓
+  Progress: 37/100 (37%)
+
+Processing batch: 38-38 (1 uploads)
+  [38] ✓
+  Progress: 38/100 (38%)
+
+Processing batch: 39-39 (1 uploads)
+  [39] ✓
+  Progress: 39/100 (39%)
+
+Processing batch: 40-40 (1 uploads)
+  [40] ✓
+  Progress: 40/100 (40%)
+
+Processing batch: 41-41 (1 uploads)
+  [41] ✓
+  Progress: 41/100 (41%)
+
+Processing batch: 42-42 (1 uploads)
+  [42] ✓
+  Progress: 42/100 (42%)
+
+Processing batch: 43-43 (1 uploads)
+  [43] ✓
+  Progress: 43/100 (43%)
+
+Processing batch: 44-44 (1 uploads)
+  [44] ✓
+  Progress: 44/100 (44%)
+
+Processing batch: 45-45 (1 uploads)
+  [45] ✓
+  Progress: 45/100 (45%)
+
+Processing batch: 46-46 (1 uploads)
+  [46] ✓
+  Progress: 46/100 (46%)
+
+Processing batch: 47-47 (1 uploads)
+  [47] ✓
+  Progress: 47/100 (47%)
+
+Processing batch: 48-48 (1 uploads)
+  [48] ✓
+  Progress: 48/100 (48%)
+
+Processing batch: 49-49 (1 uploads)
+  [49] ✓
+  Progress: 49/100 (49%)
+
+Processing batch: 50-50 (1 uploads)
+  [50] ✓
+  Progress: 50/100 (50%)
+
+Processing batch: 51-51 (1 uploads)
+  [51] ✓
+  Progress: 51/100 (51%)
+
+Processing batch: 52-52 (1 uploads)
+  [52] ✓
+  Progress: 52/100 (52%)
+
+Processing batch: 53-53 (1 uploads)
+  [53] ✓
+  Progress: 53/100 (53%)
+
+Processing batch: 54-54 (1 uploads)
+  [54] ✓
+  Progress: 54/100 (54%)
+
+Processing batch: 55-55 (1 uploads)
+  [55] ✓
+  Progress: 55/100 (55%)
+
+Processing batch: 56-56 (1 uploads)
+  [56] ✓
+  Progress: 56/100 (56%)
+
+Processing batch: 57-57 (1 uploads)
+  [57] ✓
+  Progress: 57/100 (57%)
+
+Processing batch: 58-58 (1 uploads)
+  [58] ✓
+  Progress: 58/100 (58%)
+
+Processing batch: 59-59 (1 uploads)
+  [59] ✓
+  Progress: 59/100 (59%)
+
+Processing batch: 60-60 (1 uploads)
+  [60] ✓
+  Progress: 60/100 (60%)
+
+Processing batch: 61-61 (1 uploads)
+  [61] ✓
+  Progress: 61/100 (61%)
+
+Processing batch: 62-62 (1 uploads)
+  [62] ✓
+  Progress: 62/100 (62%)
+
+Processing batch: 63-63 (1 uploads)
+  [63] ✓
+  Progress: 63/100 (63%)
+
+Processing batch: 64-64 (1 uploads)
+  [64] ✓
+  Progress: 64/100 (64%)
+
+Processing batch: 65-65 (1 uploads)
+  [65] ✓
+  Progress: 65/100 (65%)
+
+Processing batch: 66-66 (1 uploads)
+  [66] ✓
+  Progress: 66/100 (66%)
+
+Processing batch: 67-67 (1 uploads)
+  [67] ✓
+  Progress: 67/100 (67%)
+
+Processing batch: 68-68 (1 uploads)
+  [68] ✓
+  Progress: 68/100 (68%)
+
+Processing batch: 69-69 (1 uploads)
+  [69] ✓
+  Progress: 69/100 (69%)
+
+Processing batch: 70-70 (1 uploads)
+  [70] ✓
+  Progress: 70/100 (70%)
+
+Processing batch: 71-71 (1 uploads)
+  [71] ✓
+  Progress: 71/100 (71%)
+
+Processing batch: 72-72 (1 uploads)
+  [72] ✓
+  Progress: 72/100 (72%)
+
+Processing batch: 73-73 (1 uploads)
+  [73] ✓
+  Progress: 73/100 (73%)
+
+Processing batch: 74-74 (1 uploads)
+  [74] ✓
+  Progress: 74/100 (74%)
+
+Processing batch: 75-75 (1 uploads)
+  [75] ✓
+  Progress: 75/100 (75%)
+
+Processing batch: 76-76 (1 uploads)
+  [76] ✓
+  Progress: 76/100 (76%)
+
+Processing batch: 77-77 (1 uploads)
+  [77] ✓
+  Progress: 77/100 (77%)
+
+Processing batch: 78-78 (1 uploads)
+  [78] ✓
+  Progress: 78/100 (78%)
+
+Processing batch: 79-79 (1 uploads)
+  [79] ✓
+  Progress: 79/100 (79%)
+
+Processing batch: 80-80 (1 uploads)
+  [80] ✓
+  Progress: 80/100 (80%)
+
+Processing batch: 81-81 (1 uploads)
+  [81] ✓
+  Progress: 81/100 (81%)
+
+Processing batch: 82-82 (1 uploads)
+  [82] ✓
+  Progress: 82/100 (82%)
+
+Processing batch: 83-83 (1 uploads)
+  [83] ✓
+  Progress: 83/100 (83%)
+
+Processing batch: 84-84 (1 uploads)
+  [84] ✓
+  Progress: 84/100 (84%)
+
+Processing batch: 85-85 (1 uploads)
+  [85] ✓
+  Progress: 85/100 (85%)
+
+Processing batch: 86-86 (1 uploads)
+  [86] ✓
+  Progress: 86/100 (86%)
+
+Processing batch: 87-87 (1 uploads)
+  [87] ✓
+  Progress: 87/100 (87%)
+
+Processing batch: 88-88 (1 uploads)
+  [88] ✓
+  Progress: 88/100 (88%)
+
+Processing batch: 89-89 (1 uploads)
+  [89] ✓
+  Progress: 89/100 (89%)
+
+Processing batch: 90-90 (1 uploads)
+  [90] ✓
+  Progress: 90/100 (90%)
+
+Processing batch: 91-91 (1 uploads)
+  [91] ✓
+  Progress: 91/100 (91%)
+
+Processing batch: 92-92 (1 uploads)
+  [92] ✓
+  Progress: 92/100 (92%)
+
+Processing batch: 93-93 (1 uploads)
+  [93] ✓
+  Progress: 93/100 (93%)
+
+Processing batch: 94-94 (1 uploads)
+  [94] ✓
+  Progress: 94/100 (94%)
+
+Processing batch: 95-95 (1 uploads)
+  [95] ✓
+  Progress: 95/100 (95%)
+
+Processing batch: 96-96 (1 uploads)
+  [96] ✓
+  Progress: 96/100 (96%)
+
+Processing batch: 97-97 (1 uploads)
+  [97] ✓
+  Progress: 97/100 (97%)
+
+Processing batch: 98-98 (1 uploads)
+  [98] ✓
+  Progress: 98/100 (98%)
+
+Processing batch: 99-99 (1 uploads)
+  [99] ✓
+  Progress: 99/100 (99%)
+
+Processing batch: 100-100 (1 uploads)
+  [100] ✓
+  Progress: 100/100 (100%)
+
+================================================
+✓ Upload batch complete!
+✓ Uploaded: 100 images
+✓ Duration: 197s
+✓ Upload rate: .50 images/second
+
+Next steps:
+  1. Wait 2-3 minutes for Lambda processing
+  2. Query CloudWatch Logs for performance metrics
+  3. Check s3://tcss462-term-project-group-7-js/output/ for processed images
+
+Waiting 2 minutes for Lambda processing...
+---
+========================================
+Testing: JavaScript with concurrency 5
+========================================
+=== Configuration ===
+Language: JavaScript
+Requested Concurrency: 5
+Batch Size: 100
+
+Actual Concurrency: 5
+
+Searching for *.jpg in ./Kirmizi_Pistachio/...
+✓ Found 1232 files
+✓ Target bucket: s3://tcss462-term-project-group-7-js/input/
+
+System Check:
+  Available Memory: 6582MB
+
+Starting uploads (Ctrl+C to cancel)...
+================================================
+Processing batch: 1-5 (5 uploads)
+  [2] ✓
+  [1] ✓
+  [3] ✓
+  [4] ✓
+  [5] ✓
+  Progress: 5/100 (5%)
+
+Processing batch: 6-10 (5 uploads)
+  [10] ✓
+  [9] ✓
+  [6] ✓
+  [7] ✓
+  [8] ✓
+  Progress: 10/100 (10%)
+
+Processing batch: 11-15 (5 uploads)
+  [11] ✓
+  [14] ✓
+  [13] ✓
+  [15] ✓
+  [12] ✓
+  Progress: 15/100 (15%)
+
+Processing batch: 16-20 (5 uploads)
+  [17] ✓
+  [18] ✓
+  [16] ✓
+  [20] ✓
+  [19] ✓
+  Progress: 20/100 (20%)
+
+Processing batch: 21-25 (5 uploads)
+  [24] ✓
+  [25] ✓
+  [23] ✓
+  [22] ✓
+  [21] ✓
+  Progress: 25/100 (25%)
+
+Processing batch: 26-30 (5 uploads)
+  [27] ✓
+  [29] ✓
+  [28] ✓
+  [30] ✓
+  [26] ✓
+  Progress: 30/100 (30%)
+
+Processing batch: 31-35 (5 uploads)
+  [35] ✓
+  [31] ✓
+  [33] ✓
+  [34] ✓
+  [32] ✓
+  Progress: 35/100 (35%)
+
+Processing batch: 36-40 (5 uploads)
+  [38] ✓
+  [37] ✓
+  [36] ✓
+  [39] ✓
+  [40] ✓
+  Progress: 40/100 (40%)
+
+Processing batch: 41-45 (5 uploads)
+  [43] ✓
+  [44] ✓
+  [42] ✓
+  [41] ✓
+  [45] ✓
+  Progress: 45/100 (45%)
+
+Processing batch: 46-50 (5 uploads)
+  [49] ✓
+  [50] ✓
+  [48] ✓
+  [47] ✓
+  [46] ✓
+  Progress: 50/100 (50%)
+
+Processing batch: 51-55 (5 uploads)
+  [51] ✓
+  [54] ✓
+  [52] ✓
+  [53] ✓
+  [55] ✓
+  Progress: 55/100 (55%)
+
+Processing batch: 56-60 (5 uploads)
+  [56] ✓
+  [58] ✓
+  [60] ✓
+  [59] ✓
+  [57] ✓
+  Progress: 60/100 (60%)
+
+Processing batch: 61-65 (5 uploads)
+  [64] ✓
+  [62] ✓
+  [65] ✓
+  [61] ✓
+  [63] ✓
+  Progress: 65/100 (65%)
+
+Processing batch: 66-70 (5 uploads)
+  [70] ✓
+  [69] ✓
+  [68] ✓
+  [67] ✓
+  [66] ✓
+  Progress: 70/100 (70%)
+
+Processing batch: 71-75 (5 uploads)
+  [75] ✓
+  [71] ✓
+  [72] ✓
+  [74] ✓
+  [73] ✓
+  Progress: 75/100 (75%)
+
+Processing batch: 76-80 (5 uploads)
+  [78] ✓
+  [79] ✓
+  [80] ✓
+  [76] ✓
+  [77] ✓
+  Progress: 80/100 (80%)
+
+Processing batch: 81-85 (5 uploads)
+  [84] ✓
+  [85] ✓
+  [82] ✓
+  [81] ✓
+  [83] ✓
+  Progress: 85/100 (85%)
+
+Processing batch: 86-90 (5 uploads)
+  [89] ✓
+  [86] ✓
+  [87] ✓
+  [90] ✓
+  [88] ✓
+  Progress: 90/100 (90%)
+
+Processing batch: 91-95 (5 uploads)
+  [94] ✓
+  [93] ✓
+  [92] ✓
+  [95] ✓
+  [91] ✓
+  Progress: 95/100 (95%)
+
+Processing batch: 96-100 (5 uploads)
+  [100] ✓
+  [98] ✓
+  [97] ✓
+  [99] ✓
+  [96] ✓
+  Progress: 100/100 (100%)
+
+================================================
+✓ Upload batch complete!
+✓ Uploaded: 100 images
+✓ Duration: 43s
+✓ Upload rate: 2.32 images/second
+
+Next steps:
+  1. Wait 2-3 minutes for Lambda processing
+  2. Query CloudWatch Logs for performance metrics
+  3. Check s3://tcss462-term-project-group-7-js/output/ for processed images
+
+Waiting 2 minutes for Lambda processing...
+---
+========================================
+Testing: JavaScript with concurrency 10
+========================================
+=== Configuration ===
+Language: JavaScript
+Requested Concurrency: 10
+Batch Size: 100
+
+Actual Concurrency: 10
+
+Searching for *.jpg in ./Kirmizi_Pistachio/...
+✓ Found 1232 files
+✓ Target bucket: s3://tcss462-term-project-group-7-js/input/
+
+System Check:
+  Available Memory: 6574MB
+
+Starting uploads (Ctrl+C to cancel)...
+================================================
+Processing batch: 1-10 (10 uploads)
+  [2] ✓
+  [8] ✓
+  [6] ✓
+  [4] ✓
+  [10] ✓
+  [1] ✓
+  [3] ✓
+  [7] ✓
+  [9] ✓
+  [5] ✓
+  Progress: 10/100 (10%)
+
+Processing batch: 11-20 (10 uploads)
+  [11] ✓
+  [12] ✓
+  [14] ✓
+  [13] ✓
+  [20] ✓
+  [19] ✓
+  [15] ✓
+  [16] ✓
+  [17] ✓
+  [18] ✓
+  Progress: 20/100 (20%)
+
+Processing batch: 21-30 (10 uploads)
+  [29] ✓
+  [23] ✓
+  [28] ✓
+  [26] ✓
+  [22] ✓
+  [27] ✓
+  [24] ✓
+  [25] ✓
+  [21] ✓
+  [30] ✓
+  Progress: 30/100 (30%)
+
+Processing batch: 31-40 (10 uploads)
+  [31] ✓
+  [35] ✓
+  [33] ✓
+  [37] ✓
+  [40] ✓
+  [38] ✓
+  [36] ✓
+  [32] ✓
+  [34] ✓
+  [39] ✓
+  Progress: 40/100 (40%)
+
+Processing batch: 41-50 (10 uploads)
+  [43] ✓
+  [41] ✓
+  [47] ✓
+  [46] ✓
+  [45] ✓
+  [44] ✓
+  [49] ✓
+  [48] ✓
+  [42] ✓
+  [50] ✓
+  Progress: 50/100 (50%)
+
+Processing batch: 51-60 (10 uploads)
+  [59] ✓
+  [55] ✓
+  [57] ✓
+  [51] ✓
+  [53] ✓
+  [60] ✓
+  [56] ✓
+  [54] ✓
+  [52] ✓
+  [58] ✓
+  Progress: 60/100 (60%)
+
+Processing batch: 61-70 (10 uploads)
+  [63] ✓
+  [65] ✓
+  [68] ✓
+  [70] ✓
+  [61] ✓
+  [64] ✓
+  [62] ✓
+  [67] ✓
+  [69] ✓
+  [66] ✓
+  Progress: 70/100 (70%)
+
+Processing batch: 71-80 (10 uploads)
+  [75] ✓
+  [74] ✓
+  [71] ✓
+  [80] ✓
+  [78] ✓
+  [73] ✓
+  [76] ✓
+  [72] ✓
+  [79] ✓
+  [77] ✓
+  Progress: 80/100 (80%)
+
+Processing batch: 81-90 (10 uploads)
+  [85] ✓
+  [84] ✓
+  [90] ✓
+  [86] ✓
+  [81] ✓
+  [87] ✓
+  [82] ✓
+  [83] ✓
+  [89] ✓
+  [88] ✓
+  Progress: 90/100 (90%)
+
+Processing batch: 91-100 (10 uploads)
+  [93] ✓
+  [92] ✓
+  [99] ✓
+  [95] ✓
+  [98] ✓
+  [94] ✓
+  [96] ✓
+  [100] ✓
+  [91] ✓
+  [97] ✓
+  Progress: 100/100 (100%)
+
+================================================
+✓ Upload batch complete!
+✓ Uploaded: 100 images
+✓ Duration: 26s
+✓ Upload rate: 3.84 images/second
+
+Next steps:
+  1. Wait 2-3 minutes for Lambda processing
+  2. Query CloudWatch Logs for performance metrics
+  3. Check s3://tcss462-term-project-group-7-js/output/ for processed images
+
+Waiting 2 minutes for Lambda processing...
+---
+========================================
+Testing: JavaScript with concurrency 50
+========================================
+=== Configuration ===
+Language: JavaScript
+Requested Concurrency: 50
+Batch Size: 100
+
+Actual Concurrency: 50
+
+Searching for *.jpg in ./Kirmizi_Pistachio/...
+✓ Found 1232 files
+✓ Target bucket: s3://tcss462-term-project-group-7-js/input/
+
+System Check:
+  Available Memory: 6574MB
+
+Starting uploads (Ctrl+C to cancel)...
+================================================
+Processing batch: 1-50 (50 uploads)
+  [15] ✓
+  [3] ✓
+  [2] ✓
+  [48] ✓
+  [32] ✓
+  [16] ✓
+  [35] ✓
+  [29] ✓
+  [17] ✓
+  [21] ✓
+  [45] ✓
+  [18] ✓
+  [28] ✓
+  [38] ✓
+  [50] ✓
+  [8] ✓
+  [49] ✓
+  [30] ✓
+  [1] ✓
+  [40] ✓
+  [7] ✓
+  [19] ✓
+  [5] ✓
+  [43] ✓
+  [36] ✓
+  [13] ✓
+  [23] ✓
+  [4] ✓
+  [39] ✓
+  [47] ✓
+  [20] ✓
+  [33] ✓
+  [31] ✓
+  [37] ✓
+  [11] ✓
+  [42] ✓
+  [9] ✓
+  [24] ✓
+  [34] ✓
+  [6] ✓
+  [27] ✓
+  [12] ✓
+  [10] ✓
+  [14] ✓
+  [44] ✓
+  [41] ✓
+  [26] ✓
+  [22] ✓
+  [25] ✓
+  [46] ✓
+  Progress: 50/100 (50%)
+
+Processing batch: 51-100 (50 uploads)
+  [85] ✓
+  [62] ✓
+  [73] ✓
+  [51] ✓
+  [68] ✓
+  [93] ✓
+  [63] ✓
+  [77] ✓
+  [79] ✓
+  [97] ✓
+  [61] ✓
+  [56] ✓
+  [99] ✓
+  [52] ✓
+  [53] ✓
+  [54] ✓
+  [55] ✓
+  [59] ✓
+  [70] ✓
+  [100] ✓
+  [64] ✓
+  [91] ✓
+  [86] ✓
+  [57] ✓
+  [74] ✓
+  [60] ✓
+  [71] ✓
+  [82] ✓
+  [98] ✓
+  [87] ✓
+  [83] ✓
+  [92] ✓
+  [69] ✓
+  [67] ✓
+  [80] ✓
+  [66] ✓
+  [81] ✓
+  [75] ✓
+  [84] ✓
+  [96] ✓
+  [65] ✓
+  [78] ✓
+  [72] ✓
+  [58] ✓
+  [94] ✓
+  [89] ✓
+  [88] ✓
+  [76] ✓
+  [90] ✓
+  [95] ✓
+  Progress: 100/100 (100%)
+
+================================================
+✓ Upload batch complete!
+✓ Uploaded: 100 images
+✓ Duration: 16s
+✓ Upload rate: 6.25 images/second
+
+Next steps:
+  1. Wait 2-3 minutes for Lambda processing
+  2. Query CloudWatch Logs for performance metrics
+  3. Check s3://tcss462-term-project-group-7-js/output/ for processed images
+
+Waiting 2 minutes for Lambda processing...
+---
+========================================
+Testing: JavaScript with concurrency 100
+========================================
+=== Configuration ===
+Language: JavaScript
+Requested Concurrency: 100
+Batch Size: 100
+
+Actual Concurrency: 100
+
+Searching for *.jpg in ./Kirmizi_Pistachio/...
+✓ Found 1232 files
+✓ Target bucket: s3://tcss462-term-project-group-7-js/input/
+
+System Check:
+  Available Memory: 6564MB
+
+Starting uploads (Ctrl+C to cancel)...
+================================================
+Processing batch: 1-100 (100 uploads)
+  [37] ✓
+  [28] ✓
+  [97] ✓
+  [11] ✓
+  [50] ✓
+  [87] ✓
+  [2] ✓
+  [82] ✓
+  [7] ✓
+  [36] ✓
+  [84] ✓
+  [19] ✓
+  [10] ✓
+  [46] ✓
+  [60] ✓
+  [13] ✓
+  [51] ✓
+  [78] ✓
+  [9] ✓
+  [100] ✓
+  [76] ✓
+  [8] ✓
+  [20] ✓
+  [54] ✓
+  [5] ✓
+  [3] ✓
+  [15] ✓
+  [94] ✓
+  [48] ✓
+  [57] ✓
+  [75] ✓
+  [33] ✓
+  [25] ✓
+  [79] ✓
+  [35] ✓
+  [21] ✓
+  [96] ✓
+  [71] ✓
+  [32] ✓
+  [58] ✓
+  [4] ✓
+  [16] ✓
+  [18] ✓
+  [49] ✓
+  [65] ✓
+  [27] ✓
+  [45] ✓
+  [12] ✓
+  [38] ✓
+  [22] ✓
+  [1] ✓
+  [66] ✓
+  [64] ✓
+  [6] ✓
+  [55] ✓
+  [72] ✓
+  [88] ✓
+  [24] ✓
+  [47] ✓
+  [83] ✓
+  [93] ✓
+  [14] ✓
+  [61] ✓
+  [34] ✓
+  [40] ✓
+  [56] ✓
+  [86] ✓
+  [44] ✓
+  [43] ✓
+  [26] ✓
+  [42] ✓
+  [92] ✓
+  [91] ✓
+  [99] ✓
+  [41] ✓
+  [62] ✓
+  [23] ✓
+  [39] ✓
+  [17] ✓
+  [59] ✓
+  [68] ✓
+  [85] ✓
+  [29] ✓
+  [90] ✓
+  [67] ✓
+  [89] ✓
+  [80] ✓
+  [95] ✓
+  [30] ✓
+  [74] ✓
+  [53] ✓
+  [81] ✓
+  [73] ✓
+  [31] ✓
+  [69] ✓
+  [70] ✓
+  [98] ✓
+  [63] ✓
+  [77] ✓
+  [52] ✓
+  Progress: 100/100 (100%)
+
+================================================
+✓ Upload batch complete!
+✓ Uploaded: 100 images
+✓ Duration: 23s
+✓ Upload rate: 4.34 images/second
+
+Next steps:
+  1. Wait 2-3 minutes for Lambda processing
+  2. Query CloudWatch Logs for performance metrics
+  3. Check s3://tcss462-term-project-group-7-js/output/ for processed images
+
+Waiting 2 minutes for Lambda processing...
+---
+Waiting 5 minutes for cold start reset...
+
+✓ All tests completed!
+Completed: Fri Dec 12 01:44:12 AM UTC 2025

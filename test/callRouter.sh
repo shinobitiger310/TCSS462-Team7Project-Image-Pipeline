@@ -1,81 +1,139 @@
 #!/bin/bash
-set -e  # Exit on error
+set -e
 
-# Define the target directory and filename pattern
+# Configuration
 TARGET_DIR="./Kirmizi_Pistachio/"
 FILENAME_PATTERN="*.jpg"
+LANGUAGE="${1:-Python}"
+CONCURRENCY="${2:-1}"
+BATCH_SIZE="${3:-10}"
 
-# Define language argument
-LANGUAGE="Python"
+echo "=== Configuration ==="
+echo "Language: $LANGUAGE"
+echo "Requested Concurrency: $CONCURRENCY"
+echo "Batch Size: $BATCH_SIZE"
+echo ""
 
-# Find the file and store its path (-print -quit gets first match and stops)
+echo "Actual Concurrency: $CONCURRENCY"
+echo ""
+
+PREFIX="input/"
+
+case "${LANGUAGE,,}" in
+    python)
+        INPUT_BUCKET="tcss462-term-project-group-7-python"
+        ;;
+    java)
+        INPUT_BUCKET="tcss462-term-project-group-7-jav"
+        ;;
+    javascript)
+        INPUT_BUCKET="tcss462-term-project-group-7-js"
+        ;;
+    *)
+        echo "Error: Language must be Python, Java, or JavaScript"
+        exit 1
+        ;;
+esac
+
 echo "Searching for $FILENAME_PATTERN in $TARGET_DIR..."
-FILE_PATH=$(find "$TARGET_DIR" -maxdepth 1 -type f -name "$FILENAME_PATTERN" -print -quit)
+mapfile -t FILES < <(find "$TARGET_DIR" -maxdepth 1 -type f -name "$FILENAME_PATTERN")
 
-# Check if a file was found
-if [ -z "$FILE_PATH" ]; then
-    echo "Error: No file matching '$FILENAME_PATTERN' found in '$TARGET_DIR'."
+if [ ${#FILES[@]} -eq 0 ]; then
+    echo "Error: No files matching '$FILENAME_PATTERN' found."
     exit 1
 fi
 
-echo "✓ Found file: $FILE_PATH"
+echo "✓ Found ${#FILES[@]} files"
+echo "✓ Target bucket: s3://${INPUT_BUCKET}/${PREFIX}"
+echo ""
 
-# Get file size for validation
-FILE_SIZE=$(stat -f%z "$FILE_PATH" 2>/dev/null || stat -c%s "$FILE_PATH" 2>/dev/null)
-echo "✓ File size: $FILE_SIZE bytes"
-
-# Warn if file is large (Lambda payload limit is 6MB for synchronous invocations)
-if [ "$FILE_SIZE" -gt 5000000 ]; then
-    echo "⚠ Warning: File is large (>5MB). May exceed Lambda payload limits."
+# Check system resources before starting
+echo "System Check:"
+FREE_MEM=$(free -m | awk 'NR==2{printf "%.0f", $7}')
+echo "  Available Memory: ${FREE_MEM}MB"
+if [ $FREE_MEM -lt 500 ]; then
+    echo "  ⚠ Warning: Low memory. Consider restarting VM or reducing concurrency."
 fi
+echo ""
 
-# Create temporary file for payload
-TEMP_PAYLOAD=$(mktemp)
-TEMP_RESPONSE=$(mktemp)
-trap "rm -f $TEMP_PAYLOAD $TEMP_RESPONSE" EXIT
+echo "Starting uploads (Ctrl+C to cancel)..."
+echo "================================================"
 
-# Create JSON payload and save to temp file
-echo "Encoding image to base64..."
-cat > "$TEMP_PAYLOAD" <<EOF
-{
-  "language": "$LANGUAGE",
-  "image": "$(base64 -i "$FILE_PATH" | tr -d '\n')"
+# Trap to cleanup on exit
+cleanup() {
+    echo ""
+    echo "Cleaning up background processes..."
+    pkill -P $$ 2>/dev/null || true
+    wait 2>/dev/null || true
+    echo "Cleanup complete"
+    exit 1
 }
-EOF
 
-echo "✓ Payload created ($(stat -f%z "$TEMP_PAYLOAD" 2>/dev/null || stat -c%s "$TEMP_PAYLOAD" 2>/dev/null) bytes)"
+trap cleanup INT TERM
 
-echo ""
-echo "Invoking Lambda function 'projectRunner' in us-east-2..."
-echo "================================================"
+UPLOAD_START=$(date +%s)
 
-# Invoke Lambda using file payload
-time aws lambda invoke \
-    --invocation-type RequestResponse \
-    --cli-binary-format raw-in-base64-out \
-    --function-name projectRunner \
-    --region us-east-2 \
-    --payload "file://$TEMP_PAYLOAD" \
-    "$TEMP_RESPONSE" > /dev/null
-
-echo ""
-echo "JSON RESULT:"
-echo "================================================"
-cat "$TEMP_RESPONSE" | jq
-echo ""
-
-# Check if response indicates success
-if cat "$TEMP_RESPONSE" | jq -e '.success == true' > /dev/null 2>&1; then
-    echo "✓ Lambda execution successful!"
-    
-    # Extract bucket and key if available
-    BUCKET=$(cat "$TEMP_RESPONSE" | jq -r '.bucket // empty')
-    KEY=$(cat "$TEMP_RESPONSE" | jq -r '.key // empty')
-    
-    if [ -n "$BUCKET" ] && [ -n "$KEY" ]; then
-        echo "✓ Image uploaded to: s3://$BUCKET/$KEY"
+# Process in small, manageable chunks
+for chunk_start in $(seq 1 $CONCURRENCY $BATCH_SIZE); do
+    chunk_end=$((chunk_start + CONCURRENCY - 1))
+    if [ $chunk_end -gt $BATCH_SIZE ]; then
+        chunk_end=$BATCH_SIZE
     fi
-else
-    echo "⚠ Lambda execution may have failed - check response above"
-    exit 1
+    
+    CHUNK_SIZE=$((chunk_end - chunk_start + 1))
+    echo "Processing batch: $chunk_start-$chunk_end ($CHUNK_SIZE uploads)"
+    
+    # Launch uploads for this chunk
+    pids=()
+    for i in $(seq $chunk_start $chunk_end); do
+        FILE_INDEX=$(((i - 1) % ${#FILES[@]}))
+        FILE_PATH="${FILES[$FILE_INDEX]}"
+        TIMESTAMP=$(date +%s%N)
+        S3_KEY="${PREFIX}test_${LANGUAGE,,}_${i}_${TIMESTAMP}.jpg"
+        
+        (
+            # Try upload with timeout
+            if timeout 30 aws s3 cp "$FILE_PATH" "s3://${INPUT_BUCKET}/${S3_KEY}" \
+                --region us-east-2 \
+                --only-show-errors &>/dev/null; then
+                echo "  [$i] ✓"
+            else
+                echo "  [$i] ✗"
+            fi
+        ) &
+        pids+=($!)
+    done
+    
+    # Wait for all uploads in this chunk to complete
+    for pid in "${pids[@]}"; do
+        wait $pid 2>/dev/null || true
+    done
+    
+    # Progress update
+    COMPLETED=$chunk_end
+    PERCENT=$((COMPLETED * 100 / BATCH_SIZE))
+    echo "  Progress: $COMPLETED/$BATCH_SIZE ($PERCENT%)"
+    
+    # Brief pause to let VM breathe
+    sleep 1
+    echo ""
+done
+
+UPLOAD_END=$(date +%s)
+UPLOAD_DURATION=$((UPLOAD_END - UPLOAD_START))
+
+echo "================================================"
+echo "✓ Upload batch complete!"
+echo "✓ Uploaded: $BATCH_SIZE images"
+echo "✓ Duration: ${UPLOAD_DURATION}s"
+
+if [ $UPLOAD_DURATION -gt 0 ]; then
+    RATE=$(echo "scale=2; $BATCH_SIZE / $UPLOAD_DURATION" | bc)
+    echo "✓ Upload rate: ${RATE} images/second"
 fi
+
+echo ""
+echo "Next steps:"
+echo "  1. Wait 2-3 minutes for Lambda processing"
+echo "  2. Query CloudWatch Logs for performance metrics"
+echo "  3. Check s3://${INPUT_BUCKET}/output/ for processed images"
