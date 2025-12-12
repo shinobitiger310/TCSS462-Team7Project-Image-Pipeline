@@ -184,12 +184,12 @@ python3 cloudwatch_cleanup.py
 
 If you use this work, please cite:
 ```
-[Your citation information here]
+UW TACOMA - TCSS462 - FALL 2025 - Team7
 ```
 
 ## License
 
-[Your license information]
+TCSS462 Team 7
 
 ## Contributors
 
