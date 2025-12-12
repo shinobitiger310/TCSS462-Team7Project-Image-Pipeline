@@ -22,7 +22,7 @@ This repository contains:
 ## Repository Structure
 
 ```
-├── python_template/       # Python Lambda functions
+├── python_deployment/     # Python Lambda functions with deployment scripts
 ├── java_template/         # Java Lambda functions
 ├── nodejs_template/       # Node.js Lambda functions
 ├── test/                  # Testing and analysis tools
@@ -44,18 +44,20 @@ Each language implementation must be deployed to AWS Lambda. Navigate to the res
 
 **Python Functions:**
 ```bash
-cd python_template
-# Deploy using AWS CLI or SAM, ensuring 512MB memory, 30s timeout for transforms
-# Example for rotate function:
-cd src/python_rotate
-zip -r function.zip .
+cd python_deployment
+# Use the automated deployment script:
+./deploy_all_python.sh
+
+# Or deploy manually using the pre-built packages:
 aws lambda create-function --function-name python_rotate \
   --runtime python3.9 --handler lambda_function.lambda_handler \
   --memory-size 512 --timeout 30 --role <your-lambda-role-arn> \
-  --zip-file fileb://function.zip
+  --zip-file fileb://python_lambda_rotate.zip
+
+# Repeat for python_lambda_resize and python_lambda_greyscale
 ```
 
-Repeat for `python_resize`, `python_greyscale`, and `python_upload` functions.
+See `python_deployment/PYTHON_DEPLOYMENT_GUIDE.md` for detailed instructions.
 
 **Java Functions:**
 ```bash
@@ -184,13 +186,13 @@ python3 cloudwatch_cleanup.py
 
 If you use this work, please cite:
 ```
-UW TACOMA - TCSS462 - FALL 2025 - Team7
+TCSS 462 - Team 7
 ```
 
 ## License
 
-TCSS462 Team 7
+TCSS 462 - Team 7
 
 ## Contributors
 
-TCSS460/462 Team 7
+TCSS462 - Team 7
