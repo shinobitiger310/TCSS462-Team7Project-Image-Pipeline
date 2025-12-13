@@ -87,6 +87,10 @@ public class RotateHandler implements RequestHandler<S3Event, HashMap<String,Obj
             // Example: "input/photo.jpg" → "photo.jpg"
             String filename = key.substring(key.lastIndexOf('/') + 1);
 
+            // Pipeline tracking for CloudWatch metrics
+            inspector.addAttribute("image_id", filename);
+            inspector.addAttribute("pipeline_stage", "rotate");
+
             // Next-stage prefix where ResizeHandler listens.
             String newKey = "stage1/" + filename;
 

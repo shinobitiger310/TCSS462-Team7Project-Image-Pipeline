@@ -81,6 +81,10 @@ exports.handler = async (event, context) => {
         // String filename = key.substring(key.lastIndexOf('/') + 1);
         const filename = key.substring(key.lastIndexOf('/') + 1);
 
+        // Pipeline tracking for CloudWatch metrics
+        inspector.addAttribute("image_id", filename);
+        inspector.addAttribute("pipeline_stage", "rotate");
+
         // Next-stage prefix where ResizeHandler listens.
         // String newKey = "stage1/" + filename;
         const newKey = `stage1/${filename}`;
@@ -112,8 +116,7 @@ exports.handler = async (event, context) => {
         // inspector.inspectAllDeltas();
 
         inspector.addAttribute("bucket name", bucket);
-        inspector.addAttribute("initial folder", getParams.Key);
-        inspector.addAttribute("final folder", newKey)
+        inspector.addAttribute("new file", newKey)
         inspector.addAttribute("message", "Image rotated successfully");
 
         inspector.inspectAllDeltas();

@@ -86,6 +86,10 @@ public class ResizeHandler implements RequestHandler<S3Event, HashMap<String,Obj
             // Extract just the filename from the key (e.g., "photo.jpg")
             String filename = key.substring(key.lastIndexOf('/') + 1);
 
+            // Pipeline tracking for CloudWatch metrics
+            inspector.addAttribute("image_id", filename);
+            inspector.addAttribute("pipeline_stage", "resize");
+
             // Next-stage prefix where the next handler listens
             String newKey = "stage2/" + filename;
 

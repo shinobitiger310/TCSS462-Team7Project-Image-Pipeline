@@ -83,6 +83,10 @@ exports.handler = async (event, context) => {
         // String filename = key.substring(key.lastIndexOf('/') + 1);
         const filename = key.substring(key.lastIndexOf('/') + 1);
 
+        // Pipeline tracking for CloudWatch metrics
+        inspector.addAttribute("image_id", filename);
+        inspector.addAttribute("pipeline_stage", "greyscale");
+
         // String newKey = "output/" + filename;
         const newKey = `output/${filename}`;
 
@@ -105,10 +109,8 @@ exports.handler = async (event, context) => {
         // Collect final information such as total runtime and cpu deltas.
         // inspector.inspectAllDeltas();
         inspector.addAttribute("bucket name", bucket);
-        inspector.addAttribute("subfolder", getParams.Key);
-        inspector.addAttribute("file", filename)
         inspector.addAttribute("new file", newKey)
-        inspector.addAttribute("message", "Image rotated successfully");
+        inspector.addAttribute("message", "Image greyscaled successfully");
         inspector.inspectAllDeltas();
 
         // Get the metrics as a HashMap
